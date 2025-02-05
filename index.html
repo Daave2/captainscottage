@@ -73,30 +73,26 @@
     header .logo img {
       height: 50px;
     }
-    /* Mobile Navigation Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      flex-direction: column;
-      cursor: pointer;
-      outline: none;
-    }
-    .mobile-menu-toggle span {
-      width: 25px;
-      height: 3px;
-      background: var(--white);
-      margin: 4px 0;
-    }
-    /* Navigation */
+    /* Navigation: restructured as flex container */
     nav {
       display: flex;
       align-items: center;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    /* Dynamic Section Title placed to the left inside nav */
+    #nav-current-section {
+      color: var(--accent-color);
+      font-size: 1.2rem;
+      margin-right: auto;  /* pushes the links to the right */
+      font-weight: bold;
+      transition: opacity 0.3s ease;
     }
     nav ul {
       list-style: none;
       display: flex;
-      margin-right: 20px;
+      margin: 0;
+      padding: 0;
     }
     nav ul li {
       margin-left: 20px;
@@ -110,13 +106,21 @@
     nav ul li a.active {
       border-bottom: 2px solid var(--accent-color);
     }
-    /* Dynamic Section Title inside Nav */
-    #nav-current-section {
-      color: var(--accent-color);
-      font-size: 1.2rem;
+    /* Mobile Navigation Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      flex-direction: column;
+      cursor: pointer;
+      outline: none;
       margin-left: 20px;
-      font-weight: bold;
-      transition: opacity 0.3s ease;
+    }
+    .mobile-menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      margin: 4px 0;
     }
     /* Hero Section */
     .hero {
@@ -363,13 +367,14 @@
     /* Responsive Styles */
     @media (max-width: 768px) {
       nav {
+        flex-direction: column;
+        align-items: center;
         position: absolute;
         top: 70px;
         left: 0;
         width: 100%;
         background: var(--primary-color);
         display: none;
-        flex-direction: column;
       }
       nav.active {
         display: flex;
@@ -381,6 +386,10 @@
       nav ul li {
         margin: 10px 0;
         text-align: center;
+      }
+      #nav-current-section {
+        margin-right: 0;
+        margin-bottom: 10px;
       }
       .mobile-menu-toggle {
         display: flex;
@@ -415,6 +424,8 @@
       <img src="logo.png" alt="Captain's Cottage Logo">
     </div>
     <nav id="nav-menu">
+      <!-- Dynamic Section Title moved to the left within nav -->
+      <span id="nav-current-section"></span>
       <ul>
         <li><a href="#home" data-section="Home">Home</a></li>
         <li><a href="#about" data-section="About">About</a></li>
@@ -422,8 +433,6 @@
         <li><a href="#gallery" data-section="Gallery">Gallery</a></li>
         <li><a href="#booking" data-section="Booking">Booking</a></li>
       </ul>
-      <!-- Dynamic Current Section Display -->
-      <span id="nav-current-section"></span>
     </nav>
     <button class="mobile-menu-toggle" id="mobile-menu-toggle">
       <span></span>
@@ -666,7 +675,6 @@
       root: null,
       threshold: 0.5
     };
-  
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -685,7 +693,6 @@
         }
       });
     }, observerOptions);
-  
     sections.forEach(section => observer.observe(section));
   
     // Scroll Progress Bar functionality
