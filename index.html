@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Captain's Cottage - A Historic Seaside Retreat in Scarborough</title>
-  <meta name="description" content="Captain's Cottage is a charming mid-terrace house built in the 1800s, blending historic character with modern amenities. Perfect for families and couples seeking a seaside getaway in Scarborough, North Yorkshire.">
-  <!-- Favicon -->
+  <title>Captain's Cottage - Historic Seaside Retreat in Scarborough</title>
+  <meta name="description" content="Discover Captain's Cottage in Scarborough – a historic seaside retreat blending traditional charm with modern amenities, ideal for families and couples.">
+  <link rel="canonical" href="https://www.yoursite.com/">
   <link rel="icon" href="logo.png" type="image/png">
+  
+  <!-- Structured Data (Local Business / LodgingBusiness example) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Captain's Cottage",
+    "image": "https://www.yoursite.com/hero.jpg",
+    "url": "https://www.yoursite.com/",
+    "telephone": "+441234567890",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Your Street Address",
+      "addressLocality": "Scarborough",
+      "addressRegion": "North Yorkshire",
+      "postalCode": "YO11 1AA",
+      "addressCountry": "UK"
+    },
+    "description": "A historic seaside retreat in Scarborough blending traditional charm with modern comforts, perfect for families and couples.",
+    "priceRange": "$$"
+  }
+  </script>
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       /* Nautical color palette */
@@ -80,7 +105,7 @@
       flex: 1;
       justify-content: flex-end;
     }
-    /* Dynamic Section Title placed to the left inside nav */
+    /* Dynamic Section Title placed to the left within nav */
     #nav-current-section {
       color: var(--accent-color);
       font-size: 1.2rem;
@@ -176,6 +201,10 @@
       background: var(--primary-color-hover);
       color: var(--white);
       transform: translateY(-2px);
+    }
+    /* Main Content Wrapper */
+    main {
+      margin-top: 80px; /* leave space for fixed header */
     }
     /* Section Container with animation */
     .section-container {
@@ -288,6 +317,24 @@
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
+    /* Footer CTA Bar */
+    .footer-cta {
+      background: var(--primary-color);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--white);
+      margin-top: 40px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease forwards;
+    }
+    .footer-cta h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+    .footer-cta .cta-button {
+      font-size: 1.2rem;
+      padding: 15px 35px;
+    }
     /* Useful Resources Section */
     .resources {
       max-width: 1000px;
@@ -324,7 +371,7 @@
       font-size: 0.9rem;
       background: var(--primary-color);
       color: var(--white);
-      margin-top: 40px;
+      margin-top: 20px;
     }
     /* Back to Top Button */
     #back-to-top {
@@ -411,6 +458,13 @@
       .inline-images img {
         max-width: 100%;
       }
+      .footer-cta h2 {
+        font-size: 1.8rem;
+      }
+      .footer-cta .cta-button {
+        font-size: 1rem;
+        padding: 12px 25px;
+      }
     }
   </style>
 </head>
@@ -441,184 +495,198 @@
     </button>
   </header>
   
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Captain's Cottage</h1>
-      <p>A Historic Seaside Retreat in Scarborough</p>
-      <a href="#booking" class="cta-button">Book Now</a>
-    </div>
-  </section>
-  
-  <!-- About Section -->
-  <section id="about">
-    <div class="section-container">
-      <h2>Welcome to Captain's Cottage</h2>
-      <p>
-        Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage now offers a modern seaside escape with tasteful nautical accents.
-      </p>
-      <p>
-        Enjoy authentic maritime charm paired with contemporary comforts.
-      </p>
-      <div class="inline-images">
-        <img src="entrance.jpg" alt="Entrance of Captain's Cottage" class="clickable-image">
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Captain's Cottage</h1>
+        <p>A Historic Seaside Retreat in Scarborough</p>
+        <a href="#booking" class="cta-button">Book Now</a>
       </div>
-    </div>
-  </section>
-  
-  <!-- Accommodation Section -->
-  <section id="accommodation">
-    <div class="section-container">
-      <h2>Accommodation Details</h2>
-      <p>
-        The cottage accommodates up to four guests across two beautifully appointed bedrooms:
-      </p>
-      <ul>
-        <li><strong>Double Bedroom:</strong> First floor for ample space and comfort.</li>
-        <li><strong>Twin Bedroom:</strong> Second floor with roof windows and enchanting night sky views.</li>
-      </ul>
-      <p>
-        The bathroom is fully equipped with a bath, a shower over the bath, WC, and basin.
-      </p>
-      <div class="inline-images">
-        <img src="room1.jpg" alt="Double Bedroom" class="clickable-image">
-        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views" class="clickable-image">
+    </section>
+    
+    <!-- About Section -->
+    <section id="about">
+      <div class="section-container">
+        <h2>Welcome to Captain's Cottage</h2>
+        <p>
+          Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage now offers a modern seaside escape with tasteful nautical accents.
+        </p>
+        <p>
+          Enjoy authentic maritime charm paired with contemporary comforts.
+        </p>
+        <div class="inline-images">
+          <img src="entrance.jpg" alt="Entrance view of Captain's Cottage" class="clickable-image" loading="lazy">
+        </div>
       </div>
-    </div>
-  </section>
-  
-  <!-- Living Spaces & Modern Amenities Section -->
-  <section id="amenities">
-    <div class="section-container">
-      <h2>Living Spaces & Modern Amenities</h2>
-      <p>
-        Enjoy a well-appointed kitchen/diner complete with modern appliances:
-      </p>
-      <ul>
-        <li>Electric oven and induction hob</li>
-        <li>Microwave</li>
-        <li>Pod coffee machine</li>
-        <li>Fridge and freezer</li>
-        <li>Washing machine</li>
-        <li>Dishwasher</li>
-      </ul>
-      <p>
-        Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a curated selection of books and games.
-      </p>
-      <div class="inline-images">
-        <img src="kitchen.jpg" alt="Modern Kitchen" class="clickable-image">
-        <img src="livingroom.jpg" alt="Cozy Living Room" class="clickable-image">
+    </section>
+    
+    <!-- Accommodation Section -->
+    <section id="accommodation">
+      <div class="section-container">
+        <h2>Accommodation Details</h2>
+        <p>
+          The cottage accommodates up to four guests across two beautifully appointed bedrooms:
+        </p>
+        <ul>
+          <li><strong>Double Bedroom:</strong> First floor for ample space and comfort.</li>
+          <li><strong>Twin Bedroom:</strong> Second floor with roof windows and enchanting night sky views.</li>
+        </ul>
+        <p>
+          The bathroom is fully equipped with a bath, a shower over the bath, WC, and basin.
+        </p>
+        <div class="inline-images">
+          <img src="room1.jpg" alt="View of the double bedroom" class="clickable-image" loading="lazy">
+          <img src="room2.jpg" alt="View of the twin bedroom with night sky" class="clickable-image" loading="lazy">
+        </div>
       </div>
-    </div>
-  </section>
-  
-  <!-- Outdoor & Additional Amenities Section -->
-  <section id="outdoor">
-    <div class="section-container">
-      <h2>Outdoor & Additional Amenities</h2>
-      <p>
-        Step outside to enjoy a spacious decking area, ideal for al fresco dining or a quiet moment by the sea.
-      </p>
-      <ul>
-        <li><strong>Pet Policy:</strong> One well-behaved dog is welcome.</li>
-        <li><strong>Family-Friendly:</strong> Highchair and travel cot available on request.</li>
-        <li><strong>Parking:</strong> A roadside parking permit is provided.</li>
-      </ul>
-      <div class="inline-images">
-        <img src="dinningroom.jpg" alt="Dining Area / Outdoor Setting" class="clickable-image">
+    </section>
+    
+    <!-- Living Spaces & Modern Amenities Section -->
+    <section id="amenities">
+      <div class="section-container">
+        <h2>Living Spaces & Modern Amenities</h2>
+        <p>
+          Enjoy a well-appointed kitchen/diner complete with modern appliances:
+        </p>
+        <ul>
+          <li>Electric oven and induction hob</li>
+          <li>Microwave</li>
+          <li>Pod coffee machine</li>
+          <li>Fridge and freezer</li>
+          <li>Washing machine</li>
+          <li>Dishwasher</li>
+        </ul>
+        <p>
+          Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a curated selection of books and games.
+        </p>
+        <div class="inline-images">
+          <img src="kitchen.jpg" alt="Modern kitchen area" class="clickable-image" loading="lazy">
+          <img src="livingroom.jpg" alt="Cozy living room" class="clickable-image" loading="lazy">
+        </div>
       </div>
-    </div>
-  </section>
-  
-  <!-- Local Attractions Section -->
-  <section id="attractions">
-    <div class="section-container">
-      <h2>Local Attractions</h2>
-      <p>
-        Located in Scarborough's historic district, you're within walking distance of local restaurants, shops, and the beachfront. Explore nearby attractions such as:
-      </p>
-      <ul>
-        <li><strong>Scarborough Castle:</strong> Historic site with panoramic views. (<a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">English Heritage</a>)</li>
-        <li><strong>Scarborough Harbour:</strong> Seafront cafés and yacht club ambiance.</li>
-        <li><strong>North Bay Beach:</strong> A sandy haven ideal for families.</li>
-        <li><strong>Peasholm Park:</strong> Themed gardens and a boating lake. (<a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Council</a>)</li>
-        <li><strong>Maritime Heritage:</strong> Discover the town’s seafaring past. (<a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Heritage Centre</a>)</li>
-        <li><strong>Art Gallery:</strong> Local art and culture. (<a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Gallery</a>)</li>
-        <li><strong>Visit England:</strong> More attractions. (<a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a>)</li>
-      </ul>
-    </div>
-  </section>
-  
-  <!-- Useful Resources Section -->
-  <section id="resources">
-    <div class="resources">
-      <h2>Useful Resources</h2>
-      <ul>
-        <li><a href="https://www.visitscarborough.com/" target="_blank" rel="noopener">Visit Scarborough</a></li>
-        <li><a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">Scarborough Castle</a></li>
-        <li><a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Peasholm Park</a></li>
-        <li><a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Maritime Centre</a></li>
-        <li><a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Art Gallery</a></li>
-        <li><a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a></li>
-        <li><a href="https://www.google.com/maps/search/Captains+Cottage+Scarborough" target="_blank" rel="noopener">Google Maps</a></li>
-        <li><a href="https://www.tripadvisor.co.uk/Search?q=Captains+Cottage+Scarborough" target="_blank" rel="noopener">TripAdvisor</a></li>
-      </ul>
-    </div>
-  </section>
-  
-  <!-- Booking & Contact Section -->
-  <section id="booking">
-    <div class="section-container">
-      <h2>Booking & Contact</h2>
-      <p>
-        Check-in is from 4:00 pm and check-out by 10:00 am. For details and booking options, please visit <a href="https://www.booking.com" target="_blank" rel="noopener">Booking.com</a> or email us at <a href="mailto:info@SYKESCOTTAGES.CO.UK">info@SYKESCOTTAGES.CO.UK</a>.
-      </p>
-      <p>
-        For guest reviews and more information, please visit our profile on <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">Sykes Cottages</a>.
-      </p>
-    </div>
-  </section>
-  
-  <!-- Weather Widget -->
-  <section id="weather" class="section-container">
-    <h2 style="text-align: center;">Current Weather in Scarborough</h2>
-    <div style="text-align: center;">
-      <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
-    </div>
-    <script>
-      !function(d,s,id){
-        var js,fjs=d.getElementsByTagName(s)[0];
-        if(!d.getElementById(id)){
-          js=d.createElement(s); js.id=id;
-          js.src='https://weatherwidget.io/js/widget.min.js';
-          fjs.parentNode.insertBefore(js,fjs);
-        }
-      }(document,'script','weatherwidget-io-js');
-    </script>
-  </section>
-  
-  <!-- Interactive Gallery Section -->
-  <section id="gallery">
-    <div class="section-container">
-      <h2>Gallery</h2>
-      <p style="text-align:center;">Click an image to enlarge.</p>
-      <div class="gallery">
-        <img src="entrance.jpg" alt="Entrance of Captain's Cottage" class="clickable-image">
-        <img src="livingroom.jpg" alt="Cozy Living Room" class="clickable-image">
-        <img src="kitchen.jpg" alt="Modern Kitchen" class="clickable-image">
-        <img src="room1.jpg" alt="Double Bedroom" class="clickable-image">
-        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views" class="clickable-image">
-        <img src="bathroom.jpg" alt="Elegant Bathroom" class="clickable-image">
-        <img src="dinningroom.jpg" alt="Spacious Dining Room" class="clickable-image">
+    </section>
+    
+    <!-- Outdoor & Additional Amenities Section -->
+    <section id="outdoor">
+      <div class="section-container">
+        <h2>Outdoor & Additional Amenities</h2>
+        <p>
+          Step outside to enjoy a spacious decking area, ideal for al fresco dining or a quiet moment by the sea.
+        </p>
+        <ul>
+          <li><strong>Pet Policy:</strong> One well-behaved dog is welcome.</li>
+          <li><strong>Family-Friendly:</strong> Highchair and travel cot available on request.</li>
+          <li><strong>Parking:</strong> A roadside parking permit is provided.</li>
+        </ul>
+        <div class="inline-images">
+          <img src="dinningroom.jpg" alt="Outdoor dining area setup" class="clickable-image" loading="lazy">
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    
+    <!-- Local Attractions Section -->
+    <section id="attractions">
+      <div class="section-container">
+        <h2>Local Attractions</h2>
+        <p>
+          Located in Scarborough's historic district, you're within walking distance of local restaurants, shops, and the beachfront. Explore nearby attractions such as:
+        </p>
+        <ul>
+          <li><strong>Scarborough Castle:</strong> Historic site with panoramic views. (<a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">English Heritage</a>)</li>
+          <li><strong>Scarborough Harbour:</strong> Seafront cafés and yacht club ambiance.</li>
+          <li><strong>North Bay Beach:</strong> A sandy haven ideal for families.</li>
+          <li><strong>Peasholm Park:</strong> Themed gardens and a boating lake. (<a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Council</a>)</li>
+          <li><strong>Maritime Heritage:</strong> Discover the town’s seafaring past. (<a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Heritage Centre</a>)</li>
+          <li><strong>Art Gallery:</strong> Local art and culture. (<a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Gallery</a>)</li>
+          <li><strong>Visit England:</strong> More attractions. (<a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a>)</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- Useful Resources Section -->
+    <section id="resources">
+      <div class="resources">
+        <h2>Useful Resources</h2>
+        <ul>
+          <li><a href="https://www.visitscarborough.com/" target="_blank" rel="noopener">Visit Scarborough</a></li>
+          <li><a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">Scarborough Castle</a></li>
+          <li><a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Peasholm Park</a></li>
+          <li><a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Maritime Centre</a></li>
+          <li><a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Art Gallery</a></li>
+          <li><a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a></li>
+          <li><a href="https://www.google.com/maps/search/Captains+Cottage+Scarborough" target="_blank" rel="noopener">Google Maps</a></li>
+          <li><a href="https://www.tripadvisor.co.uk/Search?q=Captains+Cottage+Scarborough" target="_blank" rel="noopener">TripAdvisor</a></li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- Booking & Contact Section -->
+    <section id="booking">
+      <div class="section-container">
+        <h2>Booking & Contact</h2>
+        <p>
+          Check-in is from 4:00 pm and check-out by 10:00 am. For details and booking options, please visit <a href="https://www.booking.com" target="_blank" rel="noopener">Booking.com</a> or email us at <a href="mailto:info@SYKESCOTTAGES.CO.UK">info@SYKESCOTTAGES.CO.UK</a>.
+        </p>
+        <p>
+          For guest reviews and more information, please visit our profile on <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">Sykes Cottages</a>.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Weather Widget Section -->
+    <section id="weather" class="section-container">
+      <h2 style="text-align: center;">Current Weather in Scarborough</h2>
+      <div style="text-align: center;">
+        <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
+      </div>
+      <script>
+        !function(d,s,id){
+          var js,fjs=d.getElementsByTagName(s)[0];
+          if(!d.getElementById(id)){
+            js=d.createElement(s); js.id=id;
+            js.src='https://weatherwidget.io/js/widget.min.js';
+            fjs.parentNode.insertBefore(js,fjs);
+          }
+        }(document,'script','weatherwidget-io-js');
+      </script>
+    </section>
+    
+    <!-- Interactive Gallery Section -->
+    <section id="gallery">
+      <div class="section-container">
+        <h2>Gallery</h2>
+        <p style="text-align:center;">Click an image to enlarge.</p>
+        <div class="gallery">
+          <img src="entrance.jpg" alt="Gallery view of the entrance" class="clickable-image" loading="lazy">
+          <img src="livingroom.jpg" alt="Gallery view of the cozy living room" class="clickable-image" loading="lazy">
+          <img src="kitchen.jpg" alt="Gallery view of the modern kitchen" class="clickable-image" loading="lazy">
+          <img src="room1.jpg" alt="Gallery view of the double bedroom" class="clickable-image" loading="lazy">
+          <img src="room2.jpg" alt="Gallery view of the twin bedroom" class="clickable-image" loading="lazy">
+          <img src="bathroom.jpg" alt="Gallery view of the elegant bathroom" class="clickable-image" loading="lazy">
+          <img src="dinningroom.jpg" alt="Gallery view of the spacious dining room" class="clickable-image" loading="lazy">
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer CTA Bar -->
+  <div class="footer-cta">
+    <h2>Ready for your next seaside escape?</h2>
+    <a href="#booking" class="cta-button">Book Now</a>
+  </div>
+  
+  <!-- Main Footer -->
+  <footer>
+    <p>&copy; 2025 Captain's Cottage | All Rights Reserved</p>
+  </footer>
   
   <!-- Lightbox Modal for Images -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-content">
       <button class="lightbox-close" id="lightbox-close">&times;</button>
-      <img src="" alt="Enlarged Image" id="lightbox-img">
+      <img src="" alt="Enlarged image view" id="lightbox-img">
     </div>
   </div>
   
