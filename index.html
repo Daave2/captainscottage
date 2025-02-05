@@ -102,7 +102,7 @@
       justify-content: center;
       text-align: center;
     }
-    /* Nautical gradient overlay (subtle water effect) */
+    /* Less overlay: using only 10% opacity */
     .hero::after {
       content: "";
       position: absolute;
@@ -111,8 +111,8 @@
       right: 0; 
       bottom: 0;
       background: linear-gradient(
-        rgba(10, 35, 66, 0.3),
-        rgba(10, 35, 66, 0.3)
+        rgba(10, 35, 66, 0.1),
+        rgba(10, 35, 66, 0.1)
       );
     }
     .hero-content {
@@ -149,7 +149,7 @@
       color: var(--white);
       transform: translateY(-2px);
     }
-    /* Section Container */
+    /* Section Container with animation */
     .section-container {
       max-width: 1000px;
       margin: 120px auto 40px;
@@ -158,6 +158,8 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       border-radius: 5px;
       border-top: 4px solid var(--primary-color);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
     }
     .section-container h2 {
       font-size: 2.5rem;
@@ -177,7 +179,7 @@
       list-style: disc;
       margin-left: 20px;
     }
-    /* Inline Images as Thumbnails */
+    /* Larger Inline Images with slide-in animation */
     .inline-images {
       display: flex;
       flex-wrap: wrap;
@@ -186,11 +188,13 @@
       margin-bottom: 20px;
     }
     .inline-images img {
-      max-width: 200px;
+      max-width: 250px;
       border-radius: 5px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: 2px solid var(--accent-color);
+      opacity: 0;
+      animation: slideIn 0.8s ease forwards;
     }
     .inline-images img:hover {
       transform: scale(1.05);
@@ -313,10 +317,18 @@
       opacity: 1;
       visibility: visible;
     }
-    /* Keyframes */
+    /* Keyframes for animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     @keyframes zoomIn {
       from { transform: scale(0.8); opacity: 0; }
