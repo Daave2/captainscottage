@@ -11,12 +11,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #0066cc;
-      --primary-color-hover: #005bb5;
+      /* Nautical color palette */
+      --primary-color: #0A2342; /* deep navy */
+      --primary-color-hover: #081a33;
       --secondary-color: #333;
-      --light-bg: #f9f9f9;
+      --light-bg: #f0f4f8; /* very light blue-gray */
       --white: #fff;
-      --accent-color: #eaeaea;
+      --accent-color: #d9e2ec; /* soft accent reminiscent of seafoam */
     }
     html {
       scroll-behavior: smooth;
@@ -55,7 +56,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--secondary-color);
+      background: var(--primary-color);
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     header .logo img {
@@ -77,9 +78,7 @@
       margin: 4px 0;
     }
     /* Navigation */
-    nav {
-      /* For desktop, display inline */
-    }
+    nav { }
     nav ul {
       list-style: none;
       display: flex;
@@ -103,7 +102,7 @@
       justify-content: center;
       text-align: center;
     }
-    /* Updated overlay: using a lighter opacity (0.2) */
+    /* Nautical gradient overlay (subtle water effect) */
     .hero::after {
       content: "";
       position: absolute;
@@ -111,7 +110,10 @@
       left: 0; 
       right: 0; 
       bottom: 0;
-      background: rgba(0, 0, 0, 0.2);
+      background: linear-gradient(
+        rgba(10, 35, 66, 0.3),
+        rgba(10, 35, 66, 0.3)
+      );
     }
     .hero-content {
       position: relative;
@@ -123,27 +125,28 @@
     .hero-content h1 {
       font-size: 3rem;
       margin-bottom: 15px;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
     }
     .hero-content p {
       font-size: 1.3rem;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
     }
     .cta-button {
       display: inline-block;
       padding: 12px 30px;
       font-size: 1.1rem;
-      background: var(--primary-color);
-      color: var(--white);
+      background: var(--accent-color);
+      color: var(--primary-color);
       border-radius: 30px;
-      border: none;
+      border: 2px solid var(--primary-color);
       cursor: pointer;
       text-decoration: none;
       transition: background 0.3s ease, transform 0.3s ease;
     }
     .cta-button:hover {
       background: var(--primary-color-hover);
+      color: var(--white);
       transform: translateY(-2px);
     }
     /* Section Container */
@@ -154,12 +157,13 @@
       background: var(--white);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       border-radius: 5px;
+      border-top: 4px solid var(--primary-color);
     }
     .section-container h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-align: center;
-      color: var(--secondary-color);
+      color: var(--primary-color);
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 10px;
     }
@@ -186,6 +190,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid var(--accent-color);
     }
     .inline-images img:hover {
       transform: scale(1.05);
@@ -202,6 +207,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid var(--accent-color);
     }
     .gallery img:hover {
       transform: scale(1.03);
@@ -240,7 +246,7 @@
       top: -20px;
       right: -20px;
       background: var(--white);
-      color: var(--secondary-color);
+      color: var(--primary-color);
       border: none;
       border-radius: 50%;
       width: 40px;
@@ -257,12 +263,13 @@
       background: var(--white);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       border-radius: 5px;
+      border-top: 4px solid var(--primary-color);
     }
     .resources h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-align: center;
-      color: var(--secondary-color);
+      color: var(--primary-color);
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 10px;
     }
@@ -282,7 +289,7 @@
       text-align: center;
       padding: 20px 30px;
       font-size: 0.9rem;
-      background: var(--secondary-color);
+      background: var(--primary-color);
       color: var(--white);
       margin-top: 40px;
     }
@@ -322,7 +329,7 @@
         top: 70px;
         left: 0;
         width: 100%;
-        background: var(--secondary-color);
+        background: var(--primary-color);
         display: none;
         flex-direction: column;
       }
@@ -396,10 +403,10 @@
     <div class="section-container">
       <h2>Welcome to Captain's Cottage</h2>
       <p>
-        Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage offers a blend of historic character and modern amenities, creating an idyllic seaside retreat for families and couples.
+        Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage now offers a modern seaside escape with tasteful nautical accents.
       </p>
       <p>
-        Experience the authentic taste of Scarborough’s maritime heritage combined with contemporary comforts.
+        Enjoy authentic maritime charm paired with contemporary comforts.
       </p>
       <div class="inline-images">
         <img src="entrance.jpg" alt="Entrance of Captain's Cottage" class="clickable-image">
@@ -444,7 +451,7 @@
         <li>Dishwasher</li>
       </ul>
       <p>
-        Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a selection of books and games.
+        Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a curated selection of books and games.
       </p>
       <div class="inline-images">
         <img src="kitchen.jpg" alt="Modern Kitchen" class="clickable-image">
@@ -458,7 +465,7 @@
     <div class="section-container">
       <h2>Outdoor & Additional Amenities</h2>
       <p>
-        Step outside to enjoy a spacious decking area, perfect for outdoor dining or relaxing after a day at the beach.
+        Step outside to enjoy a spacious decking area, ideal for al fresco dining or a quiet moment by the sea.
       </p>
       <ul>
         <li><strong>Pet Policy:</strong> One well-behaved dog is welcome.</li>
@@ -476,11 +483,11 @@
     <div class="section-container">
       <h2>Local Attractions</h2>
       <p>
-        Located in Scarborough's old town, you're within walking distance of restaurants, shops, and the beachfront. Notable nearby attractions include:
+        Located in Scarborough's historic district, you're within walking distance of local restaurants, shops, and the beachfront. Explore nearby attractions such as:
       </p>
       <ul>
         <li><strong>Scarborough Castle:</strong> Historic site with panoramic views. (<a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">English Heritage</a>)</li>
-        <li><strong>Scarborough Harbour:</strong> Seafront cafés and yacht club vibes.</li>
+        <li><strong>Scarborough Harbour:</strong> Seafront cafés and yacht club ambiance.</li>
         <li><strong>North Bay Beach:</strong> A sandy haven ideal for families.</li>
         <li><strong>Peasholm Park:</strong> Themed gardens and a boating lake. (<a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Council</a>)</li>
         <li><strong>Maritime Heritage:</strong> Discover the town’s seafaring past. (<a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Heritage Centre</a>)</li>
