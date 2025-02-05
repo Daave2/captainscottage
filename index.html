@@ -27,17 +27,24 @@
     a:hover {
       text-decoration: underline;
     }
-    header, footer {
-      background: #333;
-      color: #fff;
-    }
-    /* Header */
+    /* Header Styles */
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 30px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background 0.5s ease;
+      background: transparent;
+    }
+    /* When scrolled, add background image from hero */
+    header.scrolled {
+      background: url('hero.jpg') no-repeat center center/cover;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
     header .logo img {
       height: 50px;
@@ -58,7 +65,7 @@
     .hero {
       position: relative;
       background: url('hero.jpg') no-repeat center center/cover;
-      height: 75vh;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -88,12 +95,11 @@
     /* Section Container */
     .section-container {
       max-width: 1000px;
-      margin: 0 auto;
+      margin: 120px auto 40px; /* start below header */
       padding: 40px 20px;
       background: #fff;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       border-radius: 5px;
-      margin-bottom: 40px;
     }
     .section-container h2 {
       font-size: 2.5rem;
@@ -112,6 +118,18 @@
     .section-container ul {
       list-style: disc;
       margin-left: 20px;
+    }
+    /* Inline Images in Sections */
+    .inline-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .inline-images img {
+      flex: 1 1 45%;
+      border-radius: 5px;
+      max-width: 100%;
     }
     /* Interactive Gallery */
     .gallery {
@@ -172,6 +190,9 @@
       text-align: center;
       padding: 20px 30px;
       font-size: 0.9rem;
+      background: #333;
+      color: #fff;
+      margin-top: 40px;
     }
     /* Responsive */
     @media (max-width: 600px) {
@@ -184,12 +205,18 @@
       .section-container {
         padding: 30px 15px;
       }
+      .inline-images {
+        flex-direction: column;
+      }
+      .inline-images img {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
+  <!-- Header (initially transparent, becomes styled on scroll) -->
+  <header id="main-header">
     <div class="logo">
       <img src="logo.png" alt="Captain's Cottage Logo">
     </div>
@@ -204,7 +231,7 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Section as Cover Page -->
   <section class="hero" id="home">
     <div class="hero-content">
       <h1>Captain's Cottage</h1>
@@ -212,7 +239,7 @@
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About Section with an Inline Image -->
   <section id="about">
     <div class="section-container">
       <h2>Welcome to Captain's Cottage</h2>
@@ -222,10 +249,13 @@
       <p>
         Experience the authentic taste of Scarborough’s maritime heritage combined with contemporary comforts.
       </p>
+      <div class="inline-images">
+        <img src="entrance.jpg" alt="Entrance of Captain's Cottage">
+      </div>
     </div>
   </section>
 
-  <!-- Accommodation Section -->
+  <!-- Accommodation Section with Inline Images -->
   <section id="accommodation">
     <div class="section-container">
       <h2>Accommodation Details</h2>
@@ -239,10 +269,14 @@
       <p>
         The bathroom is fully equipped with a bath, a shower over the bath, WC, and basin.
       </p>
+      <div class="inline-images">
+        <img src="room1.jpg" alt="Double Bedroom">
+        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views">
+      </div>
     </div>
   </section>
 
-  <!-- Living Spaces & Amenities Section -->
+  <!-- Living Spaces & Modern Amenities Section with Inline Images -->
   <section id="amenities">
     <div class="section-container">
       <h2>Living Spaces & Modern Amenities</h2>
@@ -260,10 +294,14 @@
       <p>
         Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a selection of books and games.
       </p>
+      <div class="inline-images">
+        <img src="kitchen.jpg" alt="Modern Kitchen">
+        <img src="livingroom.jpg" alt="Cozy Living Room">
+      </div>
     </div>
   </section>
 
-  <!-- Outdoor & Additional Amenities Section -->
+  <!-- Outdoor & Additional Amenities Section with an Inline Image -->
   <section id="outdoor">
     <div class="section-container">
       <h2>Outdoor & Additional Amenities</h2>
@@ -275,6 +313,9 @@
         <li><strong>Family-Friendly:</strong> Highchair and travel cot available on request.</li>
         <li><strong>Parking:</strong> A roadside parking permit is provided for convenience.</li>
       </ul>
+      <div class="inline-images">
+        <img src="dinningroom.jpg" alt="Dining Area / Outdoor Setting">
+      </div>
     </div>
   </section>
 
@@ -337,15 +378,24 @@
     <p>&copy; 2025 Captain's Cottage | All Rights Reserved</p>
   </footer>
 
-  <!-- JavaScript for Interactive Gallery Lightbox -->
+  <!-- JavaScript for Header Scroll Effect and Interactive Gallery Lightbox -->
   <script>
-    // Select gallery images and lightbox elements
+    // Header background switch on scroll
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Interactive Gallery Lightbox
     const galleryImages = document.querySelectorAll('.gallery img');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
 
-    // Open lightbox on image click
     galleryImages.forEach(img => {
       img.addEventListener('click', () => {
         lightbox.classList.add('active');
@@ -353,7 +403,6 @@
       });
     });
 
-    // Close lightbox when clicking close button or outside image
     lightboxClose.addEventListener('click', () => {
       lightbox.classList.remove('active');
     });
