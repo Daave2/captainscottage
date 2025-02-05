@@ -12,12 +12,12 @@
   <style>
     :root {
       /* Nautical color palette */
-      --primary-color: #0A2342; /* deep navy */
-      --primary-color-hover: #081a33;
+      --primary-color: #081a33; /* darker deep navy */
+      --primary-color-hover: #061523;
       --secondary-color: #333;
       --light-bg: #f0f4f8; /* very light blue-gray */
       --white: #fff;
-      --accent-color: #d9e2ec; /* soft accent reminiscent of seafoam */
+      --accent-color: #d9e2ec; /* soft seafoam accent */
     }
     html {
       scroll-behavior: smooth;
@@ -45,19 +45,30 @@
     a:hover {
       text-decoration: underline;
     }
-    /* Header Styles */
-    header {
+    /* Scroll Progress Bar */
+    #scroll-progress {
       position: fixed;
       top: 0;
       left: 0;
+      height: 4px;
+      background: var(--primary-color-hover);
+      width: 0%;
+      z-index: 1100;
+      transition: width 0.2s ease;
+    }
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 4px; /* leave room for progress bar */
+      left: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 1050;
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: var(--primary-color);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     header .logo img {
       height: 50px;
@@ -78,10 +89,14 @@
       margin: 4px 0;
     }
     /* Navigation */
-    nav { }
+    nav {
+      display: flex;
+      align-items: center;
+    }
     nav ul {
       list-style: none;
       display: flex;
+      margin-right: 20px;
     }
     nav ul li {
       margin-left: 20px;
@@ -90,25 +105,18 @@
       color: var(--white);
       font-weight: bold;
       font-size: 1rem;
+      transition: color 0.3s ease;
     }
-    /* Fixed Section Title Bar */
-    #section-title {
-      position: fixed;
-      top: 70px; /* Just below the header */
-      left: 0;
-      width: 100%;
-      padding: 10px 20px;
-      background: rgba(10, 35, 66, 0.8); /* semi-transparent deep navy */
-      color: var(--white);
-      font-size: 1.5rem;
-      text-align: center;
-      z-index: 900;
-      opacity: 0;
+    nav ul li a.active {
+      border-bottom: 2px solid var(--accent-color);
+    }
+    /* Dynamic Section Title inside Nav */
+    #nav-current-section {
+      color: var(--accent-color);
+      font-size: 1.2rem;
+      margin-left: 20px;
+      font-weight: bold;
       transition: opacity 0.3s ease;
-    }
-    /* Show the section title bar when active */
-    #section-title.show {
-      opacity: 1;
     }
     /* Hero Section */
     .hero {
@@ -121,17 +129,14 @@
       justify-content: center;
       text-align: center;
     }
-    /* Less overlay: using only 10% opacity */
+    /* Lighter overlay (10% opacity) */
     .hero::after {
       content: "";
       position: absolute;
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(
-        rgba(10, 35, 66, 0.1),
-        rgba(10, 35, 66, 0.1)
+        rgba(8, 26, 51, 0.1),
+        rgba(8, 26, 51, 0.1)
       );
     }
     .hero-content {
@@ -188,7 +193,8 @@
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 10px;
     }
-    .section-container p, .section-container ul {
+    .section-container p,
+    .section-container ul {
       font-size: 1.1rem;
       color: #555;
       margin-bottom: 20px;
@@ -245,7 +251,7 @@
       background: rgba(0, 0, 0, 0.9);
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      z-index: 1100;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -276,7 +282,7 @@
       height: 40px;
       font-size: 1.5rem;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     /* Useful Resources Section */
     .resources {
@@ -331,6 +337,7 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1050;
     }
     #back-to-top.show {
       opacity: 1;
@@ -399,29 +406,31 @@
   </style>
 </head>
 <body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+  
   <!-- Header -->
   <header id="main-header">
     <div class="logo">
       <img src="logo.png" alt="Captain's Cottage Logo">
     </div>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="#home" data-section="Home">Home</a></li>
+        <li><a href="#about" data-section="About">About</a></li>
+        <li><a href="#accommodation" data-section="Accommodation">Accommodation</a></li>
+        <li><a href="#gallery" data-section="Gallery">Gallery</a></li>
+        <li><a href="#booking" data-section="Booking">Booking</a></li>
+      </ul>
+      <!-- Dynamic Current Section Display -->
+      <span id="nav-current-section"></span>
+    </nav>
     <button class="mobile-menu-toggle" id="mobile-menu-toggle">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <nav id="nav-menu">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#accommodation">Accommodation</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#booking">Booking</a></li>
-      </ul>
-    </nav>
   </header>
-  
-  <!-- Dynamic Section Title Bar -->
-  <div id="section-title"></div>
   
   <!-- Hero Section -->
   <section class="hero" id="home">
@@ -607,12 +616,7 @@
   <!-- Back to Top Button -->
   <button id="back-to-top">↑ Top</button>
   
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Captain's Cottage | All Rights Reserved</p>
-  </footer>
-  
-  <!-- JavaScript for Lightbox, Mobile Menu, Back to Top, and Dynamic Section Title -->
+  <!-- JavaScript for Lightbox, Mobile Menu, Back to Top, Dynamic Nav & Scroll Progress -->
   <script>
     // Mobile Navigation Toggle
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -626,18 +630,15 @@
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
-  
     clickableImages.forEach(img => {
       img.addEventListener('click', () => {
         lightbox.classList.add('active');
         lightboxImg.src = img.src;
       });
     });
-  
     lightboxClose.addEventListener('click', () => {
       lightbox.classList.remove('active');
     });
-  
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) {
         lightbox.classList.remove('active');
@@ -654,37 +655,47 @@
       }
     });
     backToTop.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   
-    // Dynamic Section Title functionality
-    const sectionTitleBar = document.getElementById('section-title');
+    // Dynamic Navigation & Active Link Update using Intersection Observer
+    const navCurrent = document.getElementById('nav-current-section');
+    const navLinks = document.querySelectorAll('nav ul li a');
     const sections = document.querySelectorAll('section');
-    
-    // Options for the Intersection Observer
-    const options = {
+    const observerOptions = {
       root: null,
-      threshold: 0.4 // adjust this value to determine when a section is considered "in view"
+      threshold: 0.5
     };
   
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Find the first h2 in the section (if available)
+          // Update dynamic text (using the h2 of the section)
           const h2 = entry.target.querySelector('h2');
           if (h2) {
-            sectionTitleBar.textContent = h2.textContent;
-            sectionTitleBar.classList.add('show');
+            navCurrent.textContent = h2.textContent;
           }
+          // Update active link based on section id
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
         }
       });
-    }, options);
+    }, observerOptions);
   
-    sections.forEach(section => {
-      observer.observe(section);
+    sections.forEach(section => observer.observe(section));
+  
+    // Scroll Progress Bar functionality
+    const scrollProgress = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.offsetHeight;
+      const winHeight = window.innerHeight;
+      const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
     });
   </script>
 </body>
