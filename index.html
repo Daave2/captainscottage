@@ -61,6 +61,25 @@
     header .logo img {
       height: 50px;
     }
+    /* Mobile Navigation Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      flex-direction: column;
+      cursor: pointer;
+      outline: none;
+    }
+    .mobile-menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      margin: 4px 0;
+    }
+    /* Navigation */
+    nav {
+      /* For desktop, display inline */
+    }
     nav ul {
       list-style: none;
       display: flex;
@@ -292,13 +311,38 @@
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-    /* Responsive */
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--secondary-color);
+        display: none;
+        flex-direction: column;
+      }
+      nav.active {
+        display: flex;
+      }
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+      }
+      nav ul li {
+        margin: 10px 0;
+        text-align: center;
+      }
+      .mobile-menu-toggle {
+        display: flex;
+      }
+    }
     @media (max-width: 600px) {
       .hero-content h1 {
         font-size: 2.5rem;
       }
-      nav ul li {
-        margin-left: 10px;
+      header {
+        padding: 15px 20px;
       }
       .section-container, .resources {
         padding: 30px 15px;
@@ -318,7 +362,12 @@
     <div class="logo">
       <img src="logo.png" alt="Captain's Cottage Logo">
     </div>
-    <nav>
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="nav-menu">
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -518,8 +567,15 @@
     <p>&copy; 2025 Captain's Cottage | All Rights Reserved</p>
   </footer>
 
-  <!-- JavaScript for Lightbox and Back to Top -->
+  <!-- JavaScript for Lightbox, Mobile Menu, and Back to Top -->
   <script>
+    // Mobile Navigation Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    mobileMenuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
     // Lightbox functionality
     const clickableImages = document.querySelectorAll('.clickable-image');
     const lightbox = document.getElementById('lightbox');
