@@ -38,13 +38,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.5s ease;
-      background: transparent;
-    }
-    /* When scrolled, add background image from hero */
-    header.scrolled {
-      background: url('hero.jpg') no-repeat center center/cover;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      background: #333;
     }
     header .logo img {
       height: 50px;
@@ -119,7 +113,7 @@
       list-style: disc;
       margin-left: 20px;
     }
-    /* Inline Images in Sections */
+    /* Inline Images in Sections as Thumbnails */
     .inline-images {
       display: flex;
       flex-wrap: wrap;
@@ -127,9 +121,13 @@
       margin-bottom: 20px;
     }
     .inline-images img {
-      flex: 1 1 45%;
+      max-width: 200px;
       border-radius: 5px;
-      max-width: 100%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .inline-images img:hover {
+      transform: scale(1.05);
     }
     /* Interactive Gallery */
     .gallery {
@@ -185,6 +183,34 @@
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
+    /* Useful Resources Section */
+    .resources {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 40px 20px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 5px;
+    }
+    .resources h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+      border-bottom: 2px solid #eaeaea;
+      padding-bottom: 10px;
+    }
+    .resources ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .resources ul li {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .resources ul li a {
+      color: #0066cc;
+    }
     /* Footer */
     footer {
       text-align: center;
@@ -202,20 +228,20 @@
       nav ul li {
         margin-left: 10px;
       }
-      .section-container {
+      .section-container, .resources {
         padding: 30px 15px;
       }
       .inline-images {
         flex-direction: column;
       }
       .inline-images img {
-        flex: 1 1 100%;
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header (initially transparent, becomes styled on scroll) -->
+  <!-- Header -->
   <header id="main-header">
     <div class="logo">
       <img src="logo.png" alt="Captain's Cottage Logo">
@@ -239,7 +265,7 @@
     </div>
   </section>
 
-  <!-- About Section with an Inline Image -->
+  <!-- About Section with an Inline Thumbnail -->
   <section id="about">
     <div class="section-container">
       <h2>Welcome to Captain's Cottage</h2>
@@ -250,12 +276,12 @@
         Experience the authentic taste of Scarborough’s maritime heritage combined with contemporary comforts.
       </p>
       <div class="inline-images">
-        <img src="entrance.jpg" alt="Entrance of Captain's Cottage">
+        <img src="entrance.jpg" alt="Entrance of Captain's Cottage" class="clickable-image">
       </div>
     </div>
   </section>
 
-  <!-- Accommodation Section with Inline Images -->
+  <!-- Accommodation Section with Inline Thumbnails -->
   <section id="accommodation">
     <div class="section-container">
       <h2>Accommodation Details</h2>
@@ -270,13 +296,13 @@
         The bathroom is fully equipped with a bath, a shower over the bath, WC, and basin.
       </p>
       <div class="inline-images">
-        <img src="room1.jpg" alt="Double Bedroom">
-        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views">
+        <img src="room1.jpg" alt="Double Bedroom" class="clickable-image">
+        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views" class="clickable-image">
       </div>
     </div>
   </section>
 
-  <!-- Living Spaces & Modern Amenities Section with Inline Images -->
+  <!-- Living Spaces & Modern Amenities Section with Inline Thumbnails -->
   <section id="amenities">
     <div class="section-container">
       <h2>Living Spaces & Modern Amenities</h2>
@@ -295,13 +321,13 @@
         Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a selection of books and games.
       </p>
       <div class="inline-images">
-        <img src="kitchen.jpg" alt="Modern Kitchen">
-        <img src="livingroom.jpg" alt="Cozy Living Room">
+        <img src="kitchen.jpg" alt="Modern Kitchen" class="clickable-image">
+        <img src="livingroom.jpg" alt="Cozy Living Room" class="clickable-image">
       </div>
     </div>
   </section>
 
-  <!-- Outdoor & Additional Amenities Section with an Inline Image -->
+  <!-- Outdoor & Additional Amenities Section with an Inline Thumbnail -->
   <section id="outdoor">
     <div class="section-container">
       <h2>Outdoor & Additional Amenities</h2>
@@ -314,7 +340,7 @@
         <li><strong>Parking:</strong> A roadside parking permit is provided for convenience.</li>
       </ul>
       <div class="inline-images">
-        <img src="dinningroom.jpg" alt="Dining Area / Outdoor Setting">
+        <img src="dinningroom.jpg" alt="Dining Area / Outdoor Setting" class="clickable-image">
       </div>
     </div>
   </section>
@@ -327,38 +353,44 @@
         Located in Scarborough's old town, you’re within walking distance of restaurants, shops, and the beachfront. Notable nearby attractions include:
       </p>
       <ul>
-        <li><strong>Scarborough Castle:</strong> A historic site with panoramic coastal views.</li>
+        <li><strong>Scarborough Castle:</strong> A historic site with panoramic coastal views. (<a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">English Heritage</a> / EN.WIKIPEDIA.ORG)</li>
         <li><strong>Scarborough Harbour:</strong> Enjoy seafront cafés and charming yacht club vibes.</li>
         <li><strong>North Bay Beach:</strong> A beautiful, sandy haven perfect for families.</li>
-        <li><strong>Peasholm Park:</strong> Japanese-style landscaped gardens offering picturesque scenery.</li>
+        <li><strong>Peasholm Park:</strong> A family-friendly park featuring themed gardens and a boating lake. (<a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Scarborough Council</a> / EN.WIKIPEDIA.ORG)</li>
+        <li><strong>Scarborough Maritime Heritage Centre:</strong> Explore the town’s rich maritime history. (<a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Website</a> / EN.WIKIPEDIA.ORG)</li>
+        <li><strong>Scarborough Art Gallery:</strong> Discover local art and culture. (<a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Museum Trust</a> / EN.WIKIPEDIA.ORG)</li>
+        <li><strong>Visit England – Scarborough Attractions:</strong> Additional inspiration for things to do in the area. (<a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland.com</a>)</li>
       </ul>
     </div>
   </section>
 
-  <!-- Interactive Gallery Section -->
-  <section id="gallery">
-    <div class="section-container">
-      <h2>Gallery</h2>
-      <p style="text-align:center;">Click an image to enlarge.</p>
-      <div class="gallery">
-        <img src="entrance.jpg" alt="Entrance of Captain's Cottage">
-        <img src="livingroom.jpg" alt="Cozy Living Room">
-        <img src="kitchen.jpg" alt="Modern Kitchen">
-        <img src="room1.jpg" alt="Double Bedroom">
-        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views">
-        <img src="bathroom.jpg" alt="Elegant Bathroom">
-        <img src="dinningroom.jpg" alt="Spacious Dining Room">
-      </div>
+  <!-- Useful Resources Section -->
+  <section id="resources">
+    <div class="resources">
+      <h2>Useful Resources</h2>
+      <ul>
+        <li><strong>Property Details & Booking:</strong> <a href="https://www.sykescottages.co.uk/cottage/North-York-Moors-Coast-Old-and-East-Harbours/Captains-Cottage-1159058.html" target="_blank" rel="noopener">Captains Cottage – Sykes Cottages Listing</a> (SYKESCOTTAGES.CO.UK)</li>
+        <li><strong>Local Attractions & Tourism:</strong>
+          <ul>
+            <li><a href="https://www.visitscarborough.com/" target="_blank" rel="noopener">Visit Scarborough</a> (VISITSCARBOROUGH.COM)</li>
+            <li><a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">Scarborough Castle</a> (EN.WIKIPEDIA.ORG)</li>
+            <li><a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Peasholm Park</a> (EN.WIKIPEDIA.ORG)</li>
+            <li><a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Scarborough Maritime Heritage Centre</a> (EN.WIKIPEDIA.ORG)</li>
+            <li><a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Scarborough Art Gallery</a> (EN.WIKIPEDIA.ORG)</li>
+            <li><a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">Visit England – Scarborough Attractions</a> (VISITENGLAND.COM)</li>
+          </ul>
+        </li>
+        <li><strong>Practical Information:</strong>
+          <ul>
+            <li><a href="https://www.scarborough.gov.uk/" target="_blank" rel="noopener">Scarborough Council Official Website</a></li>
+            <li><a href="https://www.bbc.com/weather/2640729" target="_blank" rel="noopener">BBC Weather – Scarborough</a></li>
+            <li><a href="https://www.google.com/maps/search/Captains+Cottage+Scarborough" target="_blank" rel="noopener">Google Maps – Captains Cottage, Scarborough</a></li>
+            <li><a href="https://www.tripadvisor.co.uk/Search?q=Captains+Cottage+Scarborough" target="_blank" rel="noopener">TripAdvisor Search for Captains Cottage</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </section>
-
-  <!-- Lightbox Modal for Gallery -->
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-content">
-      <button class="lightbox-close" id="lightbox-close">&times;</button>
-      <img src="" alt="Enlarged Image" id="lightbox-img">
-    </div>
-  </div>
 
   <!-- Booking & Contact Section -->
   <section id="booking">
@@ -378,31 +410,23 @@
     <p>&copy; 2025 Captain's Cottage | All Rights Reserved</p>
   </footer>
 
-  <!-- JavaScript for Header Scroll Effect and Interactive Gallery Lightbox -->
+  <!-- JavaScript for Interactive Lightbox for Clickable Images -->
   <script>
-    // Header background switch on scroll
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Interactive Gallery Lightbox
-    const galleryImages = document.querySelectorAll('.gallery img');
+    // Select all images that should be clickable for enlarging
+    const clickableImages = document.querySelectorAll('.clickable-image');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
 
-    galleryImages.forEach(img => {
+    // When any clickable image is clicked, open the lightbox with that image
+    clickableImages.forEach(img => {
       img.addEventListener('click', () => {
         lightbox.classList.add('active');
         lightboxImg.src = img.src;
       });
     });
 
+    // Close the lightbox when clicking the close button or outside the image
     lightboxClose.addEventListener('click', () => {
       lightbox.classList.remove('active');
     });
