@@ -95,8 +95,20 @@
       background: var(--primary-color);
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
-    header .logo img {
+    /* Logo styling and rotation animation */
+    .logo img {
       height: 50px;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+    /* Rotate animation keyframes */
+    @keyframes rotateAnimation {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    /* Class to trigger rotation */
+    .rotate {
+      animation: rotateAnimation 1s forwards;
     }
     /* Navigation: restructured as flex container */
     nav {
@@ -756,13 +768,25 @@
   <!-- Back to Top Button -->
   <button id="back-to-top">↑ Top</button>
   
-  <!-- JavaScript for Lightbox, Mobile Menu, Back to Top, Dynamic Nav & Scroll Progress -->
+  <!-- JavaScript for Lightbox, Mobile Menu, Back to Top, Dynamic Nav & Scroll Progress, Rotating Logo -->
   <script>
     // Mobile Navigation Toggle
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navMenu = document.getElementById('nav-menu');
     mobileMenuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
+      // Optional: rotate the logo when menu is toggled
+      logo.classList.add('rotate');
+    });
+  
+    // Rotating Logo on Click
+    const logo = document.querySelector('.logo img');
+    logo.addEventListener('click', () => {
+      logo.classList.add('rotate');
+    });
+    // Remove rotation class after animation ends so it can be triggered again
+    logo.addEventListener('animationend', () => {
+      logo.classList.remove('rotate');
     });
   
     // Lightbox functionality
