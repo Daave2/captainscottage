@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Captain's Cottage - Seaside Retreat in Scarborough</title>
-  <meta name="description" content="Captain's Cottage is a charming mid-terrace house in Scarborough, North Yorkshire offering a perfect blend of comfort and seaside relaxation.">
+  <title>Captain's Cottage - A Historic Seaside Retreat in Scarborough</title>
+  <meta name="description" content="Captain's Cottage is a charming mid-terrace house built in the 1800s, blending historic character with modern amenities. Perfect for families and couples seeking a seaside getaway in Scarborough, North Yorkshire.">
+  <!-- Favicon using your logo -->
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
-    /* Reset some default spacing */
+    /* Reset & Base Styles */
     * {
       margin: 0;
       padding: 0;
@@ -17,13 +19,23 @@
       line-height: 1.6;
       color: #333;
     }
-    header {
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header, footer {
       background: #333;
       color: #fff;
-      padding: 10px 20px;
+    }
+    /* Header */
+    header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
     }
     header .logo img {
       height: 50px;
@@ -37,7 +49,6 @@
     }
     nav ul li a {
       color: #fff;
-      text-decoration: none;
       font-weight: bold;
     }
     /* Hero Section */
@@ -54,11 +65,8 @@
     .hero::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
     }
     .hero-content {
       position: relative;
@@ -70,56 +78,92 @@
       margin-bottom: 10px;
     }
     .hero-content p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
-    /* Section Styling */
+    /* Section Styles */
     section {
       padding: 60px 20px;
     }
-    .info {
-      max-width: 800px;
-      margin: 0 auto 40px auto;
-      text-align: center;
+    .section-container {
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .info h2 {
+    .section-container h2 {
       font-size: 2.5rem;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      text-align: center;
       color: #333;
     }
-    .info p {
+    .section-container p {
       font-size: 1.1rem;
       color: #555;
+      margin-bottom: 20px;
+      text-align: center;
     }
-    /* Gallery Grid */
+    /* Lists */
+    .features-list {
+      list-style: disc;
+      margin-left: 20px;
+      text-align: left;
+    }
+    /* Interactive Gallery */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
     }
     .gallery img {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 5px;
+      cursor: pointer;
       transition: transform 0.3s ease;
     }
     .gallery img:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
-    /* Contact Section */
-    #contact a {
-      color: #0066cc;
-      text-decoration: none;
-      font-weight: bold;
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
     }
-    /* Footer Styling */
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .lightbox-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    /* Footer */
     footer {
-      background: #333;
-      color: #fff;
       text-align: center;
       padding: 20px;
     }
-    /* Responsive Adjustments */
+    /* Responsive */
     @media (max-width: 600px) {
       .hero-content h1 {
         font-size: 2rem;
@@ -131,7 +175,7 @@
   </style>
 </head>
 <body>
-  <!-- Header with Logo and Navigation -->
+  <!-- Header -->
   <header>
     <div class="logo">
       <img src="logo.png" alt="Captain's Cottage Logo">
@@ -139,9 +183,10 @@
     <nav>
       <ul>
         <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#accommodation">Accommodation</a></li>
         <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#booking">Booking</a></li>
       </ul>
     </nav>
   </header>
@@ -149,56 +194,127 @@
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <h1>Welcome to Captain's Cottage</h1>
-      <p>Your Seaside Retreat in Scarborough, North Yorkshire</p>
+      <h1>Captain's Cottage</h1>
+      <p>A Historic Seaside Retreat in Scarborough</p>
     </div>
   </section>
 
-  <!-- Accommodation / About Section -->
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-container">
+      <h2>Welcome to Captain's Cottage</h2>
+      <p>
+        Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage blends historic character with modern amenities, creating an idyllic seaside retreat for families and couples.
+      </p>
+      <p>
+        Enjoy the authentic taste of Scarborough’s maritime heritage combined with the comforts of contemporary living.
+      </p>
+    </div>
+  </section>
+
+  <!-- Accommodation Section -->
   <section id="accommodation">
-    <div class="info">
-      <h2>About the Property</h2>
+    <div class="section-container">
+      <h2>Accommodation Details</h2>
       <p>
-        Captain's Cottage is a charming mid-terrace house that offers a perfect blend of comfort and seaside relaxation.
-        Ideal for families and couples, our property is conveniently located within walking distance of local restaurants,
-        the beachfront, and a variety of attractions in Scarborough.
+        The cottage accommodates up to four guests across two beautifully appointed bedrooms:
       </p>
+      <ul class="features-list">
+        <li><strong>Double Bedroom:</strong> Located on the first floor with ample space and comfort.</li>
+        <li><strong>Twin Bedroom:</strong> Situated on the second floor, featuring roof windows offering enchanting views of the night sky.</li>
+      </ul>
       <p>
-        The cottage accommodates up to four guests across two bedrooms—a double bedroom on the first floor and a twin bedroom
-        on the second floor. Enjoy modern amenities including a well-equipped kitchen/diner, comfortable living spaces, and a
-        spacious decking area for outdoor dining and relaxation. We also welcome one well-behaved dog!
+        The bathroom is fully equipped with a bath, a shower over the bath, WC, and basin.
       </p>
     </div>
   </section>
 
-  <!-- Gallery Section -->
+  <!-- Living Spaces & Amenities Section -->
+  <section id="amenities">
+    <div class="section-container">
+      <h2>Living Spaces & Modern Amenities</h2>
+      <p>
+        The cottage features a well-appointed kitchen/diner complete with modern appliances, including:
+      </p>
+      <ul class="features-list">
+        <li>Electric oven and induction hob</li>
+        <li>Microwave</li>
+        <li>Pod coffee machine</li>
+        <li>Fridge and freezer</li>
+        <li>Washing machine</li>
+        <li>Dishwasher</li>
+      </ul>
+      <p>
+        The cozy sitting room offers an electric fire, Smart TV with Freeview, WiFi, and a variety of reading materials and games for your entertainment.
+      </p>
+    </div>
+  </section>
+
+  <!-- Outdoor Space Section -->
+  <section id="outdoor">
+    <div class="section-container">
+      <h2>Outdoor & Additional Amenities</h2>
+      <p>
+        Step outside to enjoy a spacious decking area, perfect for outdoor dining or unwinding after a day at the beach.
+      </p>
+      <ul class="features-list">
+        <li><strong>Pet Policy:</strong> One well-behaved dog is welcome.</li>
+        <li><strong>Family-Friendly:</strong> Highchair and travel cot available upon request.</li>
+        <li><strong>Parking:</strong> A roadside parking permit is provided for your convenience.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Local Attractions Section -->
+  <section id="attractions">
+    <div class="section-container">
+      <h2>Explore the Local Attractions</h2>
+      <p>
+        Located in Scarborough's old town, you're within walking distance of local restaurants, shops, and the beachfront. Must-see attractions include:
+      </p>
+      <ul class="features-list">
+        <li><strong>Scarborough Castle:</strong> Historic site with panoramic coastal views.</li>
+        <li><strong>Scarborough Harbour:</strong> Enjoy seafront cafés and charming yacht club vibes.</li>
+        <li><strong>North Bay Beach:</strong> A beautiful, sandy haven perfect for families.</li>
+        <li><strong>Peasholm Park:</strong> Japanese-style landscaped gardens offering picturesque scenery.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Interactive Gallery Section -->
   <section id="gallery">
-    <div class="info">
+    <div class="section-container">
       <h2>Gallery</h2>
-      <p>Take a look at our property and imagine your next getaway.</p>
-    </div>
-    <div class="gallery">
-      <img src="entrance.jpg" alt="Entrance of Captain's Cottage">
-      <img src="livingroom.jpg" alt="Cozy Living Room">
-      <img src="kitchen.jpg" alt="Modern Kitchen">
-      <img src="room1.jpg" alt="Double Bedroom">
-      <img src="room2.jpg" alt="Twin Bedroom">
-      <img src="bathroom.jpg" alt="Bathroom">
-      <img src="dinningroom.jpg" alt="Dining Room">
+      <p>Click on an image to view it in full size.</p>
+      <div class="gallery">
+        <img src="entrance.jpg" alt="Entrance of Captain's Cottage">
+        <img src="livingroom.jpg" alt="Cozy Living Room">
+        <img src="kitchen.jpg" alt="Modern Kitchen">
+        <img src="room1.jpg" alt="Double Bedroom">
+        <img src="room2.jpg" alt="Twin Bedroom with Night Sky Views">
+        <img src="bathroom.jpg" alt="Elegant Bathroom">
+        <img src="dinningroom.jpg" alt="Spacious Dining Room">
+      </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="info">
-      <h2>Contact & Booking</h2>
+  <!-- Lightbox Modal for Gallery -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <img src="" alt="Enlarged Image" id="lightbox-img">
+    </div>
+  </div>
+
+  <!-- Booking & Contact Section -->
+  <section id="booking">
+    <div class="section-container">
+      <h2>Booking & Contact Information</h2>
       <p>
-        For more details, availability, and to book your stay, please reach out to us at
-        <a href="mailto:info@SYKESCOTTAGES.CO.UK">info@SYKESCOTTAGES.CO.UK</a>.
+        Check-in is from 4:00 pm and check-out by 10:00 am. For further details, availability, and booking options, please visit our listing on <a href="https://www.booking.com" target="_blank" rel="noopener">Booking.com</a> or contact us directly at <a href="mailto:info@SYKESCOTTAGES.CO.UK">info@SYKESCOTTAGES.CO.UK</a>.
       </p>
       <p>
-        Check-in is from 4 pm, and check-out is by 10 am. For reviews and further insights from previous guests,
-        please visit our TripAdvisor listing.
+        For additional insights and guest reviews, visit our profile on Sykes Cottages at <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">SYKESCOTTAGES.CO.UK</a>.
       </p>
     </div>
   </section>
@@ -207,5 +323,32 @@
   <footer>
     <p>&copy; 2025 Captain's Cottage | All Rights Reserved</p>
   </footer>
+
+  <!-- JavaScript for Interactive Gallery Lightbox -->
+  <script>
+    // Get all images in the gallery and the lightbox elements
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    // Loop through each image and add a click event listener
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        lightboxImg.src = img.src;
+      });
+    });
+
+    // Close the lightbox when clicking the close button or outside the image
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
