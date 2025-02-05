@@ -18,6 +18,7 @@
       font-family: 'Helvetica', 'Arial', sans-serif;
       line-height: 1.6;
       color: #333;
+      background: #f9f9f9;
     }
     a {
       color: #0066cc;
@@ -35,7 +36,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     header .logo img {
       height: 50px;
@@ -50,17 +52,17 @@
     nav ul li a {
       color: #fff;
       font-weight: bold;
+      font-size: 1rem;
     }
     /* Hero Section */
     .hero {
       position: relative;
       background: url('hero.jpg') no-repeat center center/cover;
-      height: 70vh;
+      height: 75vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #fff;
     }
     .hero::after {
       content: "";
@@ -71,40 +73,45 @@
     .hero-content {
       position: relative;
       z-index: 1;
+      color: #fff;
       padding: 0 20px;
     }
     .hero-content h1 {
       font-size: 3rem;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
     }
     .hero-content p {
       font-size: 1.3rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
     }
-    /* Section Styles */
-    section {
-      padding: 60px 20px;
-    }
+    /* Section Container */
     .section-container {
       max-width: 1000px;
       margin: 0 auto;
+      padding: 40px 20px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 5px;
+      margin-bottom: 40px;
     }
     .section-container h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-align: center;
       color: #333;
+      border-bottom: 2px solid #eaeaea;
+      padding-bottom: 10px;
     }
-    .section-container p {
+    .section-container p, .section-container ul {
       font-size: 1.1rem;
       color: #555;
       margin-bottom: 20px;
-      text-align: center;
+      text-align: left;
     }
-    /* Lists */
-    .features-list {
+    .section-container ul {
       list-style: disc;
       margin-left: 20px;
-      text-align: left;
     }
     /* Interactive Gallery */
     .gallery {
@@ -116,10 +123,11 @@
       width: 100%;
       border-radius: 5px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .gallery img:hover {
       transform: scale(1.03);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     /* Lightbox Modal */
     .lightbox {
@@ -157,19 +165,24 @@
       height: 40px;
       font-size: 1.5rem;
       cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
     /* Footer */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 20px 30px;
+      font-size: 0.9rem;
     }
     /* Responsive */
     @media (max-width: 600px) {
       .hero-content h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       nav ul li {
         margin-left: 10px;
+      }
+      .section-container {
+        padding: 30px 15px;
       }
     }
   </style>
@@ -204,10 +217,10 @@
     <div class="section-container">
       <h2>Welcome to Captain's Cottage</h2>
       <p>
-        Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage blends historic character with modern amenities, creating an idyllic seaside retreat for families and couples.
+        Nestled in the heart of Scarborough, North Yorkshire, Captain's Cottage is a charming mid-terrace house built in the 1800s. This traditional fisherman's cottage offers a blend of historic character and modern amenities, creating an idyllic seaside retreat for families and couples.
       </p>
       <p>
-        Enjoy the authentic taste of Scarborough’s maritime heritage combined with the comforts of contemporary living.
+        Experience the authentic taste of Scarborough’s maritime heritage combined with contemporary comforts.
       </p>
     </div>
   </section>
@@ -219,9 +232,9 @@
       <p>
         The cottage accommodates up to four guests across two beautifully appointed bedrooms:
       </p>
-      <ul class="features-list">
+      <ul>
         <li><strong>Double Bedroom:</strong> Located on the first floor with ample space and comfort.</li>
-        <li><strong>Twin Bedroom:</strong> Situated on the second floor, featuring roof windows offering enchanting views of the night sky.</li>
+        <li><strong>Twin Bedroom:</strong> Situated on the second floor, featuring roof windows with enchanting night sky views.</li>
       </ul>
       <p>
         The bathroom is fully equipped with a bath, a shower over the bath, WC, and basin.
@@ -234,9 +247,9 @@
     <div class="section-container">
       <h2>Living Spaces & Modern Amenities</h2>
       <p>
-        The cottage features a well-appointed kitchen/diner complete with modern appliances, including:
+        Enjoy a well-appointed kitchen/diner complete with modern appliances:
       </p>
-      <ul class="features-list">
+      <ul>
         <li>Electric oven and induction hob</li>
         <li>Microwave</li>
         <li>Pod coffee machine</li>
@@ -245,22 +258,22 @@
         <li>Dishwasher</li>
       </ul>
       <p>
-        The cozy sitting room offers an electric fire, Smart TV with Freeview, WiFi, and a variety of reading materials and games for your entertainment.
+        Relax in a cozy sitting room featuring an electric fire, Smart TV with Freeview, WiFi, and a selection of books and games.
       </p>
     </div>
   </section>
 
-  <!-- Outdoor Space Section -->
+  <!-- Outdoor & Additional Amenities Section -->
   <section id="outdoor">
     <div class="section-container">
       <h2>Outdoor & Additional Amenities</h2>
       <p>
-        Step outside to enjoy a spacious decking area, perfect for outdoor dining or unwinding after a day at the beach.
+        Step outside to enjoy a spacious decking area, perfect for outdoor dining or relaxing after a day at the beach.
       </p>
-      <ul class="features-list">
+      <ul>
         <li><strong>Pet Policy:</strong> One well-behaved dog is welcome.</li>
-        <li><strong>Family-Friendly:</strong> Highchair and travel cot available upon request.</li>
-        <li><strong>Parking:</strong> A roadside parking permit is provided for your convenience.</li>
+        <li><strong>Family-Friendly:</strong> Highchair and travel cot available on request.</li>
+        <li><strong>Parking:</strong> A roadside parking permit is provided for convenience.</li>
       </ul>
     </div>
   </section>
@@ -270,10 +283,10 @@
     <div class="section-container">
       <h2>Explore the Local Attractions</h2>
       <p>
-        Located in Scarborough's old town, you're within walking distance of local restaurants, shops, and the beachfront. Must-see attractions include:
+        Located in Scarborough's old town, you’re within walking distance of restaurants, shops, and the beachfront. Notable nearby attractions include:
       </p>
-      <ul class="features-list">
-        <li><strong>Scarborough Castle:</strong> Historic site with panoramic coastal views.</li>
+      <ul>
+        <li><strong>Scarborough Castle:</strong> A historic site with panoramic coastal views.</li>
         <li><strong>Scarborough Harbour:</strong> Enjoy seafront cafés and charming yacht club vibes.</li>
         <li><strong>North Bay Beach:</strong> A beautiful, sandy haven perfect for families.</li>
         <li><strong>Peasholm Park:</strong> Japanese-style landscaped gardens offering picturesque scenery.</li>
@@ -285,7 +298,7 @@
   <section id="gallery">
     <div class="section-container">
       <h2>Gallery</h2>
-      <p>Click on an image to view it in full size.</p>
+      <p style="text-align:center;">Click an image to enlarge.</p>
       <div class="gallery">
         <img src="entrance.jpg" alt="Entrance of Captain's Cottage">
         <img src="livingroom.jpg" alt="Cozy Living Room">
@@ -311,10 +324,10 @@
     <div class="section-container">
       <h2>Booking & Contact Information</h2>
       <p>
-        Check-in is from 4:00 pm and check-out by 10:00 am. For further details, availability, and booking options, please visit our listing on <a href="https://www.booking.com" target="_blank" rel="noopener">Booking.com</a> or contact us directly at <a href="mailto:info@SYKESCOTTAGES.CO.UK">info@SYKESCOTTAGES.CO.UK</a>.
+        Check-in is from 4:00 pm and check-out by 10:00 am. For further details, availability, and booking options, please visit our listing on <a href="https://www.booking.com" target="_blank" rel="noopener">Booking.com</a> or contact us at <a href="mailto:info@SYKESCOTTAGES.CO.UK">info@SYKESCOTTAGES.CO.UK</a>.
       </p>
       <p>
-        For additional insights and guest reviews, visit our profile on Sykes Cottages at <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">SYKESCOTTAGES.CO.UK</a>.
+        For guest reviews and additional insights, please visit our profile on Sykes Cottages at <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">SYKESCOTTAGES.CO.UK</a>.
       </p>
     </div>
   </section>
@@ -326,13 +339,13 @@
 
   <!-- JavaScript for Interactive Gallery Lightbox -->
   <script>
-    // Get all images in the gallery and the lightbox elements
+    // Select gallery images and lightbox elements
     const galleryImages = document.querySelectorAll('.gallery img');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
 
-    // Loop through each image and add a click event listener
+    // Open lightbox on image click
     galleryImages.forEach(img => {
       img.addEventListener('click', () => {
         lightbox.classList.add('active');
@@ -340,7 +353,7 @@
       });
     });
 
-    // Close the lightbox when clicking the close button or outside the image
+    // Close lightbox when clicking close button or outside image
     lightboxClose.addEventListener('click', () => {
       lightbox.classList.remove('active');
     });
