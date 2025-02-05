@@ -20,7 +20,7 @@
     "telephone": "+441234567890",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Captain's Cottage",
+      "streetAddress": "Your Street Address",
       "addressLocality": "Scarborough",
       "addressRegion": "North Yorkshire",
       "postalCode": "YO11 1AA",
@@ -622,7 +622,7 @@
       </div>
     </section>
     
-    <!-- Booking & Contact Section -->
+    <!-- Booking & Contact Section with Availability Form -->
     <section id="booking">
       <div class="section-container">
         <h2>Booking & Contact</h2>
@@ -632,6 +632,22 @@
         <p>
           For guest reviews and more information, please visit our profile on <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">Sykes Cottages</a>.
         </p>
+        <!-- Availability Check Form -->
+        <h3>Check Availability</h3>
+        <form id="availabilityForm">
+          <label>
+            Check-in Date:
+            <input type="date" id="checkin" required>
+          </label>
+          <br><br>
+          <label>
+            Check-out Date:
+            <input type="date" id="checkout" required>
+          </label>
+          <br><br>
+          <button type="submit" class="cta-button">Check Availability</button>
+        </form>
+        <pre id="availability" style="background: #eee; padding: 10px; margin-top: 15px;"></pre>
       </div>
     </section>
     
@@ -693,7 +709,7 @@
   <!-- Back to Top Button -->
   <button id="back-to-top">↑ Top</button>
   
-  <!-- JavaScript for Lightbox, Mobile Menu, Back to Top, Dynamic Nav & Scroll Progress -->
+  <!-- JavaScript -->
   <script>
     // Mobile Navigation Toggle
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -771,6 +787,70 @@
       const winHeight = window.innerHeight;
       const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
       scrollProgress.style.width = scrollPercent + '%';
+    });
+  
+    // Availability Check API Call (Client-side demonstration)
+    async function checkAvailability(checkin, checkout) {
+      const payload = {
+        "accommodation": 10004,
+        "booker": {
+          "country": "nl",
+          "platform": "desktop"
+        },
+        "checkin": checkin,
+        "checkout": checkout,
+        "extras": [
+          "extra_charges"
+        ],
+        "guests": {
+          "number_of_adults": 2,
+          "number_of_rooms": 1
+        }
+      };
+      
+      try {
+        const response = await fetch('https://demandapi.booking.com/3.1/accommodations/availability', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+            // NOTE: For production use, call this from your server to protect API keys and avoid CORS issues.
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        if (!response.ok) {
+          throw new Error('Network response was not ok: ' + response.statusText);
+        }
+        
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching availability:', error);
+        throw error;
+      }
+    }
+  
+    // Attach event listener to the Availability Form
+    const availabilityForm = document.getElementById('availabilityForm');
+    availabilityForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const checkin = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      
+      if (!checkin || !checkout) {
+        alert('Please provide both check-in and check-out dates.');
+        return;
+      }
+      
+      document.getElementById('availability').textContent = 'Checking availability...';
+      
+      try {
+        const availabilityData = await checkAvailability(checkin, checkout);
+        // Display formatted JSON response for demonstration.
+        document.getElementById('availability').textContent = JSON.stringify(availabilityData, null, 2);
+      } catch (error) {
+        document.getElementById('availability').textContent = 'Error checking availability. Please try again later.';
+      }
     });
   </script>
 </body>
