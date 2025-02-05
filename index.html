@@ -317,6 +317,26 @@
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
+    /* "What's On?" Section (Event Discovery Widget) */
+    .whats-on {
+      max-width: 1000px;
+      margin: 80px auto 40px;
+      padding: 40px 20px;
+      background: var(--white);
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-top: 4px solid var(--primary-color);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .whats-on h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 10px;
+    }
     /* Footer CTA Bar */
     .footer-cta {
       background: var(--primary-color);
@@ -449,7 +469,7 @@
       header {
         padding: 15px 20px;
       }
-      .section-container, .resources {
+      .section-container, .resources, .whats-on {
         padding: 30px 15px;
       }
       .inline-images {
@@ -622,7 +642,7 @@
       </div>
     </section>
     
-    <!-- Booking & Contact Section with Availability Form -->
+    <!-- Booking & Contact Section -->
     <section id="booking">
       <div class="section-container">
         <h2>Booking & Contact</h2>
@@ -632,27 +652,54 @@
         <p>
           For guest reviews and more information, please visit our profile on <a href="https://SYKESCOTTAGES.CO.UK" target="_blank" rel="noopener">Sykes Cottages</a>.
         </p>
-        <!-- Availability Check Form -->
-        <h3>Check Availability</h3>
-        <form id="availabilityForm">
-          <label>
-            Check-in Date:
-            <input type="date" id="checkin" required>
-          </label>
-          <br><br>
-          <label>
-            Check-out Date:
-            <input type="date" id="checkout" required>
-          </label>
-          <br><br>
-          <button type="submit" class="cta-button">Check Availability</button>
-        </form>
-        <pre id="availability" style="background: #eee; padding: 10px; margin-top: 15px;"></pre>
+      </div>
+    </section>
+    
+    <!-- "What's On?" Section (Event Discovery Widget) -->
+    <section id="whats-on">
+      <div class="whats-on">
+        <h2>What's On?</h2>
+        <div 
+          w-type="event-discovery" 
+          w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS" 
+          w-googleapikey="YOUR_GOOGLE_API_KEY" 
+          w-keyword="" 
+          w-theme="grid" 
+          w-colorscheme="custom" 
+          w-width="100%" 
+          w-height="550" 
+          w-size="17" 
+          w-border="2" 
+          w-borderradius="4" 
+          w-radius="25" 
+          w-period="year" 
+          w-layout="fullwidth" 
+          w-attractionid="" 
+          w-promoterid="" 
+          w-venueid="" 
+          w-status="" 
+          w-affiliateid="" 
+          w-segmentid="" 
+          w-proportion="custom" 
+          w-titlelink="off" 
+          w-sorting="groupByName" 
+          w-id="id_kjeahl" 
+          w-classificationname="" 
+          w-source="" 
+          w-branding="TicketWeb" 
+          w-countrycode="GB" 
+          w-postalcode="" 
+          w-city="Scarborough" 
+          w-showfulleventsnames="true" 
+          w-buybuttonbackgroundcolor="#2f478a" 
+          w-showloadmorebutton="true" 
+          w-latlong="">
+        </div>
       </div>
     </section>
     
     <!-- Weather Widget Section -->
-    <section id="weather" class="section-container">
+    <section id="weather-widget" class="section-container">
       <h2 style="text-align: center;">Current Weather in Scarborough</h2>
       <div style="text-align: center;">
         <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
@@ -709,7 +756,7 @@
   <!-- Back to Top Button -->
   <button id="back-to-top">↑ Top</button>
   
-  <!-- JavaScript -->
+  <!-- JavaScript for Lightbox, Mobile Menu, Back to Top, Dynamic Nav & Scroll Progress -->
   <script>
     // Mobile Navigation Toggle
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -788,70 +835,9 @@
       const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
       scrollProgress.style.width = scrollPercent + '%';
     });
-  
-    // Availability Check API Call (Client-side demonstration)
-    async function checkAvailability(checkin, checkout) {
-      const payload = {
-        "accommodation": 318615,
-        "booker": {
-          "country": "en-gb",
-          "platform": "desktop"
-        },
-        "checkin": checkin,
-        "checkout": checkout,
-        "extras": [
-          "extra_charges"
-        ],
-        "guests": {
-          "number_of_adults": 2,
-          "number_of_rooms": 1
-        }
-      };
-      
-      try {
-        const response = await fetch('https://demandapi.booking.com/3.1/accommodations/availability', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-            // NOTE: For production use, call this from your server to protect API keys and avoid CORS issues.
-          },
-          body: JSON.stringify(payload)
-        });
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok: ' + response.statusText);
-        }
-        
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error('Error fetching availability:', error);
-        throw error;
-      }
-    }
-  
-    // Attach event listener to the Availability Form
-    const availabilityForm = document.getElementById('availabilityForm');
-    availabilityForm.addEventListener('submit', async function(event) {
-      event.preventDefault();
-      const checkin = document.getElementById('checkin').value;
-      const checkout = document.getElementById('checkout').value;
-      
-      if (!checkin || !checkout) {
-        alert('Please provide both check-in and check-out dates.');
-        return;
-      }
-      
-      document.getElementById('availability').textContent = 'Checking availability...';
-      
-      try {
-        const availabilityData = await checkAvailability(checkin, checkout);
-        // Display formatted JSON response for demonstration.
-        document.getElementById('availability').textContent = JSON.stringify(availabilityData, null, 2);
-      } catch (error) {
-        document.getElementById('availability').textContent = 'Error checking availability. Please try again later.';
-      }
-    });
   </script>
+  
+  <!-- Ticketmaster Event Discovery Widget Script -->
+  <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 </body>
 </html>
