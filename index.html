@@ -329,26 +329,6 @@
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
-    /* "What's On?" Section (Event Discovery Widget) */
-    .whats-on {
-      max-width: 1000px;
-      margin: 80px auto 40px;
-      padding: 40px 20px;
-      background: var(--white);
-      border-radius: 5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border-top: 4px solid var(--primary-color);
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-    }
-    .whats-on h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-align: center;
-      color: var(--primary-color);
-      border-bottom: 2px solid var(--accent-color);
-      padding-bottom: 10px;
-    }
     /* Footer CTA Bar */
     .footer-cta {
       background: var(--primary-color);
@@ -367,24 +347,33 @@
       font-size: 1.2rem;
       padding: 15px 35px;
     }
-    /* Useful Resources Section */
-    .resources {
+    /* Combined Section Container for side-by-side layout */
+    .combined-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
       max-width: 1000px;
-      margin: 40px auto;
-      padding: 40px 20px;
+      margin: 80px auto 40px;
+      padding: 20px;
       background: var(--white);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       border-radius: 5px;
       border-top: 4px solid var(--primary-color);
     }
-    .resources h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+    .combined-column {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+    }
+    .combined-column h2 {
       text-align: center;
       color: var(--primary-color);
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
     }
+    /* Footer Resources styling */
     .resources ul {
       list-style: none;
       padding-left: 0;
@@ -481,7 +470,7 @@
       header {
         padding: 15px 20px;
       }
-      .section-container, .resources, .whats-on {
+      .section-container, .resources, .whats-on, .combined-container {
         padding: 30px 15px;
       }
       .inline-images {
@@ -618,39 +607,39 @@
       </div>
     </section>
     
-    <!-- Local Attractions Section -->
-    <section id="attractions">
-      <div class="section-container">
-        <h2>Local Attractions</h2>
-        <p>
-          Located in Scarborough's historic district, you're within walking distance of local restaurants, shops, and the beachfront. Explore nearby attractions such as:
-        </p>
-        <ul>
-          <li><strong>Scarborough Castle:</strong> Historic site with panoramic views. (<a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">English Heritage</a>)</li>
-          <li><strong>Scarborough Harbour:</strong> Seafront cafés and yacht club ambiance.</li>
-          <li><strong>North Bay Beach:</strong> A sandy haven ideal for families.</li>
-          <li><strong>Peasholm Park:</strong> Themed gardens and a boating lake. (<a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Council</a>)</li>
-          <li><strong>Maritime Heritage:</strong> Discover the town’s seafaring past. (<a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Heritage Centre</a>)</li>
-          <li><strong>Art Gallery:</strong> Local art and culture. (<a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Gallery</a>)</li>
-          <li><strong>Visit England:</strong> More attractions. (<a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a>)</li>
-        </ul>
-      </div>
-    </section>
-    
-    <!-- Useful Resources Section -->
-    <section id="resources">
-      <div class="resources">
-        <h2>Useful Resources</h2>
-        <ul>
-          <li><a href="https://www.visitscarborough.com/" target="_blank" rel="noopener">Visit Scarborough</a></li>
-          <li><a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">Scarborough Castle</a></li>
-          <li><a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Peasholm Park</a></li>
-          <li><a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Maritime Centre</a></li>
-          <li><a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Art Gallery</a></li>
-          <li><a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a></li>
-          <li><a href="https://www.google.com/maps/search/Captains+Cottage+Scarborough" target="_blank" rel="noopener">Google Maps</a></li>
-          <li><a href="https://www.tripadvisor.co.uk/Search?q=Captains+Cottage+Scarborough" target="_blank" rel="noopener">TripAdvisor</a></li>
-        </ul>
+    <!-- Combined Local Info Section (Local Attractions & Useful Resources) -->
+    <section id="local-info">
+      <div class="combined-container">
+        <!-- Local Attractions Column -->
+        <div class="combined-column">
+          <h2>Local Attractions</h2>
+          <p>
+            Located in Scarborough's historic district, you're within walking distance of local restaurants, shops, and the beachfront. Explore nearby attractions such as:
+          </p>
+          <ul>
+            <li><strong>Scarborough Castle:</strong> Historic site with panoramic views. (<a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">English Heritage</a>)</li>
+            <li><strong>Scarborough Harbour:</strong> Seafront cafés and yacht club ambiance.</li>
+            <li><strong>North Bay Beach:</strong> A sandy haven ideal for families.</li>
+            <li><strong>Peasholm Park:</strong> Themed gardens and a boating lake. (<a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Council</a>)</li>
+            <li><strong>Maritime Heritage:</strong> Discover the town’s seafaring past. (<a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Heritage Centre</a>)</li>
+            <li><strong>Art Gallery:</strong> Local art and culture. (<a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Gallery</a>)</li>
+            <li><strong>Visit England:</strong> More attractions. (<a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a>)</li>
+          </ul>
+        </div>
+        <!-- Useful Resources Column -->
+        <div class="combined-column">
+          <h2>Useful Resources</h2>
+          <ul>
+            <li><a href="https://www.visitscarborough.com/" target="_blank" rel="noopener">Visit Scarborough</a></li>
+            <li><a href="https://www.english-heritage.org.uk/visit/places/scarborough-castle/" target="_blank" rel="noopener">Scarborough Castle</a></li>
+            <li><a href="https://www.scarborough.gov.uk/home/sport-and-leisure/parks-play-areas-and-gardens/peasholm-park-and-glen" target="_blank" rel="noopener">Peasholm Park</a></li>
+            <li><a href="http://www.scarboroughsmaritimeheritage.org.uk/" target="_blank" rel="noopener">Maritime Centre</a></li>
+            <li><a href="https://www.scarboroughmuseumstrust.com/scarborough-art-gallery/" target="_blank" rel="noopener">Art Gallery</a></li>
+            <li><a href="https://www.visitengland.com/things-to-do/scarborough" target="_blank" rel="noopener">VisitEngland</a></li>
+            <li><a href="https://www.google.com/maps/search/Captains+Cottage+Scarborough" target="_blank" rel="noopener">Google Maps</a></li>
+            <li><a href="https://www.tripadvisor.co.uk/Search?q=Captains+Cottage+Scarborough" target="_blank" rel="noopener">TripAdvisor</a></li>
+          </ul>
+        </div>
       </div>
     </section>
     
@@ -667,65 +656,67 @@
       </div>
     </section>
     
-    <!-- "What's On?" Section (Event Discovery Widget) -->
-    <section id="whats-on">
-      <div class="whats-on">
-        <h2>What's On?</h2>
-        <div 
-          w-type="event-discovery" 
-          w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS" 
-          w-googleapikey="YOUR_GOOGLE_API_KEY" 
-          w-keyword="" 
-          w-theme="grid" 
-          w-colorscheme="custom" 
-          w-width="100%" 
-          w-height="550" 
-          w-size="17" 
-          w-border="2" 
-          w-borderradius="4" 
-          w-radius="25" 
-          w-period="year" 
-          w-layout="fullwidth" 
-          w-attractionid="" 
-          w-promoterid="" 
-          w-venueid="" 
-          w-status="" 
-          w-affiliateid="" 
-          w-segmentid="" 
-          w-proportion="custom" 
-          w-titlelink="off" 
-          w-sorting="groupByName" 
-          w-id="id_kjeahl" 
-          w-classificationname="" 
-          w-source="" 
-          w-branding="TicketWeb" 
-          w-countrycode="GB" 
-          w-postalcode="" 
-          w-city="Scarborough" 
-          w-showfulleventsnames="true" 
-          w-buybuttonbackgroundcolor="#2f478a" 
-          w-showloadmorebutton="true" 
-          w-latlong="">
+    <!-- Combined Events & Weather Section (What's On? & Weather Widget) -->
+    <section id="events-weather">
+      <div class="combined-container">
+        <!-- What's On? Column -->
+        <div class="combined-column">
+          <h2>What's On?</h2>
+          <div 
+            w-type="event-discovery" 
+            w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS" 
+            w-googleapikey="YOUR_GOOGLE_API_KEY" 
+            w-keyword="" 
+            w-theme="grid" 
+            w-colorscheme="custom" 
+            w-width="100%" 
+            w-height="550" 
+            w-size="17" 
+            w-border="2" 
+            w-borderradius="4" 
+            w-radius="25" 
+            w-period="year" 
+            w-layout="fullwidth" 
+            w-attractionid="" 
+            w-promoterid="" 
+            w-venueid="" 
+            w-status="" 
+            w-affiliateid="" 
+            w-segmentid="" 
+            w-proportion="custom" 
+            w-titlelink="off" 
+            w-sorting="groupByName" 
+            w-id="id_kjeahl" 
+            w-classificationname="" 
+            w-source="" 
+            w-branding="TicketWeb" 
+            w-countrycode="GB" 
+            w-postalcode="" 
+            w-city="Scarborough" 
+            w-showfulleventsnames="true" 
+            w-buybuttonbackgroundcolor="#2f478a" 
+            w-showloadmorebutton="true" 
+            w-latlong="">
+          </div>
+        </div>
+        <!-- Weather Widget Column -->
+        <div class="combined-column">
+          <h2>Current Weather in Scarborough</h2>
+          <div style="text-align: center;">
+            <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
+          </div>
+          <script>
+            !function(d,s,id){
+              var js,fjs=d.getElementsByTagName(s)[0];
+              if(!d.getElementById(id)){
+                js=d.createElement(s); js.id=id;
+                js.src='https://weatherwidget.io/js/widget.min.js';
+                fjs.parentNode.insertBefore(js,fjs);
+              }
+            }(document,'script','weatherwidget-io-js');
+          </script>
         </div>
       </div>
-    </section>
-    
-    <!-- Weather Widget Section -->
-    <section id="weather-widget" class="section-container">
-      <h2 style="text-align: center;">Current Weather in Scarborough</h2>
-      <div style="text-align: center;">
-        <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
-      </div>
-      <script>
-        !function(d,s,id){
-          var js,fjs=d.getElementsByTagName(s)[0];
-          if(!d.getElementById(id)){
-            js=d.createElement(s); js.id=id;
-            js.src='https://weatherwidget.io/js/widget.min.js';
-            fjs.parentNode.insertBefore(js,fjs);
-          }
-        }(document,'script','weatherwidget-io-js');
-      </script>
     </section>
     
     <!-- Interactive Gallery Section -->
