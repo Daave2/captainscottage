@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Charming Seaside Cottage in Scarborough | Captains Cottage</title>
-  <meta name="description" content="Experience Captains Cottage in Scarborough—a historic, pet-friendly seaside retreat blending maritime charm with modern comforts.">
+  <meta name="description" content="Experience Captains Cottage in Scarborough—a historic, pet-friendly seaside retreat blending maritime charm with modern comforts. Book on Booking.com.">
   <link rel="canonical" href="https://captainscottage.org/">
   <link rel="icon" href="logo.png" type="image/png"> <!-- Consider a dedicated .ico -->
 
@@ -41,7 +41,7 @@
     "description": "Captains Cottage: A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique coastal getaway experience.",
     "image": "https://captainscottage.org/hero.jpg", // Ensure this path is correct
     "url": "https://captainscottage.org/",
-    "telephone": "+44 1244 746200", // Confirm phone number
+    "telephone": "+44 1244 746200", // **ACTION**: Verify if this number is still relevant for general inquiries, or remove if ALL contact goes via Booking.com message system.
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "35 Longwestgate",
@@ -57,10 +57,17 @@
     },
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.0", // Update if rating changes
-      "reviewCount": "50"  // Update if review count changes
+      // **ACTION**: Update ratingValue and reviewCount based on Booking.com or remove if not applicable/maintained
+      "ratingValue": "4.0", // Example value
+      "reviewCount": "50"  // Example value
     },
-    "priceRange": "$$" // Update if price range changes
+    "priceRange": "$$", // Update if price range changes
+    // Optional: Add makesOffer for the Booking.com link, but the button is usually sufficient for users.
+    // "makesOffer": {
+    //   "@type": "Offer",
+    //   "url": "https://www.booking.com/Share-Gn1WcN",
+    //   "availability": "https://schema.org/InStock" // Or other appropriate availability
+    // }
   }
   </script>
 
@@ -117,6 +124,18 @@
       outline-offset: 2px;
     }
 
+    /* Visually hidden class for screen readers */
+   .visually-hidden {
+       position: absolute;
+       width: 1px;
+       height: 1px;
+       margin: -1px;
+       padding: 0;
+       overflow: hidden;
+       clip: rect(0, 0, 0, 0);
+       border: 0;
+   }
+
     /* Scroll Progress Bar */
     #scroll-progress {
       position: fixed;
@@ -144,8 +163,13 @@
       padding: 10px 25px; /* Slightly reduced padding */
       box-shadow: var(--box-shadow);
       z-index: 1000;
-      transition: background var(--transition-speed);
+      transition: background var(--transition-speed), padding var(--transition-speed);
     }
+     header.scrolled { /* Style for when page is scrolled */
+       padding: 5px 25px;
+       background: rgba(255, 241, 230, 0.95); /* Slightly less transparent */
+    }
+
     .header-left {
       display: flex;
       align-items: center;
@@ -153,8 +177,11 @@
     .logo img {
       height: 45px; /* Slightly smaller logo */
       cursor: pointer;
-      transition: transform var(--transition-speed);
+      transition: transform var(--transition-speed), height var(--transition-speed);
     }
+     header.scrolled .logo img {
+         height: 40px; /* Smaller logo when scrolled */
+     }
     .logo img:hover {
       transform: scale(1.05);
     }
@@ -312,7 +339,7 @@
     }
     .cta-button {
       background: var(--accent-color);
-      color: var(--white);
+      color: var(--white) !important; /* Ensure white text, override specificity */
       padding: 14px 35px; /* Larger button */
       border: none;
       border-radius: 5px;
@@ -320,14 +347,17 @@
       font-weight: bold;
       cursor: pointer;
       transition: background var(--transition-speed), transform var(--transition-speed);
-      text-decoration: none; /* Remove underline */
+      text-decoration: none !important; /* Remove underline */
       display: inline-block; /* Needed for transform */
+      line-height: normal; /* Reset line-height */
     }
     .cta-button:hover, .cta-button:focus {
       background: var(--nav-hover); /* Darker shade on hover */
       transform: translateY(-2px); /* Slight lift effect */
-      text-decoration: none; /* Ensure no underline */
-      outline: none; /* Remove default focus outline if custom is applied elsewhere */
+      text-decoration: none !important; /* Ensure no underline */
+      outline: 2px solid var(--accent-color); /* Keep focus style */
+       outline-offset: 2px;
+       color: var(--white) !important;
     }
 
     /* Main Content & Section Containers */
@@ -521,6 +551,11 @@
      .weather-widget, .events-section > div {
          margin-top: 20px;
      }
+     #local-events .events-section {
+       /* Ticketmaster widget styling might need overrides here if necessary */
+       border: 1px solid #ddd; /* Example border */
+       overflow: hidden; /* Contain widget borders/shadows */
+     }
 
     /* Footer CTA Bar */
     .footer-cta {
@@ -663,6 +698,9 @@
       header {
           padding: 10px 15px; /* Adjust padding */
       }
+      header.scrolled {
+           padding: 5px 15px; /* Adjust padding when scrolled */
+       }
        #nav-current-section {
            display: none; /* Hide dynamic section name on small screens */
        }
@@ -681,13 +719,14 @@
         z-index: 1050; /* Below toggle button */
         display: flex; /* Needed for flex properties */
         align-items: center; /* Center items horizontally */
+        overflow-y: auto; /* Allow scroll if many nav items */
       }
       nav ul.active {
         right: 0; /* Slide in */
         display: flex;
       }
       nav ul li {
-        margin: 15px 0; /* More vertical spacing */
+        margin: 10px 0; /* Vertical spacing */
         text-align: center; /* Center text */
         width: 100%; /* Full width list items */
       }
@@ -710,6 +749,9 @@
       }
        .hero-content p {
         font-size: clamp(0.9rem, 4vw, 1.1rem); /* Adjust paragraph size */
+      }
+      .cta-button {
+          padding: 12px 25px; /* Slightly smaller button on mobile */
       }
 
        .section-container {
@@ -875,7 +917,7 @@
           </div>
           <div class="benefit">
             <h3>Guest-Focused Service</h3>
-            <p>Experience personal touches, meticulous maintenance, and a warm welcome.</p>
+            <p>Experience personal touches, meticulous maintenance, and a warm welcome via Booking.com support.</p>
           </div>
         </div>
       </div>
@@ -925,7 +967,7 @@
         <h2>Outdoor Space & Extras</h2>
         <p>Step outside to unwind in our peaceful decking area and small garden—perfect for alfresco dining, morning coffees, or simply enjoying the Scarborough sea breeze.</p>
         <ul>
-          <li>Pet-friendly: One well-behaved dog is welcome to join your stay.</li>
+          <li>Pet-friendly: One well-behaved dog is welcome to join your stay (check booking details).</li>
           <li>Family amenities: A highchair and travel cot are available on request for younger guests.</li>
           <li>Parking convenience: A complimentary parking permit is provided for hassle-free access during your visit.</li>
         </ul>
@@ -1003,6 +1045,7 @@
         <div class="sub-section events-section">
           <h3>What's On In Scarborough?</h3>
           <!-- **ACTION**: Replace YOUR_GOOGLE_API_KEY with your actual Google API Key if required by Ticketmaster widget -->
+          <!-- **ACTION**: Check if Ticketmaster API key is still valid and desired -->
           <div
             w-type="event-discovery"
             w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS" /* Check if this key is still valid */
@@ -1091,18 +1134,17 @@
           <strong>Check-in:</strong> from 4:00 PM    |    <strong>Check-out:</strong> by 10:00 AM
         </p>
         <p style="text-align:center;">
-          Ready to book your stay at Captains Cottage? Please use our secure booking link:
-          <br>
-          <!-- **ACTION**: Confirm this Sykes Cottages link is correct for Captains Cottage -->
-          <a href="https://www.sykescottages.co.uk/cottage/North-York-Moors-Coast-Old-and-East-Harbours/Captains-Cottage-1159058.html" target="_blank" rel="noopener" class="cta-button" style="margin-top: 15px;">Check Availability & Book</a>
+          Ready to book your stay at Captains Cottage? We manage our bookings securely through Booking.com. Click the button below to check availability and reserve your dates:
         </p>
-        <p style="text-align:center; margin-top: 30px;">
-          For direct inquiries or questions not covered by the booking site, please feel free to contact Sykes Cottages who manage our bookings:
-          <br><strong>Phone:</strong> +44 1244 746200 <!-- Confirm this is the best number -->
-          <br>
-          <!-- **ACTION**: Update email if needed, or remove if Sykes handles all contact -->
-          <!-- <strong>Email:</strong> <a href="mailto:info@captainscottage.org">info@captainscottage.org</a> -->
+        <p style="text-align:center;">
+          <!-- **ACTION**: Verify this Booking.com link is correct and active -->
+          <a href="https://www.booking.com/Share-Gn1WcN" target="_blank" rel="noopener" class="cta-button" style="margin-top: 15px;">Check Availability on Booking.com</a>
         </p>
+        <!-- Removed previous paragraph with Sykes contact details as bookings are now via Booking.com -->
+        <!-- Optional: Add a note about contacting through Booking.com for questions -->
+         <p style="text-align:center; font-size: 0.9rem; margin-top: 20px;">
+            For any questions regarding a potential or existing booking, please use the messaging system within Booking.com once you have selected dates or made a reservation.
+         </p>
       </div>
     </section>
 
@@ -1112,7 +1154,7 @@
   <div class="footer-cta">
     <h2>Ready for Your Scarborough Escape?</h2>
     <p style="margin-bottom: 25px;">Secure your dates at Captains Cottage today.</p>
-    <a href="#booking" class="cta-button">Reserve Your Stay</a>
+    <a href="https://www.booking.com/Share-Gn1WcN" target="_blank" rel="noopener" class="cta-button">Reserve Your Stay on Booking.com</a>
   </div>
 
   <!-- Main Footer -->
@@ -1131,9 +1173,6 @@
       <div id="lightbox-media" aria-live="polite"><span id="lightbox-label" class="visually-hidden">Media viewer</span></div>
     </div>
   </div>
-  <!-- Visually hidden class for screen readers -->
-  <style>.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }</style>
-
 
   <!-- Back to Top Button -->
   <button id="back-to-top" aria-label="Scroll back to top">↑</button>
@@ -1147,13 +1186,14 @@
       const navMenu = document.getElementById('nav-menu').querySelector('ul');
       const navLinks = navMenu.querySelectorAll('a');
       const mainHeader = document.getElementById('main-header');
+      const body = document.body; // Get body element
 
       mobileMenuToggle.addEventListener('click', () => {
         const isActive = navMenu.classList.toggle('active');
         mobileMenuToggle.classList.toggle('active'); // For X animation
         mobileMenuToggle.setAttribute('aria-expanded', isActive);
         // Optional: Prevent body scroll when menu is open
-        // document.body.style.overflow = isActive ? 'hidden' : '';
+        body.style.overflow = isActive ? 'hidden' : '';
       });
 
        // Close mobile menu when a link is clicked
@@ -1163,7 +1203,7 @@
                    navMenu.classList.remove('active');
                    mobileMenuToggle.classList.remove('active');
                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                   // document.body.style.overflow = '';
+                   body.style.overflow = ''; // Restore scroll
                }
            });
        });
@@ -1178,12 +1218,7 @@
                mainHeader.classList.remove('scrolled');
            }
            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
-      }, false);
-      // Add CSS for .scrolled if you want an effect (e.g., slightly smaller padding, different background)
-      /* Example CSS:
-       header.scrolled { padding: 5px 25px; background: rgba(255, 241, 230, 0.95); }
-       header.scrolled .logo img { height: 40px; }
-      */
+      }, { passive: true }); // Use passive listener for performance
 
 
       // --- Lightbox Functionality ---
@@ -1196,7 +1231,7 @@
           clickableMedia.forEach(media => {
               media.addEventListener('click', () => {
                   lightbox.classList.add('active');
-                  document.body.style.overflow = 'hidden'; // Prevent background scroll
+                  body.style.overflow = 'hidden'; // Prevent background scroll
 
                   // Clear previous lightbox content
                   lightboxMediaContainer.innerHTML = "";
@@ -1235,7 +1270,13 @@
 
           const closeLightbox = () => {
               lightbox.classList.remove('active');
-              document.body.style.overflow = ''; // Restore background scroll
+              body.style.overflow = ''; // Restore background scroll
+              // Stop video/audio if playing
+              const currentMedia = lightboxMediaContainer.querySelector('video, audio');
+               if (currentMedia) {
+                   currentMedia.pause();
+                   currentMedia.src = ''; // Prevent further loading/playing
+               }
               lightboxMediaContainer.innerHTML = ""; // Clear content
           };
 
@@ -1298,34 +1339,37 @@
       const allSections = document.querySelectorAll('section[id]'); // Target only sections with an ID
 
       if (navCurrentIndicator && allNavLinks.length > 0 && allSections.length > 0) {
+          // Use a Map to store intersection status for efficient lookup
+          const sectionStatus = new Map();
+          allSections.forEach(sec => sectionStatus.set(sec.id, false));
+
           const observerOptions = {
               root: null, // Relative to viewport
               rootMargin: '0px 0px -50% 0px', // Trigger when section is 50% from bottom of viewport
-              threshold: 0 // Trigger as soon as it enters margin
+              threshold: 0 // Trigger as soon as it enters/leaves margin
           };
 
           const sectionObserver = new IntersectionObserver((entries) => {
-              let currentSectionId = null;
-
+              // Update status map
               entries.forEach(entry => {
-                 // Find the topmost intersecting section within the threshold area
-                  if (entry.isIntersecting) {
-                     // Check if it's higher up the page than the current best candidate
-                     if (currentSectionId === null || entry.target.offsetTop < document.getElementById(currentSectionId).offsetTop) {
-                         currentSectionId = entry.target.id;
-                     }
-                  }
+                  sectionStatus.set(entry.target.id, entry.isIntersecting);
               });
 
-               // If no section is actively intersecting according to the margin, fallback logic might be needed
-               // or simply highlight the last known one. For now, update based on currentSectionId.
+              // Find the topmost visible section based on the map
+              let currentSectionId = null;
+              for (const section of allSections) { // Iterate in document order
+                  if (sectionStatus.get(section.id)) {
+                      currentSectionId = section.id;
+                      break; // First one found is the topmost visible
+                  }
+              }
 
+              // Update links and indicator
                if (currentSectionId) {
                    allNavLinks.forEach(link => {
-                       link.classList.remove('active');
-                       if (link.getAttribute('href') === '#' + currentSectionId) {
-                           link.classList.add('active');
-                           // Update the text indicator (if visible)
+                       const isActive = link.getAttribute('href') === '#' + currentSectionId;
+                       link.classList.toggle('active', isActive);
+                       if (isActive) {
                            const sectionName = link.dataset.section;
                            if (sectionName) {
                                navCurrentIndicator.textContent = sectionName;
@@ -1333,18 +1377,15 @@
                        }
                    });
                } else {
-                 // Optional: If nothing is intersecting (e.g., scrolled past last section), clear or set default
-                  allNavLinks.forEach(link => link.classList.remove('active'));
-                  // Maybe highlight "Home" if scrolled near top
-                   if (window.scrollY < 200) {
-                      const homeLink = document.querySelector('a[href="#home"]');
-                      if(homeLink) {
-                          homeLink.classList.add('active');
-                           navCurrentIndicator.textContent = homeLink.dataset.section || "Home";
-                      }
+                   // If no section is intersecting (e.g., scrolled past last section or before first), handle fallback
+                   allNavLinks.forEach(link => link.classList.remove('active'));
+                   const homeLink = document.querySelector('a[href="#home"]');
+                   if (window.scrollY < 200 && homeLink) { // Near top? Highlight Home
+                       homeLink.classList.add('active');
+                       navCurrentIndicator.textContent = homeLink.dataset.section || "Home";
                    } else {
-                        // If scrolled way down, keep the last active one highlighted? Or clear?
-                        // navCurrentIndicator.textContent = ''; // Or keep last known section
+                        // Far down? Maybe keep the last section highlighted or clear indicator
+                       navCurrentIndicator.textContent = ''; // Or keep last known section
                    }
                }
 
@@ -1355,39 +1396,18 @@
            console.warn("Dynamic navigation elements not found or incomplete.");
       }
 
-       // --- Hero Video Loop (Keep original logic if it works) ---
-       // Note: The native 'loop' attribute was added to the video tag,
-       // which might be sufficient for simple forward looping.
-       // The JS ping-pong loop can be kept if that effect is specifically desired.
+       // --- Hero Video Loop (Native loop preferred) ---
        const heroVideoElement = document.getElementById('hero-video');
-       if (heroVideoElement && !heroVideoElement.hasAttribute('loop')) { // Only run if native loop is NOT set
-           let isReversing = false;
-
-           function simulateReversePlayback() {
-               isReversing = true;
-               heroVideoElement.pause();
-               function stepReverse() {
-                   if (heroVideoElement.currentTime > 0.05) { // Check against a small threshold
-                       heroVideoElement.currentTime = Math.max(0, heroVideoElement.currentTime - 0.03); // Adjust step for speed
-                       requestAnimationFrame(stepReverse);
-                   } else {
-                       heroVideoElement.currentTime = 0; // Ensure it hits 0
-                       isReversing = false;
-                       heroVideoElement.play(); // Play forward again
-                   }
-               }
-               requestAnimationFrame(stepReverse);
-           }
-
-           heroVideoElement.addEventListener('ended', () => {
-               // When video ends playing forward, simulate reverse
-               if (!isReversing) { // Prevent re-triggering if already reversing
-                   simulateReversePlayback();
-               }
-           });
-
-           // Optional: Handle the start - ensure it plays forward first
-           // heroVideoElement.play().catch(error => console.error("Video autoplay failed:", error));
+       if (heroVideoElement) {
+          // Ensure native loop attribute handles looping. JS fallback removed for simplicity.
+          if (!heroVideoElement.hasAttribute('loop')) {
+              console.warn("Hero video does not have the 'loop' attribute. Adding it via JS as fallback.");
+              heroVideoElement.setAttribute('loop', ''); // Ensure looping
+          }
+          // Attempt to play, catch errors silently
+          heroVideoElement.play().catch(error => {
+               console.log("Video autoplay prevented by browser policy. User interaction needed.");
+          });
        }
 
 
@@ -1395,6 +1415,7 @@
   </script>
 
   <!-- Ticketmaster Event Discovery Widget Script (Load last) -->
+  <!-- **ACTION**: Only include this if you have a valid API key and want the widget -->
   <script defer src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 
 </body>
