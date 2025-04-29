@@ -287,21 +287,13 @@
       min-height: 100%;
       width: auto;
       height: auto;
-      z-index: -2; /* Behind the overlay */
+      z-index: -1; /* Now the base layer */
       transform: translateX(-50%) translateY(-50%);
       object-fit: cover;
     }
-     /* Video Overlay for contrast */
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.4); /* Dark overlay */
-        z-index: -1; /* Between video and content */
-    }
+    /* --- OVERLAY REMOVED --- */
+    /* .hero::before { ... } rule deleted */
+
     /* Fallback content inside video tag for unsupported browsers */
     #hero-video img {
       /* Style the fallback image */
@@ -312,22 +304,24 @@
         min-height: 100%;
         width: auto;
         height: auto;
-        z-index: -2;
+        z-index: -1; /* Also base layer */
         transform: translateX(-50%) translateY(-50%);
         object-fit: cover;
     }
     .hero-content {
-      position: relative; /* Ensure content is above overlay */
+      position: relative; /* Ensure content is above video */
       z-index: 1;
       padding: 0 20px;
       max-width: 800px; /* Limit width for readability */
       animation: fadeInUp 1s ease-out; /* Animate content */
+      /* Text shadow remains for readability against potentially bright video */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
     }
     .hero-content h1 {
       font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
       margin-bottom: 15px;
       color: var(--white); /* Ensure H1 is white */
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Text shadow for readability */
+       /* Inherits text-shadow from .hero-content */
     }
     .hero-content p {
       font-size: clamp(1rem, 3vw, 1.3rem); /* Responsive font size */
@@ -335,7 +329,7 @@
       max-width: 600px; /* Limit paragraph width */
       margin-left: auto;
       margin-right: auto;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Text shadow */
+      /* Inherits text-shadow from .hero-content */
     }
     .cta-button {
       background: var(--accent-color);
