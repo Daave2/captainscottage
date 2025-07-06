@@ -726,19 +726,20 @@
         backdrop-filter: blur(10px);
         position: fixed; /* Use fixed to overlay content */
         top: 0;
-        right: -100%; /* Start off-screen */
+        right: 0; /* Anchor to right edge */
+        transform: translateX(100%); /* Start off-screen */
         width: 250px; /* Wider menu */
         height: 100%; /* Full height */
         padding-top: 80px; /* Space for header/close button */
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: right 0.4s ease-in-out; /* Smoother transition */
+        transition: transform 0.4s ease-in-out; /* Smoother transition */
         z-index: 1050; /* Below toggle button */
         display: flex; /* Needed for flex properties */
         align-items: center; /* Center items horizontally */
         overflow-y: auto; /* Allow scroll if many nav items */
       }
       nav ul.active {
-        right: 0; /* Slide in */
+        transform: translateX(0); /* Slide in */
         display: flex;
       }
       nav ul li {
