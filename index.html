@@ -738,7 +738,7 @@
         align-items: center; /* Center items horizontally */
         overflow-y: auto; /* Allow scroll if many nav items */
       }
-      nav ul.active {
+      nav.active ul {
         transform: translateX(0); /* Slide in */
         display: flex;
       }
@@ -1192,7 +1192,7 @@
 
       // --- Navigation ---
       const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-      const navMenu = document.getElementById('nav-menu').querySelector('ul');
+      const navMenu = document.getElementById('nav-menu');
       const navLinks = navMenu.querySelectorAll('a');
       const mainHeader = document.getElementById('main-header');
       const body = document.body; // Get body element
@@ -1237,6 +1237,16 @@
                }
            });
        });
+
+      // Close the mobile menu if the viewport is resized to desktop
+      window.addEventListener('resize', () => {
+          if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+              mobileMenuToggle.classList.remove('active');
+              mobileMenuToggle.setAttribute('aria-expanded', 'false');
+              body.style.overflow = '';
+          }
+      });
 
       // --- Optional: Shrink header on scroll ---
       let lastScrollTop = 0;
