@@ -7,7 +7,7 @@
   <title>Charming Seaside Cottage in Scarborough | Captains Cottage</title>
   <meta name="description" content="Experience Captains Cottage in Scarborough—a historic, pet-friendly seaside retreat blending maritime charm with modern comforts. Book on Booking.com.">
   <link rel="canonical" href="https://captainscottage.org/">
-  <link rel="icon" href="logo.png" type="image/png"> <!-- Consider a dedicated .ico -->
+  <link rel="icon" href="logo.png" type="image/png">
   <!-- Google Tag Manager -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-958624265"></script>
   <script>
@@ -21,13 +21,13 @@
   <meta property="og:description" content="Experience our historic seaside retreat in Scarborough, blending maritime charm with modern comforts.">
   <meta property="og:url" content="https://captainscottage.org/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://captainscottage.org/hero.jpg"> <!-- Ensure this path is correct -->
+  <meta property="og:image" content="https://captainscottage.org/hero.jpg">
   <meta property="og:site_name" content="Captains Cottage">
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Charming Seaside Cottage in Scarborough | Captains Cottage">
   <meta name="twitter:description" content="Experience our historic seaside retreat in Scarborough, blending maritime charm with modern comforts.">
-  <meta name="twitter:image" content="https://captainscottage.org/hero.jpg"> <!-- Ensure this path is correct -->
+  <meta name="twitter:image" content="https://captainscottage.org/hero.jpg">
   <!-- JSON-LD Structured Data for LocalBusiness -->
   <script type="application/ld+json">
   {
@@ -35,9 +35,9 @@
     "@type": "LodgingBusiness",
     "name": "Captains Cottage",
     "description": "Captains Cottage: A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique coastal getaway experience.",
-    "image": "https://captainscottage.org/hero.jpg", // Ensure this path is correct
+    "image": "https://captainscottage.org/hero.jpg",
     "url": "https://captainscottage.org/",
-    "telephone": "+44 1244 746200", // **ACTION**: Verify if this number is still relevant for general inquiries, or remove if ALL contact goes via Booking.com message system.
+    "telephone": "+44 1244 746200",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "35 Longwestgate",
@@ -53,12 +53,10 @@
     },
     "aggregateRating": {
       "@type": "AggregateRating",
-      // **ACTION**: Update ratingValue and reviewCount based on Booking.com or remove if not applicable/maintained
-      "ratingValue": "4.0", // Example value
-      "reviewCount": "50"  // Example value
+      "ratingValue": "4.0",
+      "reviewCount": "50"
     },
-    "priceRange": "$$", // Update if price range changes
-    // Optional: Add makesOffer for the Booking.com link, but the button is usually sufficient for users.
+    "priceRange": "$$"
     // "makesOffer": {
     //   "@type": "Offer",
     //   "url": "https://www.booking.com/Share-Gn1WcN",
@@ -68,6 +66,8 @@
   </script>
   <!-- Google Fonts: Poppins for headings & Roboto for body -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for highlight icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     /* New Color Palette & Variables */
     :root {
@@ -313,8 +313,31 @@
       transform: translateX(-50%) translateY(-50%);
       object-fit: cover;
     }
-    /* --- OVERLAY REMOVED --- */
-    /* .hero::before { ... } rule deleted */
+    /* Overlay gradient for readability */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+      z-index: 0;
+    }
+
+    /* Scroll down arrow */
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--white);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      z-index: 1;
+    }
+    @keyframes bounce {
+      0%,20%,50%,80%,100% {transform: translateX(-50%) translateY(0);}
+      40% {transform: translateX(-50%) translateY(-10px);}
+      60% {transform: translateX(-50%) translateY(-5px);}
+    }
 
     /* Fallback content inside video tag for unsupported browsers */
     #hero-video img {
@@ -460,11 +483,35 @@
          font-size: 0.95rem;
          color: #555; /* Slightly lighter text */
      }
-     /* Optional: Add icons */
-     #why-choose-us .benefit::before {
-         /* Example: content: '★'; display: block; font-size: 2rem; color: var(--accent-color); margin-bottom: 10px; */
-         /* Use background images or font icons (e.g., Font Awesome) */
-     }
+      #why-choose-us .benefit::before {
+      }
+
+      /* Highlights section below hero */
+      .highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        max-width: 900px;
+        margin: -50px auto 60px auto;
+      }
+      .highlight {
+        background: var(--white);
+        padding: 25px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: var(--box-shadow);
+      }
+      .highlight i {
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 10px;
+        display: block;
+      }
+      .highlight h3 {
+        margin-bottom: 10px;
+        color: var(--primary-color);
+        font-size: 1.2rem;
+      }
 
     /* Dining Recommendations Section */
     #dining-recommendations ul {
@@ -569,7 +616,7 @@
      }
      #local-events .events-section {
        /* Ticketmaster widget styling might need overrides here if necessary */
-       border: 1px solid #ddd; /* Example border */
+       border: 1px solid #ddd;
        overflow: hidden; /* Contain widget borders/shadows */
      }
 
@@ -826,19 +873,35 @@
   <!-- Main Content -->
   <main>
     <!-- Hero Section with Video Background -->
-    <section class="hero" id="home">
-      <!-- **ACTION**: Ensure hero.mp4 and hero.jpg exist and are relevant -->
-      <video id="hero-video" autoplay loop muted playsinline preload="metadata" poster="hero.jpg">
-        <source src="hero.mp4" type="video/mp4">
-        <!-- Fallback Image -->
-        <img src="hero.jpg" alt="Scenic view of Scarborough relevant to Captains Cottage">
-      </video>
-      <div class="hero-content">
-        <h1>Captains Cottage</h1>
-        <p>A historic seaside retreat in Scarborough blending maritime charm with modern comforts.</p>
-        <a href="#booking" class="cta-button">Book Your Stay</a>
-      </div>
-    </section>
+      <section class="hero" id="home">        <video id="hero-video" autoplay loop muted playsinline preload="metadata" poster="hero.jpg">
+          <source src="hero.mp4" type="video/mp4">
+          <!-- Fallback Image -->
+          <img src="hero.jpg" alt="Scenic view of Scarborough relevant to Captains Cottage">
+        </video>
+        <div class="hero-content">
+          <h1>Welcome to Captains Cottage</h1>
+          <p>Unwind in our lovingly restored 19th‑century retreat overlooking Scarborough's stunning coastline.</p>
+          <a href="#booking" class="cta-button">Check Availability</a>
+        </div>
+        <a href="#about" class="scroll-down" aria-label="Scroll to next section"><i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+      </section>
+      <section class="highlights">
+        <div class="highlight">
+          <i class="fas fa-water" aria-hidden="true"></i>
+          <h3>Seaside Location</h3>
+          <p>Steps from the castle and beautiful beach.</p>
+        </div>
+        <div class="highlight">
+          <i class="fas fa-landmark" aria-hidden="true"></i>
+          <h3>Historic Charm</h3>
+          <p>19th‑century character with modern comforts.</p>
+        </div>
+        <div class="highlight">
+          <i class="fas fa-wifi" aria-hidden="true"></i>
+          <h3>Modern Amenities</h3>
+          <p>Fast WiFi, smart TV and a fully equipped kitchen.</p>
+        </div>
+      </section>
 <!-- Property Overview Section -->
 <section id="about">
   <div class="section-container">
@@ -877,7 +940,6 @@
     <h2>Why Choose Captains Cottage?</h2>
     <div class="benefits">
       <div class="benefit">
-        <!-- Optional: Add icon here -->
         <h3>Historic Charm</h3>
         <p>Relish the authentic maritime heritage and period details of a 19th‑century cottage.</p>
       </div>
@@ -907,9 +969,7 @@
       <li><strong>Twin Bedroom:</strong> A light‑filled space featuring charming roof windows that capture coastal views.</li>
     </ul>
     <p>The modern bathroom offers both a relaxing bath and a separate, contemporary shower cubicle.</p>
-    <div class="inline-images">
-      <!-- **ACTION**: Ensure image paths are correct -->
-      <img src="room1.jpg" alt="Spacious double bedroom at Captains Cottage" class="clickable-media" loading="lazy">
+    <div class="inline-images">      <img src="room1.jpg" alt="Spacious double bedroom at Captains Cottage" class="clickable-media" loading="lazy">
       <img src="room2.jpg" alt="Bright twin bedroom with coastal views at Captains Cottage" class="clickable-media" loading="lazy">
       <img src="bathroom.jpg" alt="Modern bathroom with bath and shower at Captains Cottage" class="clickable-media" loading="lazy">
     </div>
@@ -927,9 +987,7 @@
             <li>Cozy sitting room featuring a welcoming electric fireplace, Smart TV for entertainment, and complimentary fast WiFi.</li>
         </ul>
         <p>Every detail is designed to offer maximum comfort and convenience while preserving the authentic character of Captains Cottage.</p>
-        <div class="inline-images">
-            <!-- **ACTION**: Ensure image paths are correct -->
-            <img src="kitchen.jpg" alt="Modern, fully equipped kitchen and dining area at Captains Cottage" class="clickable-media" loading="lazy">
+        <div class="inline-images">            <img src="kitchen.jpg" alt="Modern, fully equipped kitchen and dining area at Captains Cottage" class="clickable-media" loading="lazy">
             <img src="livingroom.jpg" alt="Comfortable and cozy living room with fireplace at Captains Cottage" class="clickable-media" loading="lazy">
         </div>
     </div>
@@ -945,10 +1003,7 @@
       <li>Family amenities: A highchair and travel cot are available on request for younger guests.</li>
       <li>Parking convenience: A complimentary parking permit is provided for hassle-free access during your visit.</li>
     </ul>
-    <div class="inline-images">
-      <!-- **ACTION**: Ensure image path is correct -->
-      <img src="dinningroom.jpg" alt="Outdoor decking area at Captains Cottage, ideal for alfresco dining" class="clickable-media" loading="lazy">
-       <!-- Add more outdoor images if available -->
+    <div class="inline-images">      <img src="dinningroom.jpg" alt="Outdoor decking area at Captains Cottage, ideal for alfresco dining" class="clickable-media" loading="lazy">
     </div>
   </div>
 </section>
@@ -959,14 +1014,10 @@
     <h2>Visual Tour</h2>
     <p style="text-align:center;">Explore Captains Cottage. Click any image or video to view it larger.</p>
     <div class="gallery">
-      <!-- **ACTION**: Ensure all media paths are correct -->
-      <!-- Video gallery item -->
       <video class="clickable-media" preload="metadata" playsinline muted poster="hero.jpg">
         <source src="hero.mp4" type="video/mp4">
-        <!-- Fallback for browsers that don't support the video tag -->
          <img src="hero.jpg" alt="Video tour snippet of Captains Cottage">
       </video>
-      <!-- Image gallery items -->
       <img src="entrance.jpg" alt="Entrance view of Captains Cottage" class="clickable-media" loading="lazy">
       <img src="livingroom.jpg" alt="Gallery view: Elegant living room" class="clickable-media" loading="lazy">
       <img src="kitchen.jpg" alt="Gallery view: Modern kitchen" class="clickable-media" loading="lazy">
@@ -974,7 +1025,6 @@
       <img src="room2.jpg" alt="Gallery view: Bright twin bedroom" class="clickable-media" loading="lazy">
       <img src="bathroom.jpg" alt="Gallery view: Well-appointed bathroom" class="clickable-media" loading="lazy">
       <img src="dinningroom.jpg" alt="Gallery view: Outdoor dining area" class="clickable-media" loading="lazy">
-      <!-- Add more images as needed -->
     </div>
   </div>
 </section>
@@ -989,7 +1039,6 @@
     <div class="sub-section weather-section">
       <h3>Scarborough Weather Forecast</h3>
       <div class="weather-widget">
-        <!-- Ensure this widget configuration is up-to-date -->
         <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear" data-basecolor="var(--background-color)" data-textcolor="var(--primary-color)">SCARBOROUGH WEATHER</a>
       </div>
       <script>
@@ -997,7 +1046,6 @@
       </script>
     </div>
 
-    <!-- Local Attractions -->
     <div class="sub-section local-info">
       <h3>Nearby Attractions</h3>
       <p>Captains Cottage is perfectly located to explore the best of Scarborough, much of it within easy walking distance:</p>
@@ -1017,13 +1065,9 @@
 
     <!-- Events Widget -->
     <div class="sub-section events-section">
-      <h3>What's On In Scarborough?</h3>
-      <!-- **ACTION**: Replace YOUR_GOOGLE_API_KEY with your actual Google API Key if required by Ticketmaster widget -->
-      <!-- **ACTION**: Check if Ticketmaster API key is still valid and desired -->
-      <div
+      <h3>What's On In Scarborough?</h3>      <div
         w-type="event-discovery"
-        w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS" /* Check if this key is still valid */
-        w-googleapikey="YOUR_GOOGLE_API_KEY" /* Replace this! */
+        w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS"
         w-keyword=""
         w-theme="grid"
         w-colorscheme="light" /* Use light theme */
@@ -1056,7 +1100,6 @@
         w-showviewmore="true"
         >
       </div>
-      <!-- Ticketmaster Widget Script - ensure it's loaded (usually at end of body) -->
     </div>
   </div>
 </section>
@@ -1070,7 +1113,6 @@
       <li>
         <strong>The Tunny Club (TUNS)</strong><br>
         Historic fisherman's club nearby, often welcoming visitors for simple food and drinks with character.<br>
-         <!-- Add link if available -->
       </li>
       <li>
         <strong>Ask Italian Scarborough</strong><br>
@@ -1085,7 +1127,6 @@
        <li>
         <strong>Cafe Fish</strong><br>
         Highly-rated spot known for fresh, locally sourced fish cooked simply.<br>
-        <!-- Add link if available, check TripAdvisor -->
          <a href="https://www.tripadvisor.co.uk/Restaurant_Review-g186345-d2155756-Reviews-Cafe_Fish-Scarborough_Scarborough_District_North_Yorkshire_England.html" target="_blank" rel="noopener">View on TripAdvisor</a>
       </li>
       <li>
@@ -1110,15 +1151,11 @@
     <p style="text-align:center;">
       Ready to book your stay at Captains Cottage? We manage our bookings securely through Booking.com. Click the button below to check availability and reserve your dates:
     </p>
-    <p style="text-align:center;">
-      <!-- **ACTION**: Verify this Booking.com link is correct and active -->
-      <a href="https://www.booking.com/Share-Gn1WcN" target="_blank" rel="noopener" class="cta-button" style="margin-top: 15px;">Check Availability on Booking.com</a>
+    <p style="text-align:center;">      <a href="https://www.booking.com/Share-Gn1WcN" target="_blank" rel="noopener" class="cta-button" style="margin-top: 15px;">Check Availability on Booking.com</a>
     </p>
-    <!-- Removed previous paragraph with Sykes contact details as bookings are now via Booking.com -->
-    <!-- Optional: Add a note about contacting through Booking.com for questions -->
-     <p style="text-align:center; font-size: 0.9rem; margin-top: 20px;">
-        For any questions regarding a potential or existing booking, please use the messaging system within Booking.com once you have selected dates or made a reservation.
-     </p>
+    <p style="text-align:center; font-size: 0.9rem; margin-top: 20px;">
+       For any questions regarding a potential or existing booking, please use the messaging system within Booking.com once you have selected dates or made a reservation.
+    </p>
   </div>
 </section>
   </main>
@@ -1129,17 +1166,12 @@
     <a href="https://www.booking.com/Share-Gn1WcN" target="_blank" rel="noopener" class="cta-button">Reserve Your Stay on Booking.com</a>
   </div>
   <!-- Main Footer -->
-  <footer>
-    <!-- **ACTION**: Update copyright year if needed -->
-    <p>© 2024 Captains Cottage | All Rights Reserved</p>
-    <!-- Optional: Add links to privacy policy, terms, etc. -->
-    <!-- <p><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Use</a></p> -->
+  <footer>    <p>© 2025 Captains Cottage | All Rights Reserved</p>
   </footer>
   <!-- Lightbox Modal for Media -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-label">
     <div class="lightbox-content">
       <button class="lightbox-close" id="lightbox-close" aria-label="Close media viewer">×</button>
-       <!-- Add a label for accessibility -->
       <div id="lightbox-media" aria-live="polite"><span id="lightbox-label" class="visually-hidden">Media viewer</span></div>
     </div>
   </div>
@@ -1181,7 +1213,6 @@
         const isActive = navMenu.classList.toggle('open');
         menuToggle.classList.toggle('active');
         menuToggle.setAttribute('aria-expanded', isActive);
-        // Optional: Prevent body scroll when menu is open
         body.style.overflow = isActive ? 'hidden' : '';
       });
 
@@ -1207,7 +1238,7 @@
           }
       });
 
-      // --- Optional: Shrink header on scroll ---
+      // --- Shrink header on scroll ---
       let lastScrollTop = 0;
       window.addEventListener('scroll', () => {
            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -1253,7 +1284,7 @@
                           // Fallback if no source tag (e.g., src attribute directly on video)
                           mediaElement.src = media.src;
                       }
-                      // Optional: Add a poster image from the original video
+                      // Use poster image from original video when available
                       if (media.poster) {
                           mediaElement.poster = media.poster;
                       }
@@ -1412,8 +1443,6 @@
 
     }); // End DOMContentLoaded
   </script>
-  <!-- Ticketmaster Event Discovery Widget Script (Load last) -->
-  <!-- **ACTION**: Only include this if you have a valid API key and want the widget -->
-  <script defer src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
+  <!-- Ticketmaster Event Discovery Widget Script (Load last) -->  <script defer src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 </body>
 </html>
