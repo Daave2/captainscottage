@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Charming Seaside Cottage in Scarborough | Captain’s Cottage</title>
@@ -24,276 +23,128 @@
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LodgingBusiness",
-    "name":"Captain’s Cottage",
-    "description":"A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique two-bedroom coastal getaway.",
-    "image":"https://captainscottage.org/hero.jpg",
-    "url":"https://captainscottage.org/",
-    "telephone":"+44 1244 746200",
-    "address":{"@type":"PostalAddress","streetAddress":"35 Longwestgate","addressLocality":"Scarborough","addressRegion":"North Yorkshire","postalCode":"YO11 1QB","addressCountry":"UK"},
-    "geo":{"@type":"GeoCoordinates","latitude":"54.2783","longitude":"-0.4040"},
-    "aggregateRating":{"@type":"AggregateRating","ratingValue":"3.9","reviewCount":"6"},
-    "priceRange":"$$"
-  }
+  {"@context":"https://schema.org","@type":"LodgingBusiness","name":"Captain’s Cottage","description":"A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique two-bedroom coastal getaway.","image":"https://captainscottage.org/hero.jpg","url":"https://captainscottage.org/","telephone":"+44 1244 746200","address":{"@type":"PostalAddress","streetAddress":"35 Longwestgate","addressLocality":"Scarborough","addressRegion":"North Yorkshire","postalCode":"YO11 1QB","addressCountry":"UK"},"geo":{"@type":"GeoCoordinates","latitude":"54.2783","longitude":"-0.4040"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"3.9","reviewCount":"6"},"priceRange":"$$"}
   </script>
 
-  <!-- Fonts: Cormorant SC + Lora (Inout House vibe) -->
+  <!-- Fonts: Cormorant SC + Lora (editorial vibe) -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ================== Editorial Theme (Inout-inspired) ================== */
     :root{
-      /* Palette: warm paper + ink + rust accent */
-      --paper: #f7f5f1;
-      --paper-2:#f1eee8;
-      --ink:   #171614;
-      --muted: #5a5852;
-      --accent:#d26a5c;     /* rust / salmon */
-      --accent-2:#3f6a87;   /* sea blue for subtle details */
-      --stroke: rgba(0,0,0,.12);
-      --stroke-2: rgba(0,0,0,.08);
-
-      --container: min(1120px, 92vw);
-      --gutter: clamp(18px, 3vw, 36px);
-
-      --fs--1: clamp(.92rem, .9rem + .2vw, 1rem);
-      --fs-0:  clamp(1.05rem, 1rem + .35vw, 1.18rem);
-      --fs-1:  clamp(1.32rem, 1.2rem + .7vw, 1.6rem);
-      --fs-2:  clamp(1.8rem, 1.6rem + 1.2vw, 2.3rem);
-      --fs-3:  clamp(2.6rem, 2rem + 2vw, 3.2rem);
-      --fs-4:  clamp(3.4rem, 2.6rem + 3vw, 4.6rem);
-
-      --radius: 14px;
-      --shadow: 0 20px 50px rgba(0,0,0,.16);
-      --blur: 12px;
-
-      /* Motion */
-      --parallax-smooth: .08; /* tuned for calm movement */
-      --tilt-smooth: .12;
+      --paper:#f7f5f1; --paper-2:#f1eee8;
+      --ink:#171614; --muted:#5a5852;
+      --accent:#d26a5c; --accent-2:#3f6a87;
+      --stroke:rgba(0,0,0,.12); --stroke-2:rgba(0,0,0,.08);
+      --container:min(1120px,92vw); --gutter:clamp(18px,3vw,36px);
+      --radius:14px; --shadow:0 20px 50px rgba(0,0,0,.16); --blur:12px;
+      --fs-0:clamp(1.05rem,1rem + .35vw,1.18rem);
+      --header-h:64px;                 /* updated at runtime for drawer offset */
+      --parallax-smooth:.08;
+      --tilt-smooth:.12;
     }
     @media (prefers-color-scheme: dark){
-      :root{
-        --paper:#0e0e0c;
-        --paper-2:#121210;
-        --ink:#f2efe8;
-        --muted:#c7c3b7;
-        --stroke: rgba(255,255,255,.15);
-        --stroke-2: rgba(255,255,255,.08);
-        --shadow: 0 20px 60px rgba(0,0,0,.5);
-      }
+      :root{ --paper:#0e0e0c; --paper-2:#121210; --ink:#f2efe8; --muted:#c7c3b7;
+             --stroke:rgba(255,255,255,.15); --stroke-2:rgba(255,255,255,.08); --shadow:0 20px 60px rgba(0,0,0,.5);}
     }
-
-    /* Reset / Base */
-    *,*::before,*::after{ box-sizing:border-box }
-    html{ scroll-behavior:smooth }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      margin:0;
-      background:
-        linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
-      color:var(--ink);
-      font-family: 'Lora', Georgia, serif;
-      font-size: var(--fs-0);
-      line-height: 1.6;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
+      margin:0; background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);
+      color:var(--ink); font-family:'Lora',Georgia,serif; font-size:var(--fs-0); line-height:1.6;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
-    h1,h2,h3{ font-family: 'Cormorant SC', 'Times New Roman', serif; line-height: 1.05; margin:0 0 .5em }
-    h1{ font-size: var(--fs-4); letter-spacing: .5px }
-    h2{ font-size: var(--fs-3) }
-    h3{ font-size: var(--fs-2) }
-    p{ margin:0 0 1em; color:var(--muted) }
-    a{ color:inherit; text-decoration-thickness: 1px; text-underline-offset: 3px }
-    .eyebrow{ font-family:'Cormorant SC', serif; letter-spacing:.18em; text-transform:uppercase; font-size:.82rem; color:var(--muted) }
-    .rule{ height:1px; background: var(--stroke); }
-
-    /* Progress */
-    #scroll-progress{
-      position: fixed; left: 0; top: 0; height: 2px; width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      z-index: 4000;
+    h1,h2,h3{font-family:'Cormorant SC',serif; line-height:1.05; margin:0 0 .5em}
+    a{color:inherit; text-decoration-thickness:1px; text-underline-offset:3px}
+    /* progress */
+    #scroll-progress{position:fixed;left:0;top:0;height:2px;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:4000}
+    /* header / nav */
+    header{position:sticky;top:0;z-index:3000;background:color-mix(in oklab,var(--paper) 85%,transparent);backdrop-filter:blur(var(--blur));border-bottom:1px solid var(--stroke)}
+    .nav{width:var(--container);margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--gutter);padding:12px 0;min-height:var(--header-h)}
+    .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+    .brand img{height:40px;width:40px;border-radius:10px}
+    .brand span{font-family:'Cormorant SC',serif;font-size:1.25rem;letter-spacing:.06em}
+    .links{display:flex;gap:clamp(10px,2vw,24px);align-items:center}
+    .link{font-family:'Cormorant SC',serif;letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;padding:6px 2px;border-bottom:1px solid transparent}
+    .link:hover,.link[aria-current="true"]{border-color:var(--accent)}
+    .btn-nav{font-family:'Cormorant SC',serif;letter-spacing:.18em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--ink);border-radius:12px;background:transparent;cursor:pointer}
+    .menu-btn{display:none;border:1px solid var(--stroke);background:transparent;padding:10px 12px;border-radius:12px;cursor:pointer}
+    .drawer{position:fixed;left:12px;right:12px;top:var(--header-h);background:var(--paper);border:1px solid var(--stroke);border-radius:14px;box-shadow:var(--shadow);display:none;padding:8px;z-index:3500}
+    .drawer.open{display:block}
+    .drawer a{display:block;padding:12px;border-radius:8px}
+    .drawer a:hover{background:color-mix(in oklab,var(--paper-2) 70%,transparent)}
+    @media (max-width:980px){
+      .links{display:none}
+      .btn-nav{display:none}            /* prevent crowding on mobile */
+      .menu-btn{display:inline-block}
     }
-
-    /* Nav — minimal, uppercase, thin rules */
-    header{
-      position: sticky; top: 0; z-index: 3000;
-      background: color-mix(in oklab, var(--paper) 85%, transparent);
-      backdrop-filter: blur(var(--blur));
-      border-bottom: 1px solid var(--stroke);
+    /* hero */
+    .hero{position:relative;min-height:min(86vh,1000px);display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--stroke)}
+    .video-wrap{position:absolute;inset:0;z-index:-2;overflow:hidden}
+    #hero-video{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) saturate(1.05) brightness(.92)}
+    .hero-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.52),rgba(0,0,0,.28) 40%,rgba(0,0,0,.55))}
+    .hero-inner{width:var(--container);padding:clamp(36px,6vw,80px) 0;display:grid;grid-template-columns:1fr minmax(0,780px) 1fr;align-items:center;color:#fff;text-align:center;gap:var(--gutter)}
+    .vline{justify-self:end;width:1px;height:clamp(180px,34vh,360px);background:linear-gradient(to bottom,transparent,rgba(255,255,255,.75),transparent);opacity:.8}
+    .hero h1{font-size:clamp(3rem,4.4vw,5rem);text-shadow:0 6px 26px rgba(0,0,0,.55);letter-spacing:.6px}
+    .hero p{color:#eae7dd}
+    /* >>> tagline pill: stronger contrast <<< */
+    .hero .eyebrow{
+      display:inline-flex;align-items:center;gap:.6rem;padding:8px 12px;border-radius:999px;
+      background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.55);
+      color:#fff;letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;
+      backdrop-filter:blur(6px);text-shadow:0 2px 8px rgba(0,0,0,.65);
     }
-    .nav{
-      width: var(--container);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: var(--gutter);
-      padding: 14px 0;
-    }
-    .brand{ display:flex; align-items:center; gap: .7rem; text-decoration:none }
-    .brand img{ height:40px; width:40px; border-radius:10px }
-    .brand span{ font-family:'Cormorant SC', serif; font-size:1.25rem; letter-spacing:.06em }
-    .links{ display:flex; gap: clamp(10px, 2vw, 24px); align-items:center; }
-    .link{
-      font-family:'Cormorant SC', serif;
-      letter-spacing:.18em; text-transform:uppercase; font-size:.82rem;
-      padding:6px 2px; border-bottom:1px solid transparent;
-    }
-    .link:hover, .link[aria-current="true"]{ border-color: var(--accent) }
-    .btn-nav{
-      font-family:'Cormorant SC', serif; letter-spacing:.18em; text-transform:uppercase;
-      padding:10px 14px; border:1px solid var(--ink); border-radius:12px; background:transparent; cursor:pointer;
-    }
-    .menu-btn{ display:none; border:1px solid var(--stroke); background:transparent; padding:10px 12px; border-radius:12px; cursor:pointer }
-    .drawer{
-      position: fixed; inset: 64px 16px auto 16px; background: var(--paper);
-      border:1px solid var(--stroke); border-radius: 14px; box-shadow: var(--shadow);
-      display:none; padding: 8px;
-    }
-    .drawer.open{ display:block }
-    .drawer a{ display:block; padding:12px; border-radius:8px; }
-    .drawer a:hover{ background: color-mix(in oklab, var(--paper-2) 70%, transparent) }
-
-    @media (max-width: 980px){
-      .links{ display:none }
-      .menu-btn{ display:block }
-    }
-
-    /* Hero — editorial overlay + vertical guide line */
-    .hero{
-      position: relative; min-height: min(86vh, 1000px); display:grid; place-items:center; overflow:hidden;
-      border-bottom: 1px solid var(--stroke);
-    }
-    .video-wrap{ position:absolute; inset:0; z-index:-2; overflow:hidden }
-    #hero-video{ width:100%; height:100%; object-fit:cover; filter: contrast(1.05) saturate(1.05) brightness(.92) }
-    .hero-scrim{
-      position:absolute; inset:0; z-index:-1;
-      background: linear-gradient(180deg, rgba(0,0,0,.48), rgba(0,0,0,.26) 40%, rgba(0,0,0,.5));
-      mix-blend-mode: multiply;
-    }
-    .hero-inner{
-      width: var(--container);
-      padding: clamp(36px, 6vw, 80px) 0;
-      display: grid;
-      grid-template-columns: 1fr minmax(0, 780px) 1fr;
-      align-items: center;
-      color: #fff;
-      text-align: center;
-      gap: var(--gutter);
-    }
-    .vline{
-      justify-self: end;
-      width:1px; height: clamp(200px, 38vh, 380px);
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,.75), transparent);
-      opacity:.8;
-    }
-    .hero h1{
-      font-size: clamp(3rem, 4.4vw, 5rem);
-      text-shadow: 0 6px 26px rgba(0,0,0,.55);
-      letter-spacing: .6px;
-    }
-    .hero p{ color: #eae7dd }
-    .cta-row{ margin-top: 18px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
-    .btn{
-      appearance:none; border:1px solid #fff; background: rgba(255,255,255,.08); color:#fff;
-      font-family:'Cormorant SC', serif; letter-spacing:.18em; text-transform:uppercase; font-size:.9rem;
-      padding:12px 18px; border-radius:12px; cursor:pointer;
-      transition: transform .15s ease, background .2s ease, color .2s ease;
-      backdrop-filter: blur(6px);
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.18) }
-    .btn.primary{ background: var(--accent); border-color: var(--accent); color:#fff }
-
-    .chips{ margin-top: 18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
-    .chip{ border:1px solid rgba(255,255,255,.5); color:#fff; padding:8px 10px; border-radius:999px; font-size:.78rem; opacity:.95 }
-
-    /* Sections — airy grid, editorial rules and side labels */
-    section{ scroll-margin-top: 84px }
-    .section{
-      width: var(--container); margin: 0 auto; padding: clamp(48px, 6vw, 90px) 0;
-      display: grid; gap: clamp(18px, 3vw, 28px);
-    }
-    .section-header{ display:grid; grid-template-columns: 1fr auto; align-items:end; gap: var(--gutter) }
-    .section-header .eyebrow{ color: var(--accent); }
-    .under{ height:1px; background: var(--stroke); width: 100%; }
-
-    .grid{ display:grid; gap: var(--gutter); grid-template-columns: repeat(12, 1fr) }
-    .card{
-      grid-column: span 12;
-      background: var(--paper);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      padding: clamp(18px, 3.2vw, 28px);
-      box-shadow: var(--shadow);
-    }
-    .media-inline{ display:flex; gap: 14px; flex-wrap: wrap; margin-top: 8px }
-    .media-inline img{
-      width: min(100%, 520px); border-radius: 12px; border: 1px solid var(--stroke-2); cursor: pointer;
-    }
-
-    .benefits{ display:grid; gap: var(--gutter); grid-template-columns: repeat(12, 1fr) }
-    .benefit{ grid-column: span 12 }
-    .benefit .card{ text-align: center }
-    .benefit .icon{
-      width: 52px; height: 52px; margin: 0 auto 8px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent), #fff 18%));
-    }
-
-    .list{ padding-left: 1.2em }
-    .list li{ margin-bottom: .6em; color: var(--muted) }
-
-    /* Parallax slice with editorial overlay */
-    .slice{ position: relative; height: 52vh; min-height: 340px; border-block: 1px solid var(--stroke); overflow: hidden }
-    .slice-media{ position:absolute; inset:-10%; background-size: cover; background-position: center }
-    .slice-scrim{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.25) 40%, rgba(0,0,0,.55)) }
-    .slice-inner{
-      position: relative; z-index: 1; width: var(--container); height: 100%; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr minmax(0, 720px) 1fr; align-items: center; text-align:center; color:#fff;
-    }
-
-    /* Gallery Masonry */
-    .gallery{ column-count: 1; column-gap: 14px }
-    .gallery > *{ break-inside: avoid; margin: 0 0 14px; border-radius: 12px; border:1px solid var(--stroke-2); cursor: pointer; }
-    .gallery img, .gallery video{ width: 100%; height: auto; display: block }
-
-    @media (min-width: 740px){
-      .card.span-6{ grid-column: span 6 }
-      .benefit{ grid-column: span 6 }
-      .gallery{ column-count: 2 }
-    }
-    @media (min-width: 1024px){
-      .card.span-4{ grid-column: span 4 }
-      .card.span-6{ grid-column: span 6 }
-      .benefit{ grid-column: span 3 }
-      .gallery{ column-count: 3 }
-    }
-
-    /* Lightbox */
-    .lightbox{ position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.86); z-index: 3000; padding: 24px }
-    .lightbox.open{ display: grid }
-    .lightbox-inner{ width: min(92vw, 1200px) }
-    .lightbox-inner img, .lightbox-inner video{ width: 100%; border-radius: 12px }
-    .lightbox-close{ position:absolute; top: 18px; right: 18px; border:1px solid #fff; background: transparent; color:#fff; border-radius: 10px; padding: 8px 12px; cursor:pointer }
-
-    /* Footer */
-    .footer-cta{ border-top: 1px solid var(--stroke); padding: 48px 0; text-align:center }
-    .footer{ border-top: 1px solid var(--stroke); padding: 22px 0; text-align:center; color: var(--muted) }
-
-    /* Reveal (subtle) */
-    .reveal{ opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease }
-    .reveal.in{ opacity: 1; transform: translateY(0) }
-
-    /* Parallax util */
-    [data-parallax]{ will-change: transform; transform: translate3d(var(--tx, 0px), calc(var(--py, 0px) + var(--ty, 0px)), 0) }
-    .no-parallax [data-parallax]{ transform: none !important }
+    .cta-row{margin-top:18px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .btn{appearance:none;border:1px solid #fff;background:rgba(255,255,255,.08);color:#fff;font-family:'Cormorant SC',serif;letter-spacing:.18em;text-transform:uppercase;font-size:.9rem;padding:12px 18px;border-radius:12px;cursor:pointer;transition:transform .15s ease,background .2s ease,color .2s ease;backdrop-filter:blur(6px)}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.18)}
+    .btn.primary{background:var(--accent);border-color:var(--accent)}
+    .chips{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .chip{border:1px solid rgba(255,255,255,.5);color:#fff;padding:8px 10px;border-radius:999px;font-size:.78rem;opacity:.95}
+    /* sections */
+    section{scroll-margin-top:84px}
+    .section{width:var(--container);margin:0 auto;padding:clamp(48px,6vw,90px) 0;display:grid;gap:clamp(18px,3vw,28px)}
+    .section-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:var(--gutter)}
+    .eyebrow{font-family:'Cormorant SC',serif}
+    .under{height:1px;background:var(--stroke);width:100%}
+    .grid{display:grid;gap:var(--gutter);grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12;background:var(--paper);border:1px solid var(--stroke);border-radius:var(--radius);padding:clamp(18px,3.2vw,28px);box-shadow:var(--shadow)}
+    .media-inline{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+    .media-inline img{width:min(100%,520px);border-radius:12px;border:1px solid var(--stroke-2);cursor:pointer}
+    .benefits{display:grid;gap:var(--gutter);grid-template-columns:repeat(12,1fr)}
+    .benefit{grid-column:span 12}
+    .benefit .card{text-align:center}
+    .benefit .icon{width:52px;height:52px;margin:0 auto 8px;border-radius:12px;background:linear-gradient(135deg,var(--accent),color-mix(in oklab,var(--accent),#fff 18%))}
+    .list{padding-left:1.2em}
+    .list li{margin-bottom:.6em;color:var(--muted)}
+    /* parallax slice */
+    .slice{position:relative;height:52vh;min-height:340px;border-block:1px solid var(--stroke);overflow:hidden}
+    .slice-media{position:absolute;inset:-10%;background-size:cover;background-position:center}
+    .slice-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.25) 40%,rgba(0,0,0,.55))}
+    .slice-inner{position:relative;z-index:1;width:var(--container);height:100%;margin:0 auto;display:grid;grid-template-columns:1fr minmax(0,720px) 1fr;align-items:center;text-align:center;color:#fff}
+    /* gallery */
+    .gallery{column-count:1;column-gap:14px}
+    .gallery>*{break-inside:avoid;margin:0 0 14px;border-radius:12px;border:1px solid var(--stroke-2);cursor:pointer}
+    .gallery img,.gallery video{width:100%;height:auto;display:block}
+    @media (min-width:740px){.card.span-6{grid-column:span 6}.benefit{grid-column:span 6}.gallery{column-count:2}}
+    @media (min-width:1024px){.card.span-4{grid-column:span 4}.card.span-6{grid-column:span 6}.benefit{grid-column:span 3}.gallery{column-count:3}}
+    /* lightbox */
+    .lightbox{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.86);z-index:3000;padding:24px}
+    .lightbox.open{display:grid}
+    .lightbox-inner{width:min(92vw,1200px)}
+    .lightbox-inner img,.lightbox-inner video{width:100%;border-radius:12px}
+    .lightbox-close{position:absolute;top:18px;right:18px;border:1px solid #fff;background:transparent;color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+    /* footer */
+    .footer-cta{border-top:1px solid var(--stroke);padding:48px 0;text-align:center}
+    .footer{border-top:1px solid var(--stroke);padding:22px 0;text-align:center;color:var(--muted)}
+    /* reveal */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.in{opacity:1;transform:translateY(0)}
+    /* parallax util */
+    [data-parallax]{will-change:transform;transform:translate3d(var(--tx,0px),calc(var(--py,0px) + var(--ty,0px)),0)}
+    .no-parallax [data-parallax]{transform:none!important}
   </style>
 </head>
 <body>
-  <a href="#main" class="visually-hidden">Skip to content</a>
-  <div id="scroll-progress" aria-hidden="true"></div>
-
-  <!-- ============== Header ============== -->
+  <!-- ===== Header ===== -->
   <header id="siteHeader">
     <nav class="nav" aria-label="Main">
       <a class="brand" href="#home">
@@ -312,7 +163,9 @@
         <button class="menu-btn" id="menuBtn" aria-controls="drawer" aria-expanded="false" aria-label="Open menu">Menu</button>
       </div>
     </nav>
+    <!-- Mobile Drawer -->
     <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation">
+      <a href="#booking">Book</a>
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#our-story">Our Story</a>
@@ -320,7 +173,6 @@
       <a href="#accommodation">Accommodation</a>
       <a href="#amenities">Amenities</a>
       <a href="#outdoor">Outdoor</a>
-      <a href="#booking">Booking</a>
       <a href="#local-events">Local</a>
       <a href="#dining-recommendations">Dining</a>
       <a href="#gallery">Gallery</a>
@@ -328,7 +180,7 @@
   </header>
 
   <main id="main">
-    <!-- ============== Hero (editorial) ============== -->
+    <!-- ===== Hero ===== -->
     <section class="hero" id="home">
       <div class="video-wrap" data-parallax data-speed="0.08">
         <video id="hero-video" autoplay muted playsinline loop preload="auto" poster="hero.jpg">
@@ -359,31 +211,29 @@
       </div>
     </section>
 
-    <!-- ============== About ============== -->
+    <!-- ===== About ===== -->
     <section id="about" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Property Overview</div>
+          <div class="eyebrow" style="color:var(--accent)">Property Overview</div>
           <div class="under"></div>
         </div>
       </div>
       <div class="grid">
         <article class="card span-6 reveal">
-          <p>
-            Situated at <strong>35 Longwestgate, Scarborough, North Yorkshire, YO11 1QB</strong>, Captain’s Cottage offers guests a unique blend of heritage and contemporary comfort. This historic mid-terrace property has been lovingly refurbished by new owners in mid-2024. Its rich maritime past is reflected in every detail—from period features to modern upgrades.
-          </p>
+          <p>Situated at <strong>35 Longwestgate, Scarborough, North Yorkshire, YO11 1QB</strong>, Captain’s Cottage offers guests a unique blend of heritage and contemporary comfort. This historic mid-terrace property has been lovingly refurbished by new owners in mid-2024. Its rich maritime past is reflected in every detail—from period features to modern upgrades.</p>
           <ul class="list">
             <li><strong>Heritage & Refurbishment:</strong> 19th-century cottage revitalized with updated decor, meticulous maintenance and enhanced guest comforts.</li>
             <li><strong>Layout:</strong> Two well-appointed bedrooms—first-floor double and light-filled second-floor twin—sleeping up to four.</li>
             <li><strong>Living & Kitchen:</strong> Cozy sitting room (electric fireplace, Smart TV, Wi-Fi) plus fully equipped modern kitchen/diner.</li>
-            <li><strong>Outdoor Space:</strong> Decking and garden for alfresco dining, with a complimentary parking permit.</li>
+            <li><strong>Outdoor Space:</strong> Decking & garden for alfresco dining; complimentary parking permit included.</li>
           </ul>
           <p>Experience authentic Scarborough living just steps from the beach and Scarborough Castle.</p>
         </article>
         <aside class="card span-6 reveal">
           <div class="eyebrow">Key Details</div>
-          <div class="rule" style="margin:6px 0 14px"></div>
-          <p><strong>Check-in:</strong> from 4:00 pm<br><strong>Check-out:</strong> by 10:00 am</p>
+          <div class="under" style="margin:6px 0 14px"></div>
+          <p><strong>Check-in:</strong> from 4:00 pm &nbsp; | &nbsp; <strong>Check-out:</strong> by 10:00 am</p>
           <div class="media-inline">
             <img src="room1.jpg" alt="Spacious double bedroom in a Scarborough seaside cottage" class="clickable-media">
             <img src="room2.jpg" alt="Elegant twin bedroom with coastal views in Scarborough" class="clickable-media">
@@ -392,55 +242,55 @@
       </div>
     </section>
 
-    <!-- ============== Editorial Slice ============== -->
+    <!-- ===== Parallax Slice ===== -->
     <section class="slice" aria-label="Seaside ambience">
       <div class="slice-media" style="background-image:url('hero.jpg')" data-parallax data-speed="0.12"></div>
       <div class="slice-scrim" aria-hidden="true"></div>
       <div class="slice-inner">
         <div class="vline" aria-hidden="true"></div>
         <div>
-          <div class="eyebrow">Old Town • Harbour • Castle</div>
+          <div class="eyebrow" style="color:#fff">Old Town • Harbour • Castle</div>
           <h2 style="color:#fff">Steps from Scarborough Castle</h2>
         </div>
         <div class="vline" aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- ============== Our Story ============== -->
+    <!-- ===== Our Story ===== -->
     <section id="our-story" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Our Story</div>
+          <div class="eyebrow" style="color:var(--accent)">Our Story</div>
           <div class="under"></div>
         </div>
       </div>
       <article class="card reveal">
-        <p>Captain’s Cottage has a rich maritime heritage rooted in Scarborough’s vibrant history. Built in the 19th century, the cottage witnessed the golden era of seaside resorts. In mid-2024, passionate new owners breathed fresh life into the property, carefully preserving its historic character while modernizing its amenities for today’s discerning traveler.</p>
-        <p>Today, Captain’s Cottage stands as a testament to the timeless charm of Scarborough’s coastal legacy—where classic elegance meets contemporary comfort. Experience the fusion of history, luxury and genuine local hospitality.</p>
+        <p>Captain’s Cottage has a rich maritime heritage rooted in Scarborough’s vibrant history. Built in the 19th century, the cottage witnessed the golden era of seaside resorts. In mid-2024, passionate new owners breathed fresh life into the property, preserving its historic character while modernizing amenities.</p>
+        <p>Today, Captain’s Cottage marries classic elegance with contemporary comfort—delivering history, luxury and genuine local hospitality.</p>
       </article>
     </section>
 
-    <!-- ============== Why Choose Us ============== -->
+    <!-- ===== Why Choose Us ===== -->
     <section id="why-choose-us" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Why Choose Us?</div>
+          <div class="eyebrow" style="color:var(--accent)">Why Choose Us?</div>
           <div class="under"></div>
         </div>
       </div>
       <div class="benefits">
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Historic Charm</h3><p>Relish the authentic maritime heritage and period details of a 19th-century cottage.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Modern Comforts</h3><p>Upgraded amenities—fully equipped kitchen, fast Wi-Fi and Smart TV.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Prime Location</h3><p>Steps from Scarborough Castle, the market hall and local attractions.</p></div></div>
+        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Historic Charm</h3><p>Authentic maritime heritage and period details of a 19th-century cottage.</p></div></div>
+        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Modern Comforts</h3><p>From a fully equipped kitchen to fast Wi-Fi and a Smart TV.</p></div></div>
+        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Prime Location</h3><p>Steps from Scarborough Castle, the market hall and the harbour.</p></div></div>
         <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Guest-Focused</h3><p>Personal touches, meticulous maintenance and a warm welcome.</p></div></div>
       </div>
     </section>
 
-    <!-- ============== Accommodation ============== -->
+    <!-- ===== Accommodation ===== -->
     <section id="accommodation" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Charming Accommodation</div>
+          <div class="eyebrow" style="color:var(--accent)">Charming Accommodation</div>
           <div class="under"></div>
         </div>
       </div>
@@ -448,8 +298,8 @@
         <article class="card span-6 reveal">
           <p>Our thoughtfully designed rooms ensure a comfortable stay:</p>
           <ul class="list">
-            <li><strong>Double Bedroom:</strong> An elegant retreat on the first floor with plush bedding and period details.</li>
-            <li><strong>Twin Bedroom:</strong> A light-filled space featuring charming roof windows that capture coastal views.</li>
+            <li><strong>Double Bedroom:</strong> Elegant first-floor retreat with plush bedding and period details.</li>
+            <li><strong>Twin Bedroom:</strong> Light-filled room with charming roof windows and coastal vibes.</li>
           </ul>
           <p>The modern bathroom offers both a relaxing bath and a separate contemporary shower.</p>
         </article>
@@ -462,11 +312,11 @@
       </div>
     </section>
 
-    <!-- ============== Amenities ============== -->
+    <!-- ===== Amenities ===== -->
     <section id="amenities" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Modern Amenities & Refined Living</div>
+          <div class="eyebrow" style="color:var(--accent)">Modern Amenities & Refined Living</div>
           <div class="under"></div>
         </div>
       </div>
@@ -475,44 +325,44 @@
           <ul class="list">
             <li>Electric oven, induction hob, microwave and premium coffee machine</li>
             <li>Spacious fridge/freezer, washing machine and dishwasher</li>
-            <li>Cozy sitting room with an electric fireplace, Smart TV and fast Wi-Fi</li>
+            <li>Cozy sitting room with electric fireplace, Smart TV and fast Wi-Fi</li>
           </ul>
         </article>
         <aside class="card span-6 reveal">
           <div class="media-inline">
-            <img src="kitchen.jpg" alt="Modern kitchen and dining area in a Scarborough cottage" class="clickable-media">
+            <img src="kitchen.jpg" alt="Modern kitchen and dining area" class="clickable-media">
             <img src="livingroom.jpg" alt="Comfortable living room with coastal decor" class="clickable-media">
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- ============== Outdoor ============== -->
+    <!-- ===== Outdoor ===== -->
     <section id="outdoor" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Outdoor Elegance</div>
+          <div class="eyebrow" style="color:var(--accent)">Outdoor Elegance</div>
           <div class="under"></div>
         </div>
       </div>
       <article class="card reveal">
-        <p>Step outside to unwind in our peaceful decking area and garden—perfect for alfresco dining, morning coffees or simply enjoying the Scarborough sea breeze.</p>
+        <p>Unwind in our peaceful decking area and garden—perfect for alfresco dining, morning coffees or simply enjoying the sea breeze.</p>
         <ul class="list">
           <li>Pet-friendly (one well-behaved dog allowed)</li>
-          <li>Family amenities including a highchair and travel cot on request</li>
+          <li>Highchair and travel cot on request</li>
           <li>Complimentary parking permit</li>
         </ul>
         <div class="media-inline">
-          <img src="dinningroom.jpg" alt="Outdoor decking area at Captain’s Cottage for alfresco dining" class="clickable-media">
+          <img src="dinningroom.jpg" alt="Outdoor decking area for alfresco dining" class="clickable-media">
         </div>
       </article>
     </section>
 
-    <!-- ============== Booking ============== -->
+    <!-- ===== Booking ===== -->
     <section id="booking" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Booking & Contact</div>
+          <div class="eyebrow" style="color:var(--accent)">Booking & Contact</div>
           <div class="under"></div>
         </div>
       </div>
@@ -524,7 +374,7 @@
         </article>
         <aside class="card span-6 reveal">
           <div class="eyebrow">Contact</div>
-          <div class="rule" style="margin:6px 0 14px"></div>
+          <div class="under" style="margin:6px 0 14px"></div>
           <p><strong>Phone:</strong> +44 1244 746200<br>
              <strong>Email:</strong> <a href="mailto:info@captainscottage.org">info@captainscottage.org</a></p>
           <p>We’re happy to help with dates, local tips, and special requests.</p>
@@ -532,23 +382,23 @@
       </div>
     </section>
 
-    <!-- ============== Local ============== -->
+    <!-- ===== Local ===== -->
     <section id="local-events" class="section">
       <div class="section-header">
         <div>
-          <div class="eyebrow">Local Attractions & Events</div>
+          <div class="eyebrow" style="color:var(--accent)">Local Attractions & Events</div>
           <div class="under"></div>
         </div>
       </div>
       <div class="grid">
         <article class="card span-6 reveal">
           <div class="eyebrow">Current Weather in Scarborough</div>
-          <div class="rule" style="margin:6px 0 14px"></div>
+          <div class="under" style="margin:6px 0 14px"></div>
           <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
         </article>
         <article class="card span-6 reveal">
           <div class="eyebrow">What’s On?</div>
-          <div class="rule" style="margin:6px 0 14px"></div>
+          <div class="under" style="margin:6px 0 14px"></div>
           <div 
             w-type="event-discovery"
             w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS"
@@ -561,30 +411,30 @@
           </div>
         </article>
 
-        <article class="card reveal" style="grid-column: 1 / -1;">
+        <article class="card reveal" style="grid-column:1 / -1;">
           <div class="eyebrow">Explore Scarborough</div>
-          <div class="rule" style="margin:6px 0 14px"></div>
+          <div class="under" style="margin:6px 0 14px"></div>
           <ul class="list">
-            <li><strong>Scarborough Castle</strong> (~300 m): Explore the 12th-century medieval fortress that crowns the headland.</li>
-            <li><strong>Scarborough Market Hall & Vaults</strong> (~550 m): Victorian market hall, open Mon–Sat 8 am–5 pm.</li>
-            <li><strong>MV Regal Lady (Scarborough Pleasure Steamers)</strong> (~550 m): 1930 steamship, a National Historic Ship that took part in Dunkirk.</li>
-            <li><strong>Scarborough Beach</strong> (~650 m): Sandy beach and promenade.</li>
-            <li><strong>St Martin-on-the-Hill</strong> (~650 m): G. F. Bodley church with Pre-Raphaelite stained glass.</li>
-            <li><strong>Scarborough Art Gallery</strong> (~650 m): Grade II* Italianate villa with local art and heritage.</li>
-            <li><strong>St Mary’s Church & Anne Brontë’s Grave</strong> (~700 m): 12th-century parish church and Anne Brontë’s resting place.</li>
-            <li><strong>Peasholm Park</strong> (~850 m): Oriental-themed 14-hectare park opened in 1912.</li>
-            <li><strong>Scarborough Train Station</strong> (~900 m): Rail links to York, Leeds and beyond.</li>
+            <li><strong>Scarborough Castle</strong> (~300 m) – 12th-century fortress crowning the headland.</li>
+            <li><strong>Market Hall & Vaults</strong> (~550 m) – Victorian market hall, Mon–Sat 8am–5pm.</li>
+            <li><strong>MV Regal Lady</strong> (~550 m) – 1930 steamship, National Historic Ship; Dunkirk veteran.</li>
+            <li><strong>Scarborough Beach</strong> (~650 m) – Sandy beach & promenade.</li>
+            <li><strong>St Martin-on-the-Hill</strong> (~650 m) – Bodley church with Pre-Raphaelite glass.</li>
+            <li><strong>Scarborough Art Gallery</strong> (~650 m) – Grade II* Italianate villa; local art & heritage.</li>
+            <li><strong>St Mary’s & Anne Brontë’s Grave</strong> (~700 m) – 12th-century parish church.</li>
+            <li><strong>Peasholm Park</strong> (~850 m) – Oriental-themed 14-hectare park (1912).</li>
+            <li><strong>Train Station</strong> (~900 m) – Links to York, Leeds and beyond.</li>
           </ul>
         </article>
       </div>
     </section>
 
-    <!-- ============== Dining ============== -->
+    <!-- ===== Dining ===== -->
     <section id="dining-recommendations" class="section">
-      <div class="section-header">
+      <div class="section-header" style="justify-items:center">
         <div>
-          <div class="eyebrow">Dining Recommendations</div>
-          <div class="under"></div>
+          <div class="eyebrow" style="text-align:center;color:var(--accent)">Dining Recommendations</div>
+          <div class="under" style="width:min(480px,60vw);margin:0 auto"></div>
         </div>
       </div>
       <div class="grid">
@@ -615,39 +465,13 @@
         </article>
       </div>
     </section>
-
-    <!-- ============== Gallery ============== -->
-    <section id="gallery" class="section">
-      <div class="section-header" style="justify-items:center">
-        <div>
-          <div class="eyebrow" style="text-align:center">Gallery</div>
-          <div class="under" style="width:min(480px,60vw); margin: 0 auto"></div>
-        </div>
-      </div>
-      <div class="gallery reveal">
-        <video class="clickable-media" preload="metadata" playsinline muted poster="hero.jpg">
-          <source src="hero.mp4" type="video/mp4">
-          <img src="hero.jpg" alt="Captain’s Cottage Video">
-        </video>
-        <img src="entrance.jpg" alt="Entrance at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="livingroom.jpg" alt="Elegant living room at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="kitchen.jpg" alt="Modern kitchen at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="room1.jpg" alt="Spacious double bedroom at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="room2.jpg" alt="Twin bedroom with scenic views" class="clickable-media" loading="lazy">
-        <img src="bathroom.jpg" alt="Well-appointed bathroom" class="clickable-media" loading="lazy">
-        <img src="dinningroom.jpg" alt="Outdoor dining area" class="clickable-media" loading="lazy">
-      </div>
-    </section>
   </main>
 
-  <!-- ============== Footer ============== -->
   <div class="footer-cta">
-    <h2 style="font-family:'Cormorant SC',serif; font-size:var(--fs-2); letter-spacing:.04em">Embark on Your Next Exquisite Getaway</h2>
+    <h2 style="font-family:'Cormorant SC',serif;letter-spacing:.04em">Embark on Your Next Exquisite Getaway</h2>
     <a href="#booking" class="btn primary">Reserve Your Stay</a>
   </div>
-  <footer class="footer">
-    <p>&copy; 2025 Captain’s Cottage &nbsp;|&nbsp; All Rights Reserved</p>
-  </footer>
+  <footer class="footer"><p>&copy; 2025 Captain’s Cottage | All Rights Reserved</p></footer>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media preview">
@@ -663,15 +487,22 @@
       const menuBtn = document.getElementById('menuBtn');
       const drawer = document.getElementById('drawer');
 
-      // Scroll progress
+      // Keep drawer perfectly under header (fixes mobile overlap)
+      const setHeaderHeight = () => {
+        const h = header.getBoundingClientRect().height;
+        document.documentElement.style.setProperty('--header-h', h + 'px');
+      };
+      window.addEventListener('resize', setHeaderHeight, { passive:true });
+      setHeaderHeight();
+
+      // Scroll progress + subtle shadow
       const onScroll = () => {
         const y = window.scrollY;
         const doc = document.documentElement.scrollHeight - window.innerHeight || 1;
         progress.style.width = Math.min(100, (y / doc) * 100) + '%';
         header.style.boxShadow = y > 8 ? '0 10px 24px rgba(0,0,0,.08)' : 'none';
       };
-      window.addEventListener('scroll', onScroll, { passive:true });
-      onScroll();
+      window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
 
       // Mobile drawer
       const closeDrawer = () => { drawer.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); };
@@ -682,7 +513,7 @@
       drawer.addEventListener('click', e => { if (e.target.tagName === 'A') closeDrawer(); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
 
-      // Reveal on scroll
+      // Reveal
       const reveals = document.querySelectorAll('.reveal');
       const ro = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
@@ -696,10 +527,9 @@
       const lightboxMedia = document.getElementById('lightbox-media');
       const lightboxClose = document.getElementById('lightbox-close');
       const openLightbox = (node) => {
-        lightbox.classList.add('open');
-        lightboxMedia.innerHTML = '';
+        lightbox.classList.add('open'); lightboxMedia.innerHTML = '';
         if(node.tagName === 'IMG'){ const img = new Image(); img.src = node.src; img.alt = node.alt || ''; lightboxMedia.appendChild(img); }
-        else if(node.tagName === 'VIDEO'){ const v = document.createElement('video'); v.controls = true; v.autoplay = true; const s = node.querySelector('source'); v.src = s ? s.src : (node.currentSrc || node.src); lightboxMedia.appendChild(v); }
+        else if(node.tagName === 'VIDEO'){ const v=document.createElement('video'); v.controls=true; v.autoplay=true; const s=node.querySelector('source'); v.src = s ? s.src : (node.currentSrc || node.src); lightboxMedia.appendChild(v); }
       };
       document.querySelectorAll('.clickable-media, .gallery > img, .gallery > video, .media-inline img')
         .forEach(el => el.addEventListener('click', ()=> openLightbox(el)));
@@ -711,7 +541,7 @@
       // Weather widget
       (function(d,s,id){ var js,fjs=d.getElementsByTagName(s)[0]; if(!d.getElementById(id)){ js=d.createElement(s); js.id=id; js.src='https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js,fjs);} })(document,'script','weatherwidget-io-js');
 
-      // ================= Parallax with inertial smoothing =================
+      // Parallax with inertial smoothing (calm but high-FPS)
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!prefersReduced) {
         const nodes = [...document.querySelectorAll('[data-parallax]')].map(el => ({ el, speed: parseFloat(el.dataset.speed) || 0.1, value: 0 }));
