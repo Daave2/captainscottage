@@ -27,7 +27,7 @@
   {"@context":"https://schema.org","@type":"LodgingBusiness","name":"Captain’s Cottage","description":"A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique two-bedroom coastal getaway.","image":"https://captainscottage.org/hero.jpg","url":"https://captainscottage.org/","telephone":"+44 1244 746200","address":{"@type":"PostalAddress","streetAddress":"35 Longwestgate","addressLocality":"Scarborough","addressRegion":"North Yorkshire","postalCode":"YO11 1QB","addressCountry":"UK"},"geo":{"@type":"GeoCoordinates","latitude":"54.2783","longitude":"-0.4040"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"3.9","reviewCount":"6"},"priceRange":"$$"}
   </script>
 
-  <!-- Google Tag (kept from original) -->
+  <!-- Google Tag (original) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-958624265"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -40,9 +40,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ============== Editorial Theme (Inout-inspired) ============== */
+    /* ============== Editorial Theme ============== */
     :root{
-      --paper:#0e0e0c; --paper-2:#121210;        /* default dark for punchy hero */
+      --paper:#0e0e0c; --paper-2:#121210;
       --ink:#f2efe8; --muted:#c7c3b7;
       --accent:#d26a5c; --accent-2:#3f6a87;
       --stroke:rgba(255,255,255,.15); --stroke-2:rgba(255,255,255,.08);
@@ -55,8 +55,8 @@
 
       --fs-0:clamp(1.05rem,1rem + .35vw,1.18rem);
 
-      --header-h:64px;              /* runtime-updated for drawer offset */
-      --parallax-smooth:.08;        /* calm but fluid */
+      --header-h:64px;
+      --parallax-smooth:.08;
       --tilt-smooth:.12;
     }
     @media (prefers-color-scheme: light){
@@ -98,7 +98,7 @@
     .nav{
       width:var(--container); margin:0 auto;
       display:grid;
-      grid-template-columns:auto minmax(0,1fr) auto;   /* prevents squeeze/overlap */
+      grid-template-columns:auto minmax(0,1fr) auto;
       align-items:center; gap:clamp(12px,2vw,28px);
       padding:12px 0; min-height:var(--header-h);
     }
@@ -135,7 +135,7 @@
 
     @media (max-width:980px){
       .links{ display:none }
-      .btn-nav{ display:none }   /* declutter mobile header */
+      .btn-nav{ display:none }
       .menu-btn{ display:inline-block }
     }
 
@@ -152,7 +152,17 @@
       justify-self:end; width:1px; height:clamp(180px,34vh,360px);
       background:linear-gradient(to bottom,transparent,rgba(255,255,255,.75),transparent); opacity:.8;
     }
-    .hero h1{ font-size:clamp(3rem,4.4vw,5rem); text-shadow:0 6px 26px rgba(0,0,0,.55); letter-spacing:.6px; margin-top:.2em }
+
+    /* NEW: lock the copy in a vertical stack so spacing is real, not transform-dependent */
+    .hero-center{ display:flex; flex-direction:column; align-items:center; gap:clamp(10px,2.2vw,18px) }
+
+    .hero h1{
+      font-size:clamp(3rem,4.4vw,5rem);
+      text-shadow:0 6px 26px rgba(0,0,0,.55);
+      letter-spacing:.6px;
+      margin:0;
+      position:relative; z-index:2; /* always above the eyebrow pill if they get close */
+    }
     .hero p{ color:#eae7dd }
     .hero .eyebrow{
       display:inline-flex; align-items:center; gap:.6rem; padding:8px 12px; border-radius:999px;
@@ -160,19 +170,18 @@
       color:#fff; letter-spacing:.18em; text-transform:uppercase; font-size:.82rem;
       backdrop-filter:blur(6px); text-shadow:0 2px 8px rgba(0,0,0,.65);
     }
-    .cta-row{ margin-top:18px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
+    .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
     .btn{
       appearance:none; border:1px solid #fff; background:rgba(255,255,255,.08); color:#fff;
       font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase; font-size:.9rem;
       padding:12px 18px; border-radius:14px; cursor:pointer; transition:transform .12s ease, background .2s ease, border-color .2s ease;
       backdrop-filter:blur(6px);
     }
-    /* Subtle, classy hover – no glow, no shine */
     .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.9) }
     .btn.primary{ background:var(--accent); border-color:var(--accent) }
     .btn.primary:hover{ background:color-mix(in oklab, var(--accent) 85%, #ffffff 15%) }
 
-    .chips{ margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+    .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
     .chip{ border:1px solid rgba(255,255,255,.5); color:#fff; padding:8px 10px; border-radius:999px; font-size:.78rem; opacity:.95 }
 
     /* sections */
@@ -190,15 +199,10 @@
     .media-inline{ display:flex; gap:14px; flex-wrap:wrap; margin-top:8px }
     .media-inline img{ width:min(100%,520px); border-radius:14px; border:1px solid var(--stroke-2); cursor:pointer }
 
-    /* --- Why Choose Us: equal-height cards --- */
-    .benefits{
-      display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr);
-      align-items:stretch;          /* stretch rows */
-    }
+    /* Equal-height benefits */
+    .benefits{ display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr); align-items:stretch }
     .benefit{ grid-column:span 12; display:grid }
-    .benefit .card{
-      height:100%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:.6rem;
-    }
+    .benefit .card{ height:100%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:.6rem }
     .benefit .icon{
       width:56px; height:56px; margin:2px auto 10px; border-radius:14px;
       background:linear-gradient(135deg,var(--accent),color-mix(in oklab,var(--accent),#fff 18%));
@@ -252,7 +256,7 @@
     [data-parallax]{ will-change:transform; transform:translate3d(var(--tx,0px), calc(var(--py,0px) + var(--ty,0px)), 0) }
     .no-parallax [data-parallax]{ transform:none !important }
 
-    /* ======= ANIMATION PACK (showcase, accessible) ======= */
+    /* ======= Animations ======= */
     .hero::before{
       content:""; position:absolute; inset:-20% -20% auto -20%; height:70%; pointer-events:none;
       background:
@@ -263,17 +267,21 @@
     }
     @keyframes aurora{ 0%{ transform: translateY(-3%) scale(1) } 100%{ transform: translateY(3%) scale(1.06) } }
 
-    @supports (animation-timeline: scroll()) {
-      @scroll-timeline hero-tl { source: selector(#home); orientation: block; scroll-offsets: start 0, end 80%; }
-      .hero h1{ animation: heroScale 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
-      .hero .eyebrow{ animation: heroEyebrow 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
-      .hero .vline{ animation: heroVline 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
-      @keyframes heroScale{ 0%{ transform:translateY(0) scale(1); letter-spacing:.6px; opacity:1 } 100%{ transform:translateY(-6vh) scale(.92); letter-spacing:.2px; opacity:.94 } }
-      @keyframes heroEyebrow{ 0%{ opacity:1; transform:translateY(0) } 100%{ opacity:.85; transform:translateY(-10px) } }
-      @keyframes heroVline{ 0%{ height:clamp(180px,34vh,360px) } 100%{ height:clamp(120px,18vh,220px) } }
+    /* Gate the scroll choreography to roomy viewports and reduce the lift
+       so the H1 never climbs into the eyebrow. */
+    @media (min-width: 960px) and (min-height: 720px){
+      @supports (animation-timeline: scroll()) {
+        @scroll-timeline hero-tl { source: selector(#home); orientation: block; scroll-offsets: start 0, end 80%; }
+        .hero h1{ animation: heroScale 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
+        .hero .eyebrow{ animation: heroEyebrow 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
+        .hero .vline{ animation: heroVline 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
+        @keyframes heroScale{ 0%{ transform:translateY(0) scale(1) } 100%{ transform:translateY(-3vh) scale(.95) } }
+        @keyframes heroEyebrow{ 0%{ transform:translateY(0); opacity:1 } 100%{ transform:translateY(-2.4vh); opacity:.9 } }
+        @keyframes heroVline{ 0%{ height:clamp(180px,34vh,360px) } 100%{ height:clamp(130px,20vh,240px) } }
+      }
     }
 
-    /* Gallery Hover polish */
+    /* Gallery hover polish */
     .gallery > img, .gallery > video{
       transform-origin:center;
       transition:transform 900ms ease, filter 600ms ease, box-shadow 400ms ease;
@@ -284,11 +292,11 @@
       box-shadow:0 12px 40px rgba(0,0,0,.22);
     }
 
-    /* Section rule “draw” */
+    /* Section rule draw */
     .section-header .under{ transform-origin:left center; transform:scaleX(0); opacity:.9 }
     .section-header .under.in{ transform:scaleX(1); transition:transform 900ms cubic-bezier(.22,.61,.36,1) }
 
-    /* Chips micro-float */
+    /* Chip float */
     .chip{ position:relative; animation:bob 6s ease-in-out infinite }
     .chip:nth-child(odd){ animation-duration:7s }
     @keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-3px) } }
@@ -348,7 +356,7 @@
       <div class="hero-scrim"></div>
       <div class="hero-inner" data-parallax data-speed="-0.03" data-tilt="4">
         <div class="vline" aria-hidden="true"></div>
-        <div>
+        <div class="hero-center">
           <div class="eyebrow reveal">A historic seaside retreat in Scarborough</div>
           <h1 class="reveal">Captain’s Cottage</h1>
           <p class="reveal">A lovingly refurbished 19th-century cottage in Scarborough’s Old Town that blends maritime charm with modern comforts.</p>
@@ -670,7 +678,7 @@
       const menuBtn = document.getElementById('menuBtn');
       const drawer = document.getElementById('drawer');
 
-      // Drawer sits directly under header (fixes mobile overlap)
+      // Drawer under header
       const setHeaderHeight = () => {
         const h = header.getBoundingClientRect().height;
         document.documentElement.style.setProperty('--header-h', h + 'px');
@@ -678,7 +686,7 @@
       window.addEventListener('resize', setHeaderHeight, { passive:true });
       setHeaderHeight();
 
-      // Scroll progress + subtle shadow
+      // Scroll progress + header shadow
       const onScroll = () => {
         const y = window.scrollY;
         const doc = document.documentElement.scrollHeight - window.innerHeight || 1;
@@ -745,7 +753,7 @@
       // Weather widget
       (function(d,s,id){ var js,fjs=d.getElementsByTagName(s)[0]; if(!d.getElementById(id)){ js=d.createElement(s); js.id=id; js.src='https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js,fjs);} })(document,'script','weatherwidget-io-js');
 
-      // Parallax with inertial smoothing (calm but high-FPS)
+      // Parallax with inertial smoothing
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!prefersReduced) {
         const nodes = [...document.querySelectorAll('[data-parallax]')].map(el => ({ el, speed: parseFloat(el.dataset.speed) || 0.1, value: 0 }));
