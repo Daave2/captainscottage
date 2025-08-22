@@ -27,7 +27,7 @@
   {"@context":"https://schema.org","@type":"LodgingBusiness","name":"Captain’s Cottage","description":"A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique two-bedroom coastal getaway.","image":"https://captainscottage.org/hero.jpg","url":"https://captainscottage.org/","telephone":"+44 1244 746200","address":{"@type":"PostalAddress","streetAddress":"35 Longwestgate","addressLocality":"Scarborough","addressRegion":"North Yorkshire","postalCode":"YO11 1QB","addressCountry":"UK"},"geo":{"@type":"GeoCoordinates","latitude":"54.2783","longitude":"-0.4040"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"3.9","reviewCount":"6"},"priceRange":"$$"}
   </script>
 
-  <!-- Google Tag (kept from original) -->
+  <!-- Google Tag (kept) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-958624265"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -40,17 +40,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ============== Editorial Theme (Inout-inspired) ============== */
+    /* ============== Editorial Theme ============== */
     :root{
-      --paper:#f7f5f1; --paper-2:#f1eee8;
-      --ink:#171614; --muted:#5a5852;
+      --paper:#0e0e0c; --paper-2:#121210;              /* default to dark for drama */
+      --ink:#f2efe8; --muted:#c7c3b7;
       --accent:#d26a5c; --accent-2:#3f6a87;
-      --stroke:rgba(0,0,0,.12); --stroke-2:rgba(0,0,0,.08);
+      --stroke:rgba(255,255,255,.15); --stroke-2:rgba(255,255,255,.08);
 
       --container:min(1120px,92vw);
       --gutter:clamp(18px,3vw,36px);
-      --radius:14px;
-      --shadow:0 20px 50px rgba(0,0,0,.16);
+      --radius:20px;
+      --shadow:0 20px 60px rgba(0,0,0,.5);
       --blur:12px;
 
       --fs-0:clamp(1.05rem,1rem + .35vw,1.18rem);
@@ -59,11 +59,11 @@
       --parallax-smooth:.08;        /* calm but fluid */
       --tilt-smooth:.12;
     }
-    @media (prefers-color-scheme: dark){
+    @media (prefers-color-scheme: light){
       :root{
-        --paper:#0e0e0c; --paper-2:#121210; --ink:#f2efe8; --muted:#c7c3b7;
-        --stroke:rgba(255,255,255,.15); --stroke-2:rgba(255,255,255,.08);
-        --shadow:0 20px 60px rgba(0,0,0,.5);
+        --paper:#f7f5f1; --paper-2:#f1eee8; --ink:#171614; --muted:#5a5852;
+        --stroke:rgba(0,0,0,.12); --stroke-2:rgba(0,0,0,.08);
+        --shadow:0 20px 50px rgba(0,0,0,.16);
       }
     }
 
@@ -71,7 +71,9 @@
     html{ scroll-behavior:smooth }
     body{
       margin:0;
-      background: linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(255,255,255,.04), transparent 60%) ,
+                  radial-gradient(900px 700px at 80% -15%, rgba(255,255,255,.04), transparent 60%),
+                  linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);
       color:var(--ink);
       font-family:'Lora',Georgia,serif;
       font-size:var(--fs-0);
@@ -113,7 +115,9 @@
     .btn-nav{
       font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase;
       padding:10px 14px; border:1px solid var(--ink); border-radius:12px; background:transparent; cursor:pointer;
+      transition:border-color .2s ease, color .2s ease, background-color .2s ease;
     }
+    .btn-nav:hover{ border-color:color-mix(in oklab,var(--ink) 70%, transparent) }
     .menu-btn{ display:none; border:1px solid var(--stroke); background:transparent; padding:10px 12px; border-radius:12px; cursor:pointer }
     .drawer{
       position:fixed; left:12px; right:12px; top:var(--header-h); z-index:3500;
@@ -145,22 +149,26 @@
     }
     .hero h1{ font-size:clamp(3rem,4.4vw,5rem); text-shadow:0 6px 26px rgba(0,0,0,.55); letter-spacing:.6px }
     .hero p{ color:#eae7dd }
-    /* tagline pill (higher contrast) */
+    .stack{ display:grid; gap:clamp(8px,1.2vw,16px) } /* ensure hero text never overlaps */
+    /* tagline pill (high contrast) */
     .hero .eyebrow{
       display:inline-flex; align-items:center; gap:.6rem; padding:8px 12px; border-radius:999px;
       background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.55);
       color:#fff; letter-spacing:.18em; text-transform:uppercase; font-size:.82rem;
       backdrop-filter:blur(6px); text-shadow:0 2px 8px rgba(0,0,0,.65);
     }
-    .cta-row{ margin-top:18px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
+    .cta-row{ margin-top:8px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
     .btn{
       appearance:none; border:1px solid #fff; background:rgba(255,255,255,.08); color:#fff;
       font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase; font-size:.9rem;
-      padding:12px 18px; border-radius:12px; cursor:pointer; transition:transform .15s ease, background .2s ease, color .2s ease; backdrop-filter:blur(6px);
+      padding:12px 18px; border-radius:16px; cursor:pointer;
+      /* Hover effect simplified (no movement, no glow) */
+      transition:border-color .2s ease, background-color .2s ease, color .2s ease;
     }
-    .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.18) }
+    .btn:hover{ background-color:rgba(255,255,255,.1) }
     .btn.primary{ background:var(--accent); border-color:var(--accent) }
-    .chips{ margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+    .btn.primary:hover{ background:var(--accent) } /* lock color; no animated shine */
+    .chips{ margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
     .chip{ border:1px solid rgba(255,255,255,.5); color:#fff; padding:8px 10px; border-radius:999px; font-size:.78rem; opacity:.95 }
 
     /* sections */
@@ -172,18 +180,35 @@
 
     .grid{ display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr) }
     .card{
-      grid-column:span 12; background:var(--paper); border:1px solid var(--stroke);
-      border-radius:var(--radius); padding:clamp(18px,3.2vw,28px); box-shadow:var(--shadow);
+      grid-column:span 12; background:color-mix(in oklab,var(--paper) 96%, #000 0%);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      padding:clamp(22px,3.2vw,32px);
+      box-shadow:var(--shadow);
     }
     .media-inline{ display:flex; gap:14px; flex-wrap:wrap; margin-top:8px }
     .media-inline img{ width:min(100%,520px); border-radius:12px; border:1px solid var(--stroke-2); cursor:pointer }
 
-    .benefits{ display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr) }
-    .benefit{ grid-column:span 12 }
-    .benefit .card{ text-align:center }
+    /* Why Choose Us — equal-height cards */
+    .benefits{
+      display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr);
+      align-items:stretch; grid-auto-rows:1fr;   /* equal rows */
+    }
+    .benefit{ grid-column:span 12; display:grid }
+    .benefit .card{
+      height:100%; display:flex; flex-direction:column; align-items:center; text-align:center;
+      gap:.6rem; padding-top:clamp(24px,2.5vw,32px);
+    }
     .benefit .icon{
-      width:52px; height:52px; margin:0 auto 8px; border-radius:12px;
+      width:64px; height:64px; border-radius:20px; margin:0 auto 6px;
       background:linear-gradient(135deg,var(--accent),color-mix(in oklab,var(--accent),#fff 18%));
+    }
+    @media (min-width:740px){ .card.span-6{grid-column:span 6} .benefit{grid-column:span 6} }
+    @media (min-width:1024px){
+      .card.span-4{ grid-column:span 4 }
+      .card.span-6{ grid-column:span 6 }
+      .benefit{ grid-column:span 3 }
+      .benefit .card{ min-height:360px }  /* lock consistent height on desktop */
     }
 
     .list{ padding-left:1.2em }
@@ -202,9 +227,8 @@
     .gallery{ column-count:1; column-gap:14px }
     .gallery>*{ break-inside:avoid; margin:0 0 14px; border-radius:12px; border:1px solid var(--stroke-2); cursor:pointer }
     .gallery img,.gallery video{ width:100%; height:auto; display:block }
-
-    @media (min-width:740px){ .card.span-6{ grid-column:span 6 } .benefit{ grid-column:span 6 } .gallery{ column-count:2 } }
-    @media (min-width:1024px){ .card.span-4{ grid-column:span 4 } .card.span-6{ grid-column:span 6 } .benefit{ grid-column:span 3 } .gallery{ column-count:3 } }
+    @media (min-width:740px){ .gallery{ column-count:2 } }
+    @media (min-width:1024px){ .gallery{ column-count:3 } }
 
     /* lightbox */
     .lightbox{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.86); z-index:3000; padding:24px }
@@ -225,7 +249,7 @@
     [data-parallax]{ will-change:transform; transform:translate3d(var(--tx,0px), calc(var(--py,0px) + var(--ty,0px)), 0) }
     .no-parallax [data-parallax]{ transform:none !important }
 
-    /* ======= ANIMATION PACK (showcase-grade, accessible) ======= */
+    /* ======= ANIMATION PACK (minus button shine) ======= */
 
     /* 1) Ambient aurora in hero */
     .hero::before{
@@ -252,40 +276,29 @@
       @keyframes heroVline{ 0%{ height:clamp(180px,34vh,360px) } 100%{ height:clamp(120px,18vh,220px) } }
     }
 
-    /* 3) Button “shine” swipe */
-    .btn.primary{ position:relative; overflow:hidden; isolation:isolate }
-    .btn.primary::after{
-      content:""; position:absolute; top:-20%; bottom:-20%; left:-40%; width:40%;
-      transform: translateX(-120%) rotate(25deg);
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
-      filter: blur(10px); pointer-events:none;
-    }
-    .btn.primary:hover::after{ animation: shine 900ms ease forwards }
-    @keyframes shine{ to{ transform: translateX(260%) rotate(25deg) } }
-
-    /* 4) Gallery Ken Burns on hover */
+    /* 3) Gallery hover polish (kept) */
     .gallery > img, .gallery > video{
       transform-origin:center;
       transition:transform 900ms ease, filter 600ms ease, box-shadow 400ms ease;
     }
     .gallery > img:hover, .gallery > video:hover{
-      transform:scale(1.04) translateY(-2px);
+      transform:scale(1.03) translateY(-1px);
       filter:saturate(1.05) contrast(1.03);
       box-shadow:0 12px 40px rgba(0,0,0,.22);
     }
 
-    /* 5) Section rule “draw” */
+    /* 4) Section rule “draw” */
     .section-header .under{ transform-origin:left center; transform:scaleX(0); opacity:.9 }
     .section-header .under.in{ transform:scaleX(1); transition:transform 900ms cubic-bezier(.22,.61,.36,1) }
 
-    /* 6) Chips micro-float */
+    /* 5) Chips micro-float */
     .chip{ position:relative; animation:bob 6s ease-in-out infinite }
     .chip:nth-child(odd){ animation-duration:7s }
     @keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-3px) } }
 
     /* Motion safety */
     @media (prefers-reduced-motion: reduce){
-      .hero::before, .btn.primary::after, .chip{ animation:none !important }
+      .hero::before, .chip{ animation:none !important }
     }
   </style>
 </head>
@@ -339,7 +352,7 @@
       <div class="hero-scrim"></div>
       <div class="hero-inner" data-parallax data-speed="-0.03" data-tilt="4">
         <div class="vline" aria-hidden="true"></div>
-        <div>
+        <div class="stack">
           <div class="eyebrow reveal">A historic seaside retreat in Scarborough</div>
           <h1 class="reveal">Captain’s Cottage</h1>
           <p class="reveal">A lovingly refurbished 19th-century cottage in Scarborough’s Old Town that blends maritime charm with modern comforts.</p>
@@ -429,10 +442,34 @@
         </div>
       </div>
       <div class="benefits">
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Historic Charm</h3><p>Authentic maritime heritage and period details of a 19th-century cottage.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Modern Comforts</h3><p>From a fully equipped kitchen to fast Wi-Fi and a Smart TV.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Prime Location</h3><p>Steps from Scarborough Castle, the market hall and the harbour.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Guest-Focused</h3><p>Personal touches, meticulous maintenance and a warm welcome.</p></div></div>
+        <div class="benefit reveal">
+          <div class="card">
+            <div class="icon" aria-hidden="true"></div>
+            <h3>Historic Charm</h3>
+            <p>Authentic maritime heritage and period details of a 19th-century cottage.</p>
+          </div>
+        </div>
+        <div class="benefit reveal">
+          <div class="card">
+            <div class="icon" aria-hidden="true"></div>
+            <h3>Modern Comforts</h3>
+            <p>From a fully equipped kitchen to fast Wi-Fi and a Smart TV.</p>
+          </div>
+        </div>
+        <div class="benefit reveal">
+          <div class="card">
+            <div class="icon" aria-hidden="true"></div>
+            <h3>Prime Location</h3>
+            <p>Steps from Scarborough Castle, the market hall and the harbour.</p>
+          </div>
+        </div>
+        <div class="benefit reveal">
+          <div class="card">
+            <div class="icon" aria-hidden="true"></div>
+            <h3>Guest-Focused</h3>
+            <p>Personal touches, meticulous maintenance and a warm welcome.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -674,7 +711,7 @@
         const y = window.scrollY;
         const doc = document.documentElement.scrollHeight - window.innerHeight || 1;
         progress.style.width = Math.min(100, (y / doc) * 100) + '%';
-        header.style.boxShadow = y > 8 ? '0 10px 24px rgba(0,0,0,.08)' : 'none';
+        header.style.boxShadow = y > 8 ? '0 10px 24px rgba(0,0,0,.25)' : 'none';
       };
       window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
 
@@ -699,7 +736,7 @@
       }, { threshold:0.18 });
       reveals.forEach(el => ro.observe(el));
 
-      // Optional: active nav link highlight
+      // Active nav link highlight
       const navLinks = [...document.querySelectorAll('.links .link[href^="#"]')];
       const sections = [...document.querySelectorAll('main section[id]')];
       const io = new IntersectionObserver((entries)=>{
