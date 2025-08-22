@@ -12,7 +12,7 @@
   <!-- Icons -->
   <link rel="icon" href="logo.png" type="image/png">
 
-  <!-- Preloads (safe to remove if desired) -->
+  <!-- Preloads -->
   <link rel="preload" as="image" href="hero.jpg" imagesrcset="hero.jpg" />
   <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap">
 
@@ -77,21 +77,18 @@
   <style>
     /* ============ Design System ============ */
     :root{
-      /* Aurora coastline palette */
-      --bg: #0b1220;                /* deep night blue */
+      --bg: #0b1220;
       --bg-2: #0e162a;
       --surface: rgba(255,255,255,0.06);
       --card: rgba(255,255,255,0.08);
       --stroke: rgba(255,255,255,0.12);
       --text: #e8eefc;
       --muted: #a9b6d3;
-      --accent: #ff6f61;            /* your original coral */
-      --accent-2: #7dd3fc;          /* sea blue highlight */
-      --ok: #34d399;
+      --accent: #ff6f61;
+      --accent-2: #7dd3fc;
       --shadow: 0 10px 40px rgba(0,0,0,.35);
       --glass-blur: 14px;
 
-      /* Fluid type scale */
       --step--1: clamp(.83rem, .80rem + .2vw, .93rem);
       --step-0:  clamp(1rem, .94rem + .6vw, 1.15rem);
       --step-1:  clamp(1.25rem, 1.15rem + .9vw, 1.44rem);
@@ -109,7 +106,7 @@
 
     @media (prefers-color-scheme: light){
       :root{
-        --bg: #fff9f4;             /* nod to your original warm background */
+        --bg: #fff9f4;
         --bg-2: #fff3ea;
         --surface: rgba(11,18,32,.06);
         --card: rgba(11,18,32,.06);
@@ -138,11 +135,10 @@
     a{ color:var(--accent-2); text-underline-offset:3px; }
     a:hover{ color:var(--accent); }
 
-    /* Skip link */
     .skip-link{
       position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
-    .skip-link:focus{ position:fixed; left:18px; top:18px; width:auto; height:auto; background:#000; color:#fff; padding:10px 14px; border-radius:10px; z-index:20000 }
+    .skip-link:focus{ position:fixed; left:18px; top:18px; background:#000; color:#fff; padding:10px 14px; border-radius:10px; z-index:20000 }
 
     /* Scroll progress */
     #scroll-progress{
@@ -188,7 +184,7 @@
     .drawer a{ display:block; padding:12px 10px; border-radius:10px; color:var(--text); font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
     .drawer a:hover{ background:var(--surface); color:var(--accent); }
 
-    /* Hero */
+    /* Hero with Parallax */
     .hero{
       position:relative; min-height: min(86vh, 1000px); display:grid; place-items:center; overflow:hidden;
       border-bottom:1px solid var(--stroke);
@@ -200,14 +196,14 @@
     #hero-video{
       width:100%; height:100%; object-fit:cover; filter: saturate(1.05) contrast(1.05) brightness(.9);
     }
-    .hero::after{
-      /* aurora overlay */
-      content:""; position:absolute; inset:-10% -10% auto -10%; height:70%;
+    .aurora{
+      position:absolute; inset:-10% -10% auto -10%; height:70%;
       background:
         radial-gradient(40% 60% at 20% 40%, rgba(125,211,252,.22), transparent 60%),
         radial-gradient(40% 60% at 80% 30%, rgba(255,111,97,.25), transparent 60%),
         linear-gradient(180deg, rgba(0,0,0,.45), transparent 60%);
       z-index:-1; filter: blur(20px);
+      pointer-events:none;
     }
     .hero-inner{
       width:var(--container); padding: clamp(36px, 5vw, 72px) 0; text-align:center;
@@ -241,9 +237,7 @@
     .btn-ghost{
       color:var(--text); background: var(--surface); border:1px solid var(--stroke);
     }
-    .hero-facts{
-      margin-top: 28px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
-    }
+    .hero-facts{ margin-top: 28px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
     .chip{
       padding:10px 12px; border-radius:999px; background: var(--surface); border:1px solid var(--stroke);
       font-size: var(--step--1); color: var(--muted);
@@ -251,13 +245,8 @@
 
     /* Section wrapper */
     section{ scroll-margin-top: 84px; }
-    .section{
-      width:var(--container); margin:0 auto; padding: var(--section-pad) 0;
-      display:grid; gap:24px;
-    }
-    .section-header{
-      display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap;
-    }
+    .section{ width:var(--container); margin:0 auto; padding: var(--section-pad) 0; display:grid; gap:24px; }
+    .section-header{ display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap; }
     .section h2{
       font-size: var(--step-3);
       background: linear-gradient(90deg, #fff, color-mix(in oklab, #fff 50%, var(--accent-2)));
@@ -266,27 +255,18 @@
     .lead{ font-size: var(--step-0); max-width: 70ch }
 
     /* Cards grid */
-    .grid{
-      display:grid; gap:18px;
-      grid-template-columns: repeat(12, 1fr);
-    }
+    .grid{ display:grid; gap:18px; grid-template-columns: repeat(12, 1fr); }
     .card{
       grid-column: span 12;
-      background: var(--card);
-      border:1px solid var(--stroke);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      padding: clamp(18px, 2.6vw, 26px);
-      overflow:hidden;
+      background: var(--card); border:1px solid var(--stroke); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow); padding: clamp(18px, 2.6vw, 26px); overflow:hidden;
       transform: translateZ(0);
     }
     .card:hover{ outline: 1px solid color-mix(in oklab, var(--accent) 30%, var(--stroke)); }
     .card h3{ font-size: var(--step-1); color: #fff; margin-bottom:.4em }
     .card p{ color: var(--muted) }
 
-    .media-inline{
-      display:flex; gap:14px; flex-wrap:wrap; margin-top: 10px;
-    }
+    .media-inline{ display:flex; gap:14px; flex-wrap:wrap; margin-top: 10px; }
     .media-inline img{
       width: min(100%, 520px); max-width:100%; border-radius:16px; border:1px solid var(--stroke);
       transition: transform .35s ease, box-shadow .35s ease; box-shadow: var(--shadow);
@@ -295,9 +275,7 @@
     .media-inline img:hover{ transform: translateY(-4px) scale(1.02) }
 
     /* Feature benefits */
-    .benefits{
-      display:grid; gap:14px; grid-template-columns: repeat(12, 1fr);
-    }
+    .benefits{ display:grid; gap:14px; grid-template-columns: repeat(12, 1fr); }
     .benefit{ grid-column: span 12; }
     .benefit .card{ height:100%; text-align:center }
     .benefit .icon{
@@ -307,16 +285,11 @@
     }
 
     /* Attractions list */
-    .list{
-      padding-left: 1.2em;
-    }
+    .list{ padding-left: 1.2em; }
     .list li{ margin-bottom:.6em; color:var(--muted) }
 
     /* Gallery (masonry without JS) */
-    .gallery-wrap{
-      column-count: 1;
-      column-gap: 14px;
-    }
+    .gallery-wrap{ column-count: 1; column-gap: 14px; }
     .gallery-wrap > *{
       break-inside: avoid; margin: 0 0 14px; display:block; border-radius:16px; border:1px solid var(--stroke);
       box-shadow: var(--shadow); cursor:pointer;
@@ -335,6 +308,25 @@
       .gallery-wrap{ column-count: 3 }
     }
 
+    /* Parallax Slice banner */
+    .parallax-slice{
+      position:relative; height:56vh; min-height:360px; border-block: 1px solid var(--stroke); overflow:hidden;
+    }
+    .parallax-media{
+      position:absolute; inset:-10%; background-size:cover; background-position:center;
+      filter:saturate(1.05) contrast(1.05) brightness(.9);
+    }
+    .parallax-overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 40%, rgba(0,0,0,.5));
+      pointer-events:none;
+    }
+    .parallax-content{
+      position:relative; z-index:1; width:var(--container); height:100%; margin:0 auto;
+      display:grid; place-items:center; text-align:center;
+    }
+    .parallax-content h2{ color:#fff }
+
     /* Lightbox */
     .lightbox{
       position: fixed; inset:0; display:none; place-items:center;
@@ -350,17 +342,13 @@
     }
 
     /* Footer CTA bar */
-    .footer-cta{
-      margin-top: var(--section-pad);
-      border-top:1px solid var(--stroke);
+    .footer-cta{ margin-top: var(--section-pad); border-top:1px solid var(--stroke);
       background: linear-gradient(180deg, color-mix(in oklab, var(--card) 70%, transparent), transparent);
       padding: 44px 0;
     }
     .cta-inner{ width:var(--container); margin:0 auto; text-align:center }
     .cta-inner h2{ font-size: var(--step-3); margin-bottom:.6em }
-    .footer{
-      border-top:1px solid var(--stroke); padding:22px 0; text-align:center; color:var(--muted);
-    }
+    .footer{ border-top:1px solid var(--stroke); padding:22px 0; text-align:center; color:var(--muted); }
 
     /* Back to top */
     #back-to-top{
@@ -376,7 +364,13 @@
     .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease }
     .reveal.in{ opacity:1; transform: translateY(0) }
 
-    /* Reduced motion */
+    /* Parallax utility: elements read CSS vars set in JS */
+    [data-parallax]{
+      will-change: transform;
+      transform: translate3d(var(--tx, 0px), calc(var(--py, 0px) + var(--ty, 0px)), 0);
+    }
+    .no-parallax [data-parallax]{ transform: none !important; }
+
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important; }
       .media-inline img:hover{ transform:none }
@@ -430,15 +424,16 @@
   </header>
 
   <main id="main">
-    <!-- Hero -->
+    <!-- Hero with Parallax layers -->
     <section class="hero" id="home" aria-label="Hero">
-      <div class="video-wrap" aria-hidden="true">
+      <div class="video-wrap" data-parallax data-speed="0.12">
         <video id="hero-video" autoplay muted playsinline loop preload="auto" poster="hero.jpg">
           <source src="hero.mp4" type="video/mp4">
           <img src="hero.jpg" alt="" />
         </video>
       </div>
-      <div class="hero-inner">
+      <div class="aurora" data-parallax data-speed="0.25" data-tilt="12" aria-hidden="true"></div>
+      <div class="hero-inner" data-parallax data-speed="-0.05" data-tilt="6">
         <div class="eyebrow reveal"><span class="brandmark" aria-hidden="true"></span> A historic seaside retreat in Scarborough</div>
         <h1 class="reveal">Captain’s Cottage</h1>
         <p class="reveal">A lovingly refurbished 19th-century cottage in Scarborough’s Old Town that blends maritime charm with modern comforts.</p>
@@ -483,6 +478,18 @@
             <img src="room2.jpg" alt="Elegant twin bedroom with coastal views in Scarborough" class="clickable-media">
           </div>
         </aside>
+      </div>
+    </section>
+
+    <!-- Parallax Slice Banner -->
+    <section class="parallax-slice" aria-label="Seaside ambience">
+      <div class="parallax-media" style="background-image:url('hero.jpg')" data-parallax data-speed="0.18"></div>
+      <div class="parallax-overlay" aria-hidden="true"></div>
+      <div class="parallax-content">
+        <div>
+          <div class="eyebrow" style="margin-bottom:10px">Old Town • Harbour • Castle</div>
+          <h2>Steps from Scarborough Castle</h2>
+        </div>
       </div>
     </section>
 
@@ -745,7 +752,6 @@
 
   <!-- Scripts -->
   <script>
-    // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
       const progress = document.getElementById('scroll-progress');
       const backToTop = document.getElementById('back-to-top');
@@ -754,7 +760,11 @@
       const drawer = document.getElementById('drawer');
       const logo = document.getElementById('logo');
 
-      // Hydrate desktop links (no layout shift for SSR)
+      // Respect reduced motion for parallax
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) document.documentElement.classList.add('no-parallax');
+
+      // Hydrate desktop links
       linksContainer.hidden = false;
 
       // Mobile drawer
@@ -768,12 +778,8 @@
         menuBtn.setAttribute('aria-expanded', String(isOpen));
         document.body.classList.toggle('menu-open', isOpen);
       });
-      drawer.addEventListener('click', e => {
-        if(e.target.tagName === 'A') closeDrawer();
-      });
-      document.addEventListener('keydown', e => {
-        if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
-      });
+      drawer.addEventListener('click', e => { if(e.target.tagName === 'A') closeDrawer(); });
+      document.addEventListener('keydown', e => { if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
 
       // Logo spin
       logo.addEventListener('click', () => {
@@ -786,9 +792,8 @@
       const onScroll = () => {
         const scrollY = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const percent = Math.max(0, Math.min(100, (scrollY / docHeight) * 100));
+        const percent = Math.max(0, Math.min(100, (scrollY / (docHeight || 1)) * 100));
         progress.style.width = percent + '%';
-
         if (scrollY > 400) backToTop.classList.add('show');
         else backToTop.classList.remove('show');
       };
@@ -845,9 +850,7 @@
       };
 
       const clickables = document.querySelectorAll('.clickable-media, .gallery-wrap > img, .gallery-wrap > video, .media-inline img');
-      clickables.forEach(el => {
-        el.addEventListener('click', ()=> openLightbox(el));
-      });
+      clickables.forEach(el => { el.addEventListener('click', ()=> openLightbox(el)); });
 
       const closeLightbox = () => {
         lightbox.classList.remove('open');
@@ -857,7 +860,7 @@
       lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
       document.addEventListener('keydown', e => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
 
-      // Weather widget loader (kept from your original)
+      // Weather widget loader
       (function(d,s,id){
         var js,fjs=d.getElementsByTagName(s)[0];
         if(!d.getElementById(id)){
@@ -866,6 +869,59 @@
           fjs.parentNode.insertBefore(js,fjs);
         }
       }(document,'script','weatherwidget-io-js'));
+
+      // =======================
+      // Parallax Engine (rAF)
+      // =======================
+      if (!prefersReduced) {
+        const parallaxNodes = [...document.querySelectorAll('[data-parallax]')].map(el => ({
+          el,
+          speed: parseFloat(el.getAttribute('data-speed')) || 0.15
+        }));
+
+        const updateParallax = () => {
+          const viewH = window.innerHeight;
+          parallaxNodes.forEach(({el, speed}) => {
+            const rect = el.getBoundingClientRect();
+            // Distance from viewport center
+            const offset = (rect.top + rect.height/2) - (viewH/2);
+            // Translate opposite to scroll, scaled by speed
+            const translate = (-offset) * speed;
+            el.style.setProperty('--py', translate.toFixed(2) + 'px');
+          });
+          raf = requestAnimationFrame(updateParallax);
+        };
+        let raf = requestAnimationFrame(updateParallax);
+
+        // Subtle pointer tilt on hero layers (desktop only)
+        const hero = document.querySelector('.hero');
+        const tiltLayers = [...document.querySelectorAll('[data-tilt]')].map(el => ({
+          el,
+          mult: parseFloat(el.getAttribute('data-tilt')) || 8
+        }));
+
+        const applyTilt = (cx, cy) => {
+          // cx, cy range ~[-.5, .5]
+          tiltLayers.forEach(({el, mult})=>{
+            el.style.setProperty('--tx', (-cx * mult).toFixed(1) + 'px');
+            el.style.setProperty('--ty', (-cy * mult).toFixed(1) + 'px');
+          });
+        };
+
+        let throttle = false;
+        hero && hero.addEventListener('pointermove', (e)=>{
+          if(throttle) return;
+          throttle = true;
+          requestAnimationFrame(()=>{
+            const r = hero.getBoundingClientRect();
+            const cx = (e.clientX - r.left)/r.width - .5;
+            const cy = (e.clientY - r.top)/r.height - .5;
+            applyTilt(cx, cy);
+            throttle = false;
+          });
+        });
+        hero && hero.addEventListener('pointerleave', ()=> applyTilt(0,0));
+      }
     });
   </script>
 
