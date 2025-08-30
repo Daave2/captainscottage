@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your New Airbnb Booking System — Interactive Guide</title>
+  <meta name="description" content="A quick, phone-friendly guide for adding, viewing, and managing Airbnb bookings in Google Forms & Sheets." />
+  <style>
+    :root{
+      --bg: #0b0c0f;
+      --paper:#ffffff;
+      --ink:#1a1f2b;
+      --muted:#5b6478;
+      --brand:#2563eb;
+      --brand-ink:#0b3aa3;
+      --ring: rgba(37,99,235,.25);
+      --ok:#16a34a;
+      --warn:#eab308;
+      --bad:#ef4444;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(3,10,30,.08);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0c10;
+        --paper:#11141a;
+        --ink:#ecf0f8;
+        --muted:#9aa3b2;
+        --brand:#60a5fa;
+        --brand-ink:#1e3a8a;
+        --ring: rgba(96,165,250,.35);
+        --shadow: 0 10px 30px rgba(0,0,0,.35);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg, var(--bg), #0e1117);
+      color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{max-width:1000px; margin:auto; padding:24px; display:grid; gap:18px}
+    header.hero{
+      background:var(--paper); border-radius:var(--radius);
+      padding:28px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+    }
+    header.hero h1{margin:0 0 8px; font-size: clamp(22px, 3.2vw, 34px);}
+    header.hero p{margin:0; color:var(--muted)}
+    .actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:16px}
+    .btn{
+      appearance:none; border:none; border-radius:12px; padding:12px 16px;
+      background:var(--brand); color:white; font-weight:600; cursor:pointer;
+      display:inline-flex; gap:10px; align-items:center; box-shadow:var(--shadow);
+    }
+    .btn.secondary{background:#e6ecff; color:var(--brand-ink)}
+    .btn.ghost{background:transparent; color:var(--brand); border:1px solid var(--brand)}
+    .btn:focus-visible{outline:3px solid var(--ring); outline-offset:2px}
+
+    .card{
+      background:var(--paper); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:22px; display:grid; gap:14px;
+    }
+    .grid{display:grid; gap:14px}
+    @media(min-width:880px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
+
+    .kicker{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+    h2{margin:0; font-size: clamp(18px, 2.4vw, 24px);}
+    h3{margin:0; font-size: clamp(16px, 2vw, 20px);}
+    p{margin:0}
+    ul{margin:0 0 0 1.1em}
+    li{margin:.25em 0}
+
+    .tabs{display:flex; gap:8px; flex-wrap:wrap}
+    .tab{padding:10px 12px; border-radius:10px; border:1px solid #d6dff7; color:var(--brand-ink); background:#eef3ff; cursor:pointer}
+    .tab[aria-selected="true"]{background:var(--brand); color:white; border-color:var(--brand)}
+    .tabpanel{display:none}
+    .tabpanel.active{display:grid; gap:10px}
+
+    details{border:1px solid #e5e7eb20; border-radius:12px; background:linear-gradient(180deg,#ffffff06,transparent); padding:10px}
+    details>summary{cursor:pointer; list-style:none; font-weight:700; display:flex; align-items:center; gap:10px}
+    details>summary::-webkit-details-marker{display:none}
+    details .content{padding:10px 4px 6px 4px}
+
+    .linkrow{display:flex; gap:8px; flex-wrap:wrap}
+    .input-like{
+      border:1px solid #dbe2f6; background:#f7f9ff; color:#26324d;
+      padding:10px 12px; border-radius:10px; min-width:260px; max-width:100%;
+      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+
+    .flex{display:flex; align-items:center; gap:10px}
+    .spacer{flex:1}
+
+    .illus{
+      width:100%; max-width:520px; margin:auto; display:block;
+      border-radius:14px; border:1px solid #e5e7eb35; background:#f7fafc10;
+    }
+    .badge{display:inline-grid; place-items:center; width:24px; height:24px; border-radius:999px; background:var(--brand); color:white; font-weight:700}
+
+    footer{color:var(--muted); text-align:center; padding:24px 0}
+    .note{color:var(--muted)}
+    .pill{padding:2px 8px; border-radius:999px; background:#f1f5ff; color:#24427a; font-size:12px}
+
+    .toolbar{display:flex; gap:8px; flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Your New Airbnb Booking System: Interactive Guide</h1>
+      <p>Fast, phone-friendly instructions for adding bookings, viewing your calendar, editing/cancelling, statements, and notifications.</p>
+
+      <div class="actions">
+        <button class="btn" id="openFormBtn" title="Open New Booking form">📝 Open New Booking Form</button>
+        <button class="btn secondary" id="openSheetBtn" title="Open the spreadsheet">📅 Open Booking Spreadsheet</button>
+        <button class="btn ghost" id="printBtn" title="Print or save as PDF">🖨️ Print / Save PDF</button>
+      </div>
+
+      <div class="toolbar" style="margin-top:10px">
+        <div class="input-like" id="formUrlBox" title="New Booking Form URL"></div>
+        <button class="btn ghost" id="copyForm">Copy form link</button>
+
+        <div class="input-like" id="sheetUrlBox" title="Spreadsheet URL"></div>
+        <button class="btn ghost" id="copySheet">Copy sheet link</button>
+      </div>
+    </header>
+
+    <!-- Add to Home Screen -->
+    <section class="card grid cols-2">
+      <div class="grid">
+        <span class="kicker">Getting started</span>
+        <h2>Add the “New Booking” form to your phone’s home screen</h2>
+        <div class="tabs" role="tablist" aria-label="Platforms">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="tab-iphone" id="tab-iphone-btn">iPhone</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-android" id="tab-android-btn">Android</button>
+        </div>
+
+        <div id="tab-iphone" class="tabpanel active" role="tabpanel" aria-labelledby="tab-iphone-btn">
+          <ol style="margin-left:1.25em">
+            <li>Open the <strong>New Booking</strong> link in <strong>Safari</strong>.</li>
+            <li>Tap the <strong>Share</strong> icon (square with an up arrow).</li>
+            <li>Scroll and tap <strong>Add to Home Screen</strong>.</li>
+            <li>Name it <em>New Booking</em> and tap <strong>Add</strong>.</li>
+          </ol>
+          <!-- Minimal inline SVG “share sheet” illustration -->
+          <svg class="illus" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" aria-label="iPhone Add to Home Screen illustration">
+            <defs>
+              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+                <stop stop-color="#f0f4ff" offset="0"/>
+                <stop stop-color="#e8efff" offset="1"/>
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" rx="18" fill="url(#g)"/>
+            <rect x="40" y="40" width="560" height="280" rx="18" fill="#fff" stroke="#d8e0ff"/>
+            <rect x="70" y="70" width="200" height="36" rx="8" fill="#eef3ff" stroke="#d8e0ff"/>
+            <rect x="70" y="120" width="500" height="48" rx="10" fill="#2563eb" opacity=".12" stroke="#bcd2ff"/>
+            <g transform="translate(80,130)">
+              <rect width="230" height="28" rx="6" fill="#2563eb" />
+              <text x="12" y="19" font-family="system-ui,Segoe UI,Roboto" font-size="16" fill="#fff">Add to Home Screen</text>
+            </g>
+            <path d="M 330 210 q 40 -30 90 -40" stroke="#2563eb" stroke-width="6" fill="none" marker-end="url(#arrow)"/>
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <div id="tab-android" class="tabpanel" role="tabpanel" aria-labelledby="tab-android-btn">
+          <ol style="margin-left:1.25em">
+            <li>Open the <strong>New Booking</strong> link in <strong>Chrome</strong>.</li>
+            <li>Tap the <strong>⋮</strong> menu in the top-right.</li>
+            <li>Tap <strong>Add to Home screen</strong>.</li>
+            <li>Name it <em>New Booking</em> and tap <strong>Add</strong>.</li>
+          </ol>
+          <!-- Minimal inline SVG “Android add to home” style illustration -->
+          <svg class="illus" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" aria-label="Android Add to Home Screen illustration">
+            <rect width="100%" height="100%" rx="18" fill="#eef6ff"/>
+            <rect x="40" y="40" width="560" height="280" rx="18" fill="#fff" stroke="#d8e0ff"/>
+            <circle cx="560" cy="60" r="4" fill="#3b82f6"/>
+            <circle cx="572" cy="60" r="4" fill="#3b82f6"/>
+            <circle cx="584" cy="60" r="4" fill="#3b82f6"/>
+            <rect x="70" y="120" width="500" height="48" rx="10" fill="#22c55e" opacity=".12" stroke="#b8f1cf"/>
+            <g transform="translate(80,130)">
+              <rect width="250" height="28" rx="6" fill="#22c55e"/>
+              <text x="12" y="19" font-family="system-ui,Segoe UI,Roboto" font-size="16" fill="#06240f">Add to Home screen</text>
+            </g>
+            <path d="M 320 210 q 40 -30 88 -40" stroke="#22c55e" stroke-width="6" fill="none" marker-end="url(#arrow2)"/>
+            <defs>
+              <marker id="arrow2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#22c55e"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Simple calendar illustration -->
+      <div class="grid" aria-hidden="true">
+        <svg class="illus" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="600" height="310" rx="16" fill="#fff" stroke="#d8e0ff"/>
+          <rect x="20" y="30" width="600" height="70" rx="16 16 0 0" fill="#2563eb" opacity=".12"/>
+          <g transform="translate(40,120)" fill="none" stroke="#dfe6ff">
+            <!-- grid -->
+            <script type="application/ecmascript"><![CDATA[
+              // draw 6x5 grid via injected DOM - left in SVG for clarity
+            ]]></script>
+          </g>
+          <!-- Colored blocks for “booked” look -->
+          <g>
+            <rect x="60" y="140" width="70" height="42" rx="6" fill="#2563eb" opacity=".2"/>
+            <rect x="140" y="140" width="70" height="42" rx="6" fill="#22c55e" opacity=".2"/>
+            <rect x="300" y="224" width="70" height="42" rx="6" fill="#f59e0b" opacity=".25"/>
+            <rect x="380" y="182" width="70" height="42" rx="6" fill="#ef4444" opacity=".22"/>
+          </g>
+        </svg>
+        <p class="note">Once the icon is on your home screen, adding bookings becomes a two-tap habit.</p>
+      </div>
+    </section>
+
+    <!-- Main tasks -->
+    <section class="card">
+      <span class="kicker">How to use the system</span>
+      <h2>The 4 main tasks</h2>
+
+      <details open>
+        <summary><span class="badge">1</span> Add a New Booking</summary>
+        <div class="content">
+          <ul>
+            <li>Tap the <strong>New Booking</strong> icon on your phone’s home screen.</li>
+            <li>Fill the four fields: <em>Guest Name</em>, <em>Check-in Date</em>, <em>Check-out Date</em>, <em>Payout Price</em>.</li>
+            <li>Tap <strong>Submit</strong>. Your calendar updates automatically.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary><span class="badge">2</span> View your Calendar</summary>
+        <div class="content">
+          <ul>
+            <li>Open the Google Sheets app.</li>
+            <li>Open your booking spreadsheet (link above).</li>
+            <li>Tap a calendar tab (e.g. <em>2025 Jan to June</em>) to see bookings visually.</li>
+            <li>The calendar is <strong>read-only</strong>, so you can’t break anything accidentally.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary><span class="badge">3</span> Edit or Cancel a Booking</summary>
+        <div class="content">
+          <ul>
+            <li>Go to the <strong>Bookings Master</strong> tab (your master list of all bookings).</li>
+            <li>To find a booking: tap the <strong>⋮</strong> menu → <strong>Find and replace</strong> → type the guest’s name.</li>
+            <li><strong>Edit</strong>: tap the cell you need (name, date, price) and type the correction.</li>
+            <li><strong>Cancel</strong>: change the <strong>Status</strong> cell from <em>Confirmed</em> to <em>Cancelled</em>. It disappears from the calendar automatically.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary><span class="badge">4</span> View your Income Statements</summary>
+        <div class="content">
+          <ul>
+            <li>Open the <strong>Statements</strong> tab.</li>
+            <li>Pick a <strong>Year</strong> and <strong>Month</strong> from the dropdowns.</li>
+            <li>The totals and booking list refresh instantly, with a yearly summary on the right.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Settings & golden rule -->
+    <section class="grid cols-2">
+      <div class="card">
+        <span class="kicker">Notifications</span>
+        <h3>Change notification emails</h3>
+        <ul>
+          <li>Open the <strong>Settings</strong> tab in your spreadsheet.</li>
+          <li>Update the email address in the relevant cell — the system uses it automatically.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="kicker">Golden rule</span>
+        <h3>Keep it simple</h3>
+        <ul>
+          <li>To <strong>ADD</strong> a booking → always use the <em>Form</em> (the home-screen icon).</li>
+          <li>To <strong>EDIT or CANCEL</strong> → use the <em>Bookings Master</em> tab.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>Tip: use the <span class="pill">Print / Save PDF</span> button to export this guide for offline use.</p>
+    </footer>
+  </div>
+
+  <script>
+    // === Customize your links here ===
+    const FORM_URL  = "https://docs.google.com/forms/d/e/1FAIpQLScXZAVXmGCFramrhe909mu2s8HswbydrXoanYy2_MG9wJm2oA/viewform";
+    const SHEET_URL = "https://docs.google.com/spreadsheets/d/1MNmcKiVRMfCZM-01n0CZ5h3vLiVXdLvexFSGOuxqxPI/edit";
+
+    // Populate link boxes
+    document.getElementById("formUrlBox").textContent  = FORM_URL;
+    document.getElementById("sheetUrlBox").textContent = SHEET_URL;
+
+    // Open buttons
+    document.getElementById("openFormBtn").addEventListener("click", () => window.open(FORM_URL, "_blank", "noopener"));
+    document.getElementById("openSheetBtn").addEventListener("click", () => window.open(SHEET_URL, "_blank", "noopener"));
+
+    // Copy buttons
+    async function copy(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Link copied to clipboard ✅");
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+        alert("Link copied to clipboard ✅");
+      }
+    }
+    document.getElementById("copyForm").addEventListener("click", () => copy(FORM_URL));
+    document.getElementById("copySheet").addEventListener("click", () => copy(SHEET_URL));
+
+    // Print
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+    // Tabs (iPhone / Android)
+    const tabButtons = [
+      document.getElementById("tab-iphone-btn"),
+      document.getElementById("tab-android-btn")
+    ];
+    const panels = [
+      document.getElementById("tab-iphone"),
+      document.getElementById("tab-android")
+    ];
+    tabButtons.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach(b => b.setAttribute("aria-selected","false"));
+        panels.forEach(p => p.classList.remove("active"));
+        btn.setAttribute("aria-selected","true");
+        panels[i].classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
