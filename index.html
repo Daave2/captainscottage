@@ -1,804 +1,1779 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <!-- Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Charming Seaside Cottage in Scarborough | Captain’s Cottage</title>
-  <meta name="description" content="Stay at Captain’s Cottage, a lovingly refurbished 19th-century mid-terrace cottage in Scarborough’s Old Town. With two bedrooms, modern amenities and a garden, it blends maritime heritage with contemporary comfort.">
+  <title>Captain's Cottage | Charming Seaside Retreat in Scarborough</title>
+  <meta name="description"
+    content="Book Captain's Cottage, a beautifully refurbished 19th-century cottage in Scarborough's Old Town. 2 bedrooms, garden, pet-friendly. Rated 9.0/10 on Booking.com.">
   <link rel="canonical" href="https://captainscottage.org/">
-  <meta name="theme-color" content="#0e0e0c" />
+  <meta name="theme-color" content="#1a365d" />
   <link rel="icon" href="logo.png" type="image/png" />
 
   <!-- Social -->
-  <meta property="og:title" content="Charming Seaside Cottage in Scarborough | Captain’s Cottage">
-  <meta property="og:description" content="Experience our historic seaside retreat in Scarborough, blending maritime charm with modern comforts.">
+  <meta property="og:title" content="Captain's Cottage | Scarborough Seaside Retreat">
+  <meta property="og:description"
+    content="A charming 19th-century cottage in Scarborough's Old Town. 2 bedrooms, garden, pet-friendly. Rated 9.0/10.">
   <meta property="og:url" content="https://captainscottage.org/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://captainscottage.org/hero.jpg">
-  <meta property="og:site_name" content="Captain’s Cottage">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Charming Seaside Cottage in Scarborough | Captain’s Cottage">
-  <meta name="twitter:description" content="Experience our historic seaside retreat in Scarborough, blending maritime charm with modern comforts.">
-  <meta name="twitter:image" content="https://captainscottage.org/hero.jpg">
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"LodgingBusiness","name":"Captain’s Cottage","description":"A charming, historic mid-terrace cottage in Scarborough that fuses 19th-century maritime heritage with modern comforts. Recently refurbished, it offers a unique two-bedroom coastal getaway.","image":"https://captainscottage.org/hero.jpg","url":"https://captainscottage.org/","telephone":"+44 1244 746200","address":{"@type":"PostalAddress","streetAddress":"35 Longwestgate","addressLocality":"Scarborough","addressRegion":"North Yorkshire","postalCode":"YO11 1QB","addressCountry":"UK"},"geo":{"@type":"GeoCoordinates","latitude":"54.2783","longitude":"-0.4040"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"3.9","reviewCount":"6"},"priceRange":"$$"}
-  </script>
-
-  <!-- Google Tag (original) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-958624265"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-958624265');
+  {"@context":"https://schema.org","@type":"LodgingBusiness","name":"Captain's Cottage","description":"A beautifully refurbished 19th-century cottage in Scarborough's Old Town. 2 bedrooms, pet-friendly, with garden and modern amenities.","image":"https://captainscottage.org/hero.jpg","url":"https://captainscottage.org/","address":{"@type":"PostalAddress","streetAddress":"35 Longwestgate","addressLocality":"Scarborough","addressRegion":"North Yorkshire","postalCode":"YO11 1QB","addressCountry":"UK"},"geo":{"@type":"GeoCoordinates","latitude":"54.2783","longitude":"-0.4040"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"9.0","bestRating":"10","reviewCount":"36"}}
   </script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Leaflet CSS for Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
-    /* ============== Editorial Theme ============== */
-    :root{
-      --paper:#0e0e0c; --paper-2:#121210;
-      --ink:#f2efe8; --muted:#c7c3b7;
-      --accent:#d26a5c; --accent-2:#3f6a87;
-      --stroke:rgba(255,255,255,.15); --stroke-2:rgba(255,255,255,.08);
+    /* ============== CSS Custom Properties ============== */
+    :root {
+      --navy: #1a365d;
+      --navy-light: #2c5282;
+      --sand: #f7f5f1;
+      --sand-dark: #e8e4dc;
+      --ocean: #0ea5e9;
+      --coral: #f97316;
+      --white: #ffffff;
+      --black: #0f172a;
+      --gray-600: #475569;
+      --gray-400: #94a3b8;
 
-      --container:min(1120px,92vw);
-      --gutter:clamp(18px,3vw,36px);
-      --radius:18px;
-      --shadow:0 22px 60px rgba(0,0,0,.5);
-      --blur:12px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-      --fs-0:clamp(1.05rem,1rem + .35vw,1.18rem);
-
-      --header-h:64px;
-      --parallax-smooth:.08;
-      --tilt-smooth:.12;
+      --container: min(1200px, 90vw);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --paper:#f7f5f1; --paper-2:#f1eee8; --ink:#171614; --muted:#5a5852;
-        --stroke:rgba(0,0,0,.12); --stroke-2:rgba(0,0,0,.08);
-        --shadow:0 20px 50px rgba(0,0,0,.16);
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --sand: #1e293b;
+        --sand-dark: #0f172a;
+        --white: #1e293b;
+        --black: #f1f5f9;
+        --gray-600: #cbd5e1;
+        --gray-400: #64748b;
       }
     }
 
-    *,*::before,*::after{ box-sizing:border-box }
-    html{ scroll-behavior:smooth }
-    body{
-      margin:0;
-      background: radial-gradient(1200px 600px at 50% -200px, rgba(255,255,255,.06), transparent 60%) , linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);
-      color:var(--ink);
-      font-family:'Lora',Georgia,serif;
-      font-size:var(--fs-0);
-      line-height:1.6;
-      text-rendering:optimizeLegibility;
-      -webkit-font-smoothing:antialiased;
-    }
-    h1,h2,h3{ font-family:'Cormorant SC',serif; line-height:1.05; margin:0 0 .5em }
-    a{ color:inherit; text-decoration-thickness:1px; text-underline-offset:3px }
-
-    /* progress */
-    #scroll-progress{
-      position:fixed; left:0; top:0; height:2px; width:0%;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2)); z-index:4000;
+    /* ============== Reset & Base ============== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* header / nav */
-    header{
-      position:sticky; top:0; z-index:3000;
-      background:color-mix(in oklab,var(--paper) 85%,transparent);
-      backdrop-filter:blur(var(--blur));
-      border-bottom:1px solid var(--stroke);
-    }
-    .nav{
-      width:var(--container); margin:0 auto;
-      display:grid;
-      grid-template-columns:auto minmax(0,1fr) auto;
-      align-items:center; gap:clamp(12px,2vw,28px);
-      padding:12px 0; min-height:var(--header-h);
-    }
-    .brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; white-space:nowrap }
-    .brand img{ height:40px; width:40px; border-radius:10px }
-    .brand span{ font-family:'Cormorant SC',serif; font-size:1.25rem; letter-spacing:.06em }
-
-    .links{
-      display:flex; gap:clamp(10px,2vw,24px); align-items:center;
-      flex-wrap:nowrap; overflow:hidden; white-space:nowrap;
-    }
-    .link{
-      font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase;
-      font-size:.82rem; line-height:1.2; padding:6px 2px; border-bottom:1px solid transparent;
-    }
-    .link:hover, .link[aria-current="true"]{ border-color:var(--accent) }
-
-    .btn-nav{
-      font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase;
-      padding:10px 14px; border:1px solid currentColor; border-radius:12px; background:transparent; cursor:pointer;
-      transition: background .2s ease, transform .12s ease;
-    }
-    .btn-nav:hover{ background:color-mix(in oklab, currentColor 10%, transparent); transform: translateY(-1px) }
-
-    .menu-btn{ display:none; border:1px solid var(--stroke); background:transparent; padding:10px 12px; border-radius:12px; cursor:pointer }
-    .drawer{
-      position:fixed; left:12px; right:12px; top:var(--header-h); z-index:3500;
-      background:var(--paper); border:1px solid var(--stroke); border-radius:14px; box-shadow:var(--shadow);
-      display:none; padding:8px;
-    }
-    .drawer.open{ display:block }
-    .drawer a{ display:block; padding:12px; border-radius:8px }
-    .drawer a:hover{ background:color-mix(in oklab,var(--paper-2) 70%,transparent) }
-
-    @media (max-width:980px){
-      .links{ display:none }
-      .btn-nav{ display:none }
-      .menu-btn{ display:inline-block }
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* hero */
-    .hero{ position:relative; min-height:min(86vh,1000px); display:grid; place-items:center; overflow:hidden; border-bottom:1px solid var(--stroke) }
-    .video-wrap{ position:absolute; inset:0; z-index:-2; overflow:hidden }
-    #hero-video{ width:100%; height:100%; object-fit:cover; filter:contrast(1.05) saturate(1.05) brightness(.92) }
-    .hero-scrim{ position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(0,0,0,.52),rgba(0,0,0,.28) 40%,rgba(0,0,0,.55)) }
-    .hero-inner{
-      width:var(--container); padding:clamp(36px,6vw,80px) 0;
-      display:grid; grid-template-columns:1fr minmax(0,780px) 1fr; align-items:center; color:#fff; text-align:center; gap:var(--gutter);
-    }
-    .vline{
-      justify-self:end; width:1px; height:clamp(180px,34vh,360px);
-      background:linear-gradient(to bottom,transparent,rgba(255,255,255,.75),transparent); opacity:.8;
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--black);
+      background: var(--sand);
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* NEW: lock the copy in a vertical stack so spacing is real, not transform-dependent */
-    .hero-center{ display:flex; flex-direction:column; align-items:center; gap:clamp(10px,2.2vw,18px) }
-
-    .hero h1{
-      font-size:clamp(3rem,4.4vw,5rem);
-      text-shadow:0 6px 26px rgba(0,0,0,.55);
-      letter-spacing:.6px;
-      margin:0;
-      position:relative; z-index:2; /* always above the eyebrow pill if they get close */
-    }
-    .hero p{ color:#eae7dd }
-    .hero .eyebrow{
-      display:inline-flex; align-items:center; gap:.6rem; padding:8px 12px; border-radius:999px;
-      background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.55);
-      color:#fff; letter-spacing:.18em; text-transform:uppercase; font-size:.82rem;
-      backdrop-filter:blur(6px); text-shadow:0 2px 8px rgba(0,0,0,.65);
-    }
-    .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
-    .btn{
-      appearance:none; border:1px solid #fff; background:rgba(255,255,255,.08); color:#fff;
-      font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase; font-size:.9rem;
-      padding:12px 18px; border-radius:14px; cursor:pointer; transition:transform .12s ease, background .2s ease, border-color .2s ease;
-      backdrop-filter:blur(6px);
-    }
-    .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.9) }
-    .btn.primary{ background:var(--accent); border-color:var(--accent) }
-    .btn.primary:hover{ background:color-mix(in oklab, var(--accent) 85%, #ffffff 15%) }
-
-    .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
-    .chip{ border:1px solid rgba(255,255,255,.5); color:#fff; padding:8px 10px; border-radius:999px; font-size:.78rem; opacity:.95 }
-
-    /* sections */
-    section{ scroll-margin-top:84px }
-    .section{ width:var(--container); margin:0 auto; padding:clamp(48px,6vw,90px) 0; display:grid; gap:clamp(18px,3vw,28px) }
-    .section-header{ display:grid; grid-template-columns:1fr auto; align-items:end; gap:var(--gutter) }
-    .eyebrow{ font-family:'Cormorant SC',serif }
-    .under{ height:1px; background:var(--stroke); width:100% }
-
-    .grid{ display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr) }
-    .card{
-      grid-column:span 12; background:var(--paper); border:1px solid var(--stroke);
-      border-radius:var(--radius); padding:clamp(18px,3.2vw,28px); box-shadow:var(--shadow);
-    }
-    .media-inline{ display:flex; gap:14px; flex-wrap:wrap; margin-top:8px }
-    .media-inline img{ width:min(100%,520px); border-radius:14px; border:1px solid var(--stroke-2); cursor:pointer }
-
-    /* Equal-height benefits */
-    .benefits{ display:grid; gap:var(--gutter); grid-template-columns:repeat(12,1fr); align-items:stretch }
-    .benefit{ grid-column:span 12; display:grid }
-    .benefit .card{ height:100%; display:flex; flex-direction:column; align-items:center; text-align:center; gap:.6rem }
-    .benefit .icon{
-      width:56px; height:56px; margin:2px auto 10px; border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),color-mix(in oklab,var(--accent),#fff 18%));
+    img,
+    video {
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
 
-    .list{ padding-left:1.2em }
-    .list li{ margin-bottom:.6em; color:var(--muted) }
-
-    /* parallax slice */
-    .slice{ position:relative; height:52vh; min-height:340px; border-block:1px solid var(--stroke); overflow:hidden }
-    .slice-media{ position:absolute; inset:-10%; background-size:cover; background-position:center }
-    .slice-scrim{ position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.25) 40%,rgba(0,0,0,.55)) }
-    .slice-inner{
-      position:relative; z-index:1; width:var(--container); height:100%; margin:0 auto;
-      display:grid; grid-template-columns:1fr minmax(0,720px) 1fr; align-items:center; text-align:center; color:#fff;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    /* gallery */
-    .gallery{ column-count:1; column-gap:14px }
-    .gallery>*{ break-inside:avoid; margin:0 0 14px; border-radius:14px; border:1px solid var(--stroke-2); cursor:pointer }
-    .gallery img,.gallery video{ width:100%; height:auto; display:block }
-
-    @media (min-width:740px){
-      .card.span-6{ grid-column:span 6 }
-      .benefit{ grid-column:span 6 }
-      .gallery{ column-count:2 }
-    }
-    @media (min-width:1024px){
-      .card.span-4{ grid-column:span 4 }
-      .card.span-6{ grid-column:span 6 }
-      .benefit{ grid-column:span 3 }
-      .gallery{ column-count:3 }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
     }
 
-    /* lightbox */
-    .lightbox{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.86); z-index:3000; padding:24px }
-    .lightbox.open{ display:grid }
-    .lightbox-inner{ width:min(92vw,1200px) }
-    .lightbox-inner img,.lightbox-inner video{ width:100%; border-radius:14px }
-    .lightbox-close{ position:absolute; top:18px; right:18px; border:1px solid #fff; background:transparent; color:#fff; border-radius:10px; padding:8px 12px; cursor:pointer }
-
-    /* footer */
-    .footer-cta{ border-top:1px solid var(--stroke); padding:48px 0; text-align:center }
-    .footer{ border-top:1px solid var(--stroke); padding:22px 0; text-align:center; color:var(--muted) }
-
-    /* reveal */
-    .reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease }
-    .reveal.in{ opacity:1; transform:translateY(0) }
-
-    /* parallax util */
-    [data-parallax]{ will-change:transform; transform:translate3d(var(--tx,0px), calc(var(--py,0px) + var(--ty,0px)), 0) }
-    .no-parallax [data-parallax]{ transform:none !important }
-
-    /* ======= Animations ======= */
-    .hero::before{
-      content:""; position:absolute; inset:-20% -20% auto -20%; height:70%; pointer-events:none;
-      background:
-        radial-gradient(40% 60% at 20% 40%, color-mix(in oklab, var(--accent-2), #000 20%) 40%, transparent 60%),
-        radial-gradient(40% 60% at 80% 30%, color-mix(in oklab, var(--accent), #000 10%) 35%, transparent 60%);
-      filter: blur(28px) saturate(1.15); opacity:.35;
-      animation: aurora 24s ease-in-out infinite alternate;
+    /* ============== Typography ============== */
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      line-height: 1.2;
     }
-    @keyframes aurora{ 0%{ transform: translateY(-3%) scale(1) } 100%{ transform: translateY(3%) scale(1.06) } }
 
-    /* Gate the scroll choreography to roomy viewports and reduce the lift
-       so the H1 never climbs into the eyebrow. */
-    @media (min-width: 960px) and (min-height: 720px){
-      @supports (animation-timeline: scroll()) {
-        @scroll-timeline hero-tl { source: selector(#home); orientation: block; scroll-offsets: start 0, end 80%; }
-        .hero h1{ animation: heroScale 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
-        .hero .eyebrow{ animation: heroEyebrow 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
-        .hero .vline{ animation: heroVline 1 both; animation-timeline: hero-tl; animation-range: 0% 100%; }
-        @keyframes heroScale{ 0%{ transform:translateY(0) scale(1) } 100%{ transform:translateY(-3vh) scale(.95) } }
-        @keyframes heroEyebrow{ 0%{ transform:translateY(0); opacity:1 } 100%{ transform:translateY(-2.4vh); opacity:.9 } }
-        @keyframes heroVline{ 0%{ height:clamp(180px,34vh,360px) } 100%{ height:clamp(130px,20vh,240px) } }
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+    }
+
+    p {
+      color: var(--gray-600);
+    }
+
+    /* ============== Layout ============== */
+    .container {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: clamp(60px, 10vw, 100px) 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(40px, 6vw, 60px);
+    }
+
+    .section-header p {
+      max-width: 600px;
+      margin: 0.5rem auto 0;
+    }
+
+    /* ============== Header ============== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: var(--transition);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      header {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: rgba(255, 255, 255, 0.1);
       }
     }
 
-    /* Gallery hover polish */
-    .gallery > img, .gallery > video{
-      transform-origin:center;
-      transition:transform 900ms ease, filter 600ms ease, box-shadow 400ms ease;
-    }
-    .gallery > img:hover, .gallery > video:hover{
-      transform:scale(1.04) translateY(-2px);
-      filter:saturate(1.05) contrast(1.03);
-      box-shadow:0 12px 40px rgba(0,0,0,.22);
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 24px;
     }
 
-    /* Section rule draw */
-    .section-header .under{ transform-origin:left center; transform:scaleX(0); opacity:.9 }
-    .section-header .under.in{ transform:scaleX(1); transition:transform 900ms cubic-bezier(.22,.61,.36,1) }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-    /* Chip float */
-    .chip{ position:relative; animation:bob 6s ease-in-out infinite }
-    .chip:nth-child(odd){ animation-duration:7s }
-    @keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-3px) } }
+    .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 10px;
+    }
 
-    @media (prefers-reduced-motion: reduce){
-      .hero::before, .chip{ animation:none !important }
+    .logo span {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0.8;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      opacity: 1;
+      color: var(--ocean);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--coral);
+      color: white;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+    }
+
+    .btn-secondary:hover {
+      background: var(--navy);
+      color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      padding: 8px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--black);
+      margin: 6px 0;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .header-btn {
+        display: none;
+      }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--white);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      transform: translateX(100%);
+      transition: var(--transition);
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu a {
+      padding: 16px 0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid var(--sand-dark);
+    }
+
+    /* ============== Hero ============== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .hero-media video,
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg,
+          rgba(26, 54, 93, 0.4) 0%,
+          rgba(26, 54, 93, 0.6) 50%,
+          rgba(26, 54, 93, 0.8) 100%);
+    }
+
+    .hero-content {
+      color: white;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .hero-content h1 {
+      margin-bottom: 16px;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Rating Badge */
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 12px 20px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .rating-score {
+      background: var(--ocean);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .rating-text {
+      font-size: 0.95rem;
+    }
+
+    .rating-text strong {
+      display: block;
+    }
+
+    /* Quick Facts */
+    .quick-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin: 32px 0;
+    }
+
+    .quick-fact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .quick-fact svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(10px);
+      }
+    }
+
+    /* ============== At a Glance ============== */
+    .features-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .feature-card {
+      background: var(--white);
+      padding: 32px 24px;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--ocean), var(--navy-light));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* ============== Gallery ============== */
+    #gallery {
+      background: var(--white);
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 250px);
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.05);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .play-icon svg {
+      width: 24px;
+      height: 24px;
+      margin-left: 4px;
+      color: var(--navy);
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+
+      .gallery-item:first-child {
+        grid-column: span 2;
+      }
+
+      .gallery-item {
+        height: 200px;
+      }
+    }
+
+    /* ============== The Cottage ============== */
+    .cottage-grid {
+      display: grid;
+      gap: 48px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 900px) {
+      .cottage-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cottage-story h2 {
+      margin-bottom: 24px;
+    }
+
+    .cottage-story p {
+      margin-bottom: 16px;
+    }
+
+    .key-details {
+      background: var(--white);
+      padding: 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--sand-dark);
+    }
+
+    .detail-row:last-child {
+      border: none;
+    }
+
+    .detail-label {
+      font-weight: 500;
+    }
+
+    .detail-value {
+      color: var(--gray-600);
+    }
+
+    /* Amenities */
+    .amenities-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      margin-top: 24px;
+    }
+
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: var(--sand);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+    }
+
+    .amenity-item svg {
+      width: 20px;
+      height: 20px;
+      color: var(--ocean);
+      flex-shrink: 0;
+    }
+
+    /* ============== Reviews ============== */
+    #reviews {
+      background: var(--navy);
+      color: white;
+    }
+
+    #reviews .section-header p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .reviews-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 32px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .review-stars {
+      color: var(--coral);
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .review-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .review-author {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .reviews-cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .reviews-cta a {
+      color: white;
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+
+    .reviews-cta a:hover {
+      opacity: 1;
+    }
+
+    /* ============== Location ============== */
+    .location-grid {
+      display: grid;
+      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 900px) {
+      .location-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #map {
+      height: 400px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .attractions-list {
+      list-style: none;
+    }
+
+    .attraction-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--sand-dark);
+    }
+
+    .attraction-distance {
+      background: var(--ocean);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .attraction-name {
+      font-weight: 500;
+    }
+
+    .attraction-desc {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+    }
+
+    /* Weather Widget Wrapper */
+    .weather-wrapper {
+      margin-top: 32px;
+      padding: 24px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* ============== Dining ============== */
+    #dining {
+      background: var(--white);
+    }
+
+    .dining-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .dining-card {
+      background: var(--sand);
+      padding: 24px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .dining-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .dining-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .dining-card p {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .dining-card a {
+      color: var(--ocean);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .dining-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ============== Events/What's On ============== */
+    #events {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+      color: white;
+    }
+
+    #events .section-header p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .events-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .event-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .event-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--coral);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .event-date svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .event-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .event-card p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .event-venue {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .event-venue svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .events-cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .events-cta a.btn {
+      background: white;
+      color: var(--navy);
+    }
+
+    .events-cta a.btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255, 255, 255, 0.3);
+    }
+
+    .events-note {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .events-note a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: underline;
+    }
+
+    /* ============== CTA Section ============== */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .cta-section h2 {
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-details {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-detail {
+      text-align: center;
+    }
+
+    .cta-detail strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .cta-detail span {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* ============== Footer ============== */
+    footer {
+      background: var(--sand-dark);
+      padding: 48px 0 24px;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      margin-bottom: 8px;
+    }
+
+    .footer-col a:hover {
+      color: var(--ocean);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+
+    /* ============== Lightbox ============== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .lightbox.open {
+      display: grid;
+    }
+
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: var(--radius);
+    }
+
+    .lightbox-content img,
+    .lightbox-content video {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: var(--radius);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ============== Mobile Sticky CTA ============== */
+    .mobile-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 16px 20px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      display: none;
+      z-index: 999;
+    }
+
+    .mobile-cta .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-cta {
+        display: block;
+      }
+
+      footer {
+        padding-bottom: 100px;
+      }
+    }
+
+    /* ============== Animations ============== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
+
 <body>
-  <!-- ===== Header ===== -->
-  <header id="siteHeader">
-    <nav class="nav" aria-label="Main">
-      <a class="brand" href="#home">
-        <img src="logo.png" alt="Captain’s Cottage logo">
-        <span>Captain’s Cottage</span>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <img src="logo.png" alt="Captain's Cottage">
+        <span>Captain's Cottage</span>
       </a>
-      <div class="links" id="links">
-        <a class="link" href="#home">Home</a>
-        <a class="link" href="#about">About</a>
-        <a class="link" href="#accommodation">Stay</a>
-        <a class="link" href="#local-events">Explore</a>
-        <a class="link" href="#gallery">Gallery</a>
-      </div>
-      <div>
-        <a class="btn-nav" href="#booking">Book</a>
-        <button class="menu-btn" id="menuBtn" aria-controls="drawer" aria-expanded="false" aria-label="Open menu">Menu</button>
-      </div>
-    </nav>
-    <!-- Mobile Drawer -->
-    <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation">
-      <a href="#booking">Book</a>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#our-story">Our Story</a>
-      <a href="#why-choose-us">Why Choose Us</a>
-      <a href="#accommodation">Accommodation</a>
-      <a href="#amenities">Amenities</a>
-      <a href="#outdoor">Outdoor</a>
-      <a href="#local-events">Local</a>
-      <a href="#dining-recommendations">Dining</a>
-      <a href="#gallery">Gallery</a>
+      <nav>
+        <a href="#features">At a Glance</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#cottage">The Cottage</a>
+        <a href="#location">Location</a>
+        <a href="#events">Events</a>
+      </nav>
+      <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+        rel="noopener" class="btn btn-primary header-btn">
+        Check Availability
+      </a>
+      <button class="menu-toggle" aria-label="Menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <div id="scroll-progress" aria-hidden="true"></div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features" onclick="toggleMenu()">At a Glance</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+    <a href="#cottage" onclick="toggleMenu()">The Cottage</a>
+    <a href="#location" onclick="toggleMenu()">Location</a>
+    <a href="#events" onclick="toggleMenu()">Events</a>
+    <a href="#dining" onclick="toggleMenu()">Dining</a>
+    <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+      rel="noopener" class="btn btn-primary" style="margin-top:24px;">Check Availability</a>
+  </div>
 
-  <main id="main">
-    <!-- ===== Hero ===== -->
+  <main>
+    <!-- Hero -->
     <section class="hero" id="home">
-      <div class="video-wrap" data-parallax data-speed="0.08">
-        <video id="hero-video" autoplay muted playsinline loop preload="auto" poster="hero.jpg">
+      <div class="hero-media">
+        <video autoplay muted loop playsinline poster="hero.jpg">
           <source src="hero.mp4" type="video/mp4">
-          <img src="hero.jpg" alt="">
         </video>
       </div>
-      <div class="hero-scrim"></div>
-      <div class="hero-inner" data-parallax data-speed="-0.03" data-tilt="4">
-        <div class="vline" aria-hidden="true"></div>
-        <div class="hero-center">
-          <div class="eyebrow reveal">A historic seaside retreat in Scarborough</div>
-          <h1 class="reveal">Captain’s Cottage</h1>
-          <p class="reveal">A lovingly refurbished 19th-century cottage in Scarborough’s Old Town that blends maritime charm with modern comforts.</p>
-          <div class="cta-row reveal">
-            <a class="btn primary" href="#booking">Book Now</a>
-            <a class="btn" href="#gallery">View Gallery</a>
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <div class="rating-badge fade-in">
+          <span class="rating-score">9.0</span>
+          <span class="rating-text"><strong>Exceptional</strong>36 guest reviews</span>
+        </div>
+        <h1 class="fade-in">Captain's Cottage</h1>
+        <p class="fade-in" style="font-size:1.15rem;color:white;margin-bottom:8px;">A charming 19th-century seaside
+          retreat in Scarborough's Old Town</p>
+        <div class="quick-facts fade-in">
+          <span class="quick-fact">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Sleeps 4
+          </span>
+          <span class="quick-fact">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            2 Bedrooms
+          </span>
+          <span class="quick-fact">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            Pet Friendly
+          </span>
+        </div>
+        <div class="hero-cta fade-in">
+          <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+            rel="noopener" class="btn btn-primary">Check Availability</a>
+          <a href="#gallery" class="btn btn-secondary"
+            style="background:transparent;color:white;border-color:white;">View Gallery</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2>At a Glance</h2>
+          <p>Everything you need for a perfect seaside getaway</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3>Prime Location</h3>
+            <p>Steps from Scarborough Castle and the harbour in the historic Old Town</p>
           </div>
-          <div class="chips reveal" aria-label="Quick facts">
-            <span class="chip">2 Bedrooms (Double + Twin)</span>
-            <span class="chip">Garden & Decking</span>
-            <span class="chip">Smart TV & Fast Wi-Fi</span>
-            <span class="chip">Pet Friendly</span>
-            <span class="chip">Parking Permit Included</span>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3>Modern Comfort</h3>
+            <p>Smart TV, fast WiFi, and a fully equipped kitchen with dishwasher</p>
+          </div>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <h3>Historic Charm</h3>
+            <p>Beautifully refurbished 19th-century cottage with period features</p>
+          </div>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3>Pet Friendly</h3>
+            <p>Your well-behaved furry friend is welcome to join the adventure</p>
+          </div>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <h3>Private Garden</h3>
+            <p>Decking area perfect for alfresco dining and morning coffees</p>
           </div>
         </div>
-        <div class="vline" aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- ===== About ===== -->
-    <section id="about" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Property Overview</div>
-          <div class="under"></div>
+    <!-- Gallery -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2>Gallery</h2>
+          <p>Take a tour of Captain's Cottage</p>
         </div>
-      </div>
-      <div class="grid">
-        <article class="card span-6 reveal">
-          <p>
-            Situated at <strong>35 Longwestgate, Scarborough, North Yorkshire, YO11 1QB</strong>, Captain’s Cottage offers guests a unique blend of heritage and contemporary comfort. This historic mid-terrace property has been lovingly refurbished by new owners in mid-2024. Its rich maritime past is reflected in every detail—from period features to modern upgrades.
-          </p>
-          <ul class="list">
-            <li><strong>Heritage & Refurbishment:</strong> 19th-century cottage revitalized with updated decor, meticulous maintenance and enhanced guest comforts.</li>
-            <li><strong>Layout:</strong> Two well-appointed bedrooms—first-floor double and light-filled second-floor twin—sleeping up to four.</li>
-            <li><strong>Living & Kitchen:</strong> Cozy sitting room (electric fireplace, Smart TV, Wi-Fi) plus fully equipped modern kitchen/diner.</li>
-            <li><strong>Outdoor Space:</strong> Decking & garden for alfresco dining; complimentary parking permit included.</li>
-          </ul>
-          <p>Experience authentic Scarborough living just steps from the beach and Scarborough Castle.</p>
-        </article>
-        <aside class="card span-6 reveal">
-          <div class="eyebrow">Key Details</div>
-          <div class="under" style="margin:6px 0 14px"></div>
-          <p><strong>Check-in:</strong> from 4:00 pm &nbsp; | &nbsp; <strong>Check-out:</strong> by 10:00 am</p>
-          <div class="media-inline">
-            <img src="room1.jpg" alt="Spacious double bedroom in a Scarborough seaside cottage" class="clickable-media">
-            <img src="room2.jpg" alt="Elegant twin bedroom with coastal views in Scarborough" class="clickable-media">
+        <div class="gallery-grid">
+          <div class="gallery-item fade-in" onclick="openLightbox('hero.mp4', 'video')">
+            <video muted loop playsinline poster="hero.jpg">
+              <source src="hero.mp4" type="video/mp4">
+            </video>
+            <div class="play-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
           </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ===== Parallax Slice ===== -->
-    <section class="slice" aria-label="Seaside ambience">
-      <div class="slice-media" style="background-image:url('hero.jpg')" data-parallax data-speed="0.12"></div>
-      <div class="slice-scrim" aria-hidden="true"></div>
-      <div class="slice-inner">
-        <div class="vline" aria-hidden="true"></div>
-        <div>
-          <div class="eyebrow" style="color:#fff">Old Town • Harbour • Castle</div>
-          <h2 style="color:#fff">Steps from Scarborough Castle</h2>
-        </div>
-        <div class="vline" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- ===== Our Story ===== -->
-    <section id="our-story" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Our Story</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <article class="card reveal">
-        <p>Captain’s Cottage has a rich maritime heritage rooted in Scarborough’s vibrant history. Built in the 19th century, the cottage witnessed the golden era of seaside resorts. In mid-2024, passionate new owners breathed fresh life into the property, preserving its historic character while modernizing amenities.</p>
-        <p>Today, Captain’s Cottage marries classic elegance with contemporary comfort—delivering history, luxury and genuine local hospitality.</p>
-      </article>
-    </section>
-
-    <!-- ===== Why Choose Us ===== -->
-    <section id="why-choose-us" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Why Choose Us?</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <div class="benefits">
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Historic Charm</h3><p>Authentic maritime heritage and period details of a 19th-century cottage.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Modern Comforts</h3><p>From a fully equipped kitchen to fast Wi-Fi and a Smart TV.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Prime Location</h3><p>Steps from Scarborough Castle, the market hall and the harbour.</p></div></div>
-        <div class="benefit reveal"><div class="card"><div class="icon" aria-hidden="true"></div><h3>Guest-Focused</h3><p>Personal touches, meticulous maintenance and a warm welcome.</p></div></div>
-      </div>
-    </section>
-
-    <!-- ===== Accommodation ===== -->
-    <section id="accommodation" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Charming Accommodation</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <div class="grid">
-        <article class="card span-6 reveal">
-          <p>Our thoughtfully designed rooms ensure a comfortable stay:</p>
-          <ul class="list">
-            <li><strong>Double Bedroom:</strong> Elegant first-floor retreat with plush bedding and period details.</li>
-            <li><strong>Twin Bedroom:</strong> Light-filled room with charming roof windows and coastal vibes.</li>
-          </ul>
-          <p>The modern bathroom offers both a relaxing bath and a separate contemporary shower.</p>
-        </article>
-        <aside class="card span-6 reveal">
-          <div class="media-inline">
-            <img src="bathroom.jpg" alt="Well-appointed bathroom at Captain’s Cottage" class="clickable-media">
-            <img src="entrance.jpg" alt="Entrance to Captain’s Cottage" class="clickable-media">
+          <div class="gallery-item fade-in" onclick="openLightbox('livingroom.jpg')">
+            <img src="livingroom.jpg" alt="Cosy living room with fireplace" loading="lazy">
           </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ===== Amenities ===== -->
-    <section id="amenities" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Modern Amenities & Refined Living</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <div class="grid">
-        <article class="card span-6 reveal">
-          <ul class="list">
-            <li>Electric oven, induction hob, microwave and premium coffee machine</li>
-            <li>Spacious fridge/freezer, washing machine and dishwasher</li>
-            <li>Cozy sitting room with electric fireplace, Smart TV and fast Wi-Fi</li>
-          </ul>
-        </article>
-        <aside class="card span-6 reveal">
-          <div class="media-inline">
-            <img src="kitchen.jpg" alt="Modern kitchen and dining area in a Scarborough cottage" class="clickable-media">
-            <img src="livingroom.jpg" alt="Comfortable living room with coastal decor" class="clickable-media">
+          <div class="gallery-item fade-in" onclick="openLightbox('kitchen.jpg')">
+            <img src="kitchen.jpg" alt="Modern fully equipped kitchen" loading="lazy">
           </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ===== Outdoor ===== -->
-    <section id="outdoor" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Outdoor Elegance</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <article class="card reveal">
-        <p>Unwind in our peaceful decking area and garden—perfect for alfresco dining, morning coffees or simply enjoying the sea breeze.</p>
-        <ul class="list">
-          <li>Pet-friendly (one well-behaved dog allowed)</li>
-          <li>Family amenities including a highchair and travel cot on request</li>
-          <li>Complimentary parking permit</li>
-        </ul>
-        <div class="media-inline">
-          <img src="dinningroom.jpg" alt="Outdoor decking area at Captain’s Cottage for alfresco dining" class="clickable-media">
-        </div>
-      </article>
-    </section>
-
-    <!-- ===== Booking ===== -->
-    <section id="booking" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Booking & Contact</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <div class="grid">
-        <article class="card span-6 reveal">
-          <p><strong>Check-in:</strong> from 4:00 pm &nbsp; | &nbsp; <strong>Check-out:</strong> by 10:00 am</p>
-          <p>To secure your stay, please visit our booking page on Sykes Cottages:</p>
-          <p><a href="https://www.sykescottages.co.uk/cottage/North-York-Moors-Coast-Old-and-East-Harbours/Captains-Cottage-1159058.html" target="_blank" rel="noopener noreferrer" class="btn primary">Book on Sykes Cottages</a></p>
-        </article>
-        <aside class="card span-6 reveal">
-          <div class="eyebrow">Contact</div>
-          <div class="under" style="margin:6px 0 14px"></div>
-          <p><strong>Phone:</strong> +44 1244 746200<br>
-             <strong>Email:</strong> <a href="mailto:info@captainscottage.org">info@captainscottage.org</a></p>
-          <p>We’re happy to help with dates, local tips, and special requests.</p>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ===== Local ===== -->
-    <section id="local-events" class="section">
-      <div class="section-header">
-        <div>
-          <div class="eyebrow" style="color:var(--accent)">Local Attractions & Events</div>
-          <div class="under"></div>
-        </div>
-      </div>
-      <div class="grid">
-        <article class="card span-6 reveal">
-          <div class="eyebrow">Current Weather in Scarborough</div>
-          <div class="under" style="margin:6px 0 14px"></div>
-          <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/" data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="clear">SCARBOROUGH WEATHER</a>
-        </article>
-        <article class="card span-6 reveal">
-          <div class="eyebrow">What’s On?</div>
-          <div class="under" style="margin:6px 0 14px"></div>
-          <div 
-            w-type="event-discovery"
-            w-tmapikey="1Ar4ur0n7IJcCmDR6kq3KuRAeqIesfkS"
-            w-googleapikey="YOUR_GOOGLE_API_KEY"
-            w-theme="grid" w-colorscheme="custom" w-width="100%" w-height="550" w-size="17"
-            w-border="2" w-borderradius="4" w-radius="25" w-period="year" w-layout="fullwidth"
-            w-titlelink="off" w-sorting="groupByName" w-id="id_kjeahl" w-branding="TicketWeb"
-            w-countrycode="GB" w-city="Scarborough" w-showfulleventsnames="true" w-buybuttonbackgroundcolor="#2f478a"
-            w-showloadmorebutton="true">
+          <div class="gallery-item fade-in" onclick="openLightbox('room1.jpg')">
+            <img src="room1.jpg" alt="Spacious double bedroom" loading="lazy">
           </div>
-        </article>
-
-        <article class="card reveal" style="grid-column:1 / -1;">
-          <div class="eyebrow">Explore Scarborough</div>
-          <div class="under" style="margin:6px 0 14px"></div>
-          <ul class="list">
-            <li><strong>Scarborough Castle</strong> (~300 m) – 12th-century fortress crowning the headland.</li>
-            <li><strong>Market Hall & Vaults</strong> (~550 m) – Victorian market hall, Mon–Sat 8am–5pm.</li>
-            <li><strong>MV Regal Lady</strong> (~550 m) – 1930 steamship, National Historic Ship; Dunkirk veteran.</li>
-            <li><strong>Scarborough Beach</strong> (~650 m) – Sandy beach & promenade.</li>
-            <li><strong>St Martin-on-the-Hill</strong> (~650 m) – Bodley church with Pre-Raphaelite glass.</li>
-            <li><strong>Scarborough Art Gallery</strong> (~650 m) – Grade II* Italianate villa; local art & heritage.</li>
-            <li><strong>St Mary’s & Anne Brontë’s Grave</strong> (~700 m) – 12th-century parish church.</li>
-            <li><strong>Peasholm Park</strong> (~850 m) – Oriental-themed 14-hectare park (1912).</li>
-            <li><strong>Train Station</strong> (~900 m) – Links to York, Leeds and beyond.</li>
-          </ul>
-        </article>
+          <div class="gallery-item fade-in" onclick="openLightbox('room2.jpg')">
+            <img src="room2.jpg" alt="Twin bedroom" loading="lazy">
+          </div>
+          <div class="gallery-item fade-in" onclick="openLightbox('bathroom.jpg')">
+            <img src="bathroom.jpg" alt="Modern bathroom" loading="lazy">
+          </div>
+          <div class="gallery-item fade-in" onclick="openLightbox('dinningroom.jpg')">
+            <img src="dinningroom.jpg" alt="Outdoor decking area" loading="lazy">
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ===== Dining ===== -->
-    <section id="dining-recommendations" class="section">
-      <div class="section-header" style="justify-items:center">
-        <div>
-          <div class="eyebrow" style="text-align:center;color:var(--accent)">Dining Recommendations</div>
-          <div class="under" style="width:min(480px,60vw); margin:0 auto"></div>
+    <!-- The Cottage -->
+    <section id="cottage">
+      <div class="container">
+        <div class="cottage-grid">
+          <div class="cottage-story fade-in">
+            <h2>Your Seaside Retreat</h2>
+            <p>Captain's Cottage is a lovingly refurbished 19th-century mid-terrace home nestled in Scarborough's
+              historic Old Town. With its rich maritime heritage and contemporary comforts, it offers the perfect base
+              for exploring the Yorkshire coast.</p>
+            <p>Recently renovated in 2024, the cottage combines period character with modern amenities. From the cosy
+              living room with its electric fireplace and Smart TV to the fully equipped kitchen and peaceful garden
+              retreat, every detail has been considered for your comfort.</p>
+            <p><strong>Accommodation:</strong></p>
+            <ul style="margin:16px 0 24px 20px;color:var(--gray-600);">
+              <li>First floor: Elegant double bedroom with period features</li>
+              <li>Second floor: Light-filled twin bedroom with roof windows</li>
+              <li>Modern bathroom with bath and separate shower</li>
+            </ul>
+            <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+              rel="noopener" class="btn btn-primary">View Full Details on Booking.com</a>
+          </div>
+          <div class="key-details fade-in">
+            <h3 style="margin-bottom:24px;">Key Details</h3>
+            <div class="detail-row">
+              <span class="detail-label">Check-in</span>
+              <span class="detail-value">From 4:00 PM</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Check-out</span>
+              <span class="detail-value">By 10:00 AM</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Guests</span>
+              <span class="detail-value">Up to 4</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Bedrooms</span>
+              <span class="detail-value">2 (Double + Twin)</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Bathrooms</span>
+              <span class="detail-value">1</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Pets</span>
+              <span class="detail-value">1 dog welcome</span>
+            </div>
+
+            <h4 style="margin:32px 0 16px;font-size:1rem;">Amenities</h4>
+            <div class="amenities-grid">
+              <div class="amenity-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+                Fast WiFi
+              </div>
+              <div class="amenity-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Smart TV
+              </div>
+              <div class="amenity-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                </svg>
+                Fireplace
+              </div>
+              <div class="amenity-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Dishwasher
+              </div>
+              <div class="amenity-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Washer
+              </div>
+              <div class="amenity-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+                Coffee Machine
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="grid">
-        <article class="card span-6 reveal">
-          <h3>The Princess Café</h3>
-          <p>Fresh seafood and café classics overlooking the harbour at Sandside (approx. 0.4 km).</p>
-          <p><a href="https://www.tripadvisor.co.uk/Restaurant_Review-g190744-d1863874-Reviews-The_Princess_Cafe-Scarborough_Scarborough_District_North_Yorkshire_England.html" target="_blank" rel="noopener noreferrer">View on TripAdvisor</a></p>
-        </article>
-        <article class="card span-6 reveal">
-          <h3>Golden Grid</h3>
-          <p>Long-established seafood restaurant on Sandside, famous for fish & chips with harbour views.</p>
-          <p><a href="https://www.tripadvisor.co.uk/Restaurant_Review-g190744-d752595-Reviews-Golden_Grid-Scarborough_Scarborough_District_North_Yorkshire_England.html" target="_blank" rel="noopener noreferrer">View on TripAdvisor</a></p>
-        </article>
-        <article class="card span-4 reveal">
-          <h3>The Angel Inn</h3>
-          <p>Traditional pub near the market hall offering real ales and hearty meals.</p>
-          <p><a href="https://www.tripadvisor.co.uk/Attraction_Review-g190744-d7186553-Reviews-The_Angel_Inn-Scarborough_Scarborough_District_North_Yorkshire_England.html" target="_blank" rel="noopener noreferrer">View on TripAdvisor</a></p>
-        </article>
-        <article class="card span-4 reveal">
-          <h3>North Riding Brew Pub</h3>
-          <p>Award-winning microbrewery taproom pouring fresh North Riding ales and pub classics.</p>
-          <p><a href="https://www.tripadvisor.co.uk/Restaurant_Review-g190744-d6591411-Reviews-North_Riding_Brew_Pub-Scarborough_Scarborough_District_North_Yorkshire_England.html" target="_blank" rel="noopener noreferrer">View on TripAdvisor</a></p>
-        </article>
-        <article class="card span-4 reveal">
-          <h3>Market Hall & Vaults Food Court</h3>
-          <p>Street food, cakes and local produce at the historic market hall (Mon–Sat 8 am–5 pm).</p>
-          <p><a href="https://www.tripadvisor.co.uk/Attraction_Review-g190744-d7238603-Reviews-Scarborough_Market_Hall_Vaults-Scarborough_Scarborough_District_North_Yorkshire_England.html" target="_blank" rel="noopener noreferrer">View on TripAdvisor</a></p>
-        </article>
       </div>
     </section>
 
-    <!-- ===== Gallery ===== -->
-    <section id="gallery" class="section">
-      <div class="section-header" style="justify-items:center">
-        <div>
-          <div class="eyebrow" style="text-align:center;color:var(--accent)">Gallery</div>
-          <div class="under" style="width:min(480px,60vw); margin:0 auto"></div>
+    <!-- Reviews -->
+    <section id="reviews">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2>What Guests Say</h2>
+          <p>Rated 9.0/10 on Booking.com from 36 verified reviews</p>
+        </div>
+        <div class="reviews-grid">
+          <div class="review-card fade-in">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Lovely cottage in a fantastic location. The hosts thought of everything - really
+              felt like home. Would definitely recommend!"</p>
+            <p class="review-author">— Verified Guest, Booking.com</p>
+          </div>
+          <div class="review-card fade-in">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Beautifully refurbished with attention to detail. Perfect base for exploring
+              Scarborough and the coast. The garden was a lovely bonus."</p>
+            <p class="review-author">— Verified Guest, Booking.com</p>
+          </div>
+          <div class="review-card fade-in">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Everything we needed for a relaxing break. Close to the castle and harbour. The
+              kitchen was well equipped and beds very comfortable."</p>
+            <p class="review-author">— Verified Guest, Booking.com</p>
+          </div>
+        </div>
+        <div class="reviews-cta fade-in">
+          <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html#tab-reviews"
+            target="_blank" rel="noopener">Read all 36 reviews on Booking.com →</a>
         </div>
       </div>
-      <div class="gallery reveal">
-        <video class="clickable-media" preload="metadata" playsinline muted poster="hero.jpg">
-          <source src="hero.mp4" type="video/mp4">
-          <img src="hero.jpg" alt="Captain’s Cottage Video">
-        </video>
-        <img src="entrance.jpg" alt="Entrance at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="livingroom.jpg" alt="Elegant living room at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="kitchen.jpg" alt="Modern kitchen at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="room1.jpg" alt="Spacious double bedroom at Captain’s Cottage" class="clickable-media" loading="lazy">
-        <img src="room2.jpg" alt="Twin bedroom with scenic views" class="clickable-media" loading="lazy">
-        <img src="bathroom.jpg" alt="Well-appointed bathroom" class="clickable-media" loading="lazy">
-        <img src="dinningroom.jpg" alt="Outdoor dining area" class="clickable-media" loading="lazy">
+    </section>
+
+    <!-- Location -->
+    <section id="location">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2>Explore Scarborough</h2>
+          <p>Captain's Cottage is perfectly positioned in the heart of the Old Town</p>
+        </div>
+        <div class="location-grid">
+          <div id="map" class="fade-in"></div>
+          <div class="fade-in">
+            <h3 style="margin-bottom:24px;">Nearby Attractions</h3>
+            <ul class="attractions-list">
+              <li class="attraction-item">
+                <span class="attraction-distance">300m</span>
+                <div>
+                  <p class="attraction-name">Scarborough Castle</p>
+                  <p class="attraction-desc">12th-century fortress crowning the headland</p>
+                </div>
+              </li>
+              <li class="attraction-item">
+                <span class="attraction-distance">550m</span>
+                <div>
+                  <p class="attraction-name">Market Hall & Vaults</p>
+                  <p class="attraction-desc">Victorian market hall, Mon–Sat 8am–5pm</p>
+                </div>
+              </li>
+              <li class="attraction-item">
+                <span class="attraction-distance">650m</span>
+                <div>
+                  <p class="attraction-name">Scarborough Beach</p>
+                  <p class="attraction-desc">Sandy beach & promenade</p>
+                </div>
+              </li>
+              <li class="attraction-item">
+                <span class="attraction-distance">850m</span>
+                <div>
+                  <p class="attraction-name">Peasholm Park</p>
+                  <p class="attraction-desc">Oriental-themed 14-hectare park</p>
+                </div>
+              </li>
+              <li class="attraction-item">
+                <span class="attraction-distance">900m</span>
+                <div>
+                  <p class="attraction-name">Train Station</p>
+                  <p class="attraction-desc">Links to York, Leeds and beyond</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="weather-wrapper">
+              <h4 style="margin-bottom:16px;font-size:1rem;">Current Weather</h4>
+              <a class="weatherwidget-io" href="https://forecast7.com/en/54d28n0d40/scarborough/"
+                data-label_1="SCARBOROUGH" data-label_2="WEATHER" data-icons="Climacons Animated"
+                data-theme="pure">SCARBOROUGH WEATHER</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dining -->
+    <section id="dining">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2>Local Dining</h2>
+          <p>Our favourite spots for food and drink nearby</p>
+        </div>
+        <div class="dining-grid">
+          <div class="dining-card fade-in">
+            <h3>The Princess Café</h3>
+            <p>Fresh seafood and café classics overlooking the harbour at Sandside (0.4 km)</p>
+            <a href="https://www.google.com/maps/search/The+Princess+Cafe+Scarborough" target="_blank"
+              rel="noopener">View on Google Maps →</a>
+          </div>
+          <div class="dining-card fade-in">
+            <h3>Golden Grid</h3>
+            <p>Long-established seafood restaurant famous for fish & chips with harbour views</p>
+            <a href="https://www.google.com/maps/search/Golden+Grid+Scarborough" target="_blank" rel="noopener">View on
+              Google Maps →</a>
+          </div>
+          <div class="dining-card fade-in">
+            <h3>North Riding Brew Pub</h3>
+            <p>Award-winning microbrewery taproom with fresh ales and pub classics</p>
+            <a href="https://www.google.com/maps/search/North+Riding+Brew+Pub+Scarborough" target="_blank"
+              rel="noopener">View on Google Maps →</a>
+          </div>
+          <div class="dining-card fade-in">
+            <h3>Market Hall Food Court</h3>
+            <p>Street food, cakes and local produce at the historic market hall</p>
+            <a href="https://www.google.com/maps/search/Scarborough+Market+Hall+Vaults" target="_blank"
+              rel="noopener">View on Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events / What's On -->
+    <section id="events">
+      <div class="container">
+        <div class="section-header fade-in">
+          <h2>What's On in Scarborough</h2>
+          <p>Plan your visit around one of these fantastic local events</p>
+        </div>
+        <div class="events-grid">
+          <div class="event-card fade-in">
+            <span class="event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Jun–Aug 2026
+            </span>
+            <h3>Open Air Theatre Summer Season</h3>
+            <p>Michael Bublé, Teddy Swims, The Streets, Scissor Sisters, and more at the UK's largest open-air theatre!
+            </p>
+            <span class="event-venue">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              Scarborough Open Air Theatre
+            </span>
+          </div>
+          <div class="event-card fade-in">
+            <span class="event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              15–30 May 2026
+            </span>
+            <h3>Big Ideas By the Sea</h3>
+            <p>Arts and environmental festival with events at St Mary's Church, the Castle, and venues across town</p>
+            <span class="event-venue">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              Various venues
+            </span>
+          </div>
+          <div class="event-card fade-in">
+            <span class="event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              25–27 Sep 2026
+            </span>
+            <h3>Scarborough Jazz Festival</h3>
+            <p>Annual celebration of jazz music with top international and UK artists at the historic Spa</p>
+            <span class="event-venue">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              Scarborough Spa
+            </span>
+          </div>
+          <div class="event-card fade-in">
+            <span class="event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Late Nov 2026
+            </span>
+            <h3>Scarborough Sparkle</h3>
+            <p>Christmas wonderland with festive market, lantern parade, entertainment and tipi bar</p>
+            <span class="event-venue">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              Open Air Theatre
+            </span>
+          </div>
+          <div class="event-card fade-in">
+            <span class="event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              28–29 Mar 2026
+            </span>
+            <h3>Scarborough Punk Festival</h3>
+            <p>16 bands including The Casualties and Sham-69 at the legendary Scarborough Spa</p>
+            <span class="event-venue">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              Scarborough Spa
+            </span>
+          </div>
+          <div class="event-card fade-in">
+            <span class="event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Year-round
+            </span>
+            <h3>Castle & Heritage Events</h3>
+            <p>Medieval re-enactments, ghost tours, and special events at Scarborough Castle throughout the year</p>
+            <span class="event-venue">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              Scarborough Castle (300m)
+            </span>
+          </div>
+        </div>
+        <div class="events-cta fade-in">
+          <a href="https://www.visitscarborough.com/whats-on" target="_blank" rel="noopener" class="btn">View Full
+            Events Calendar →</a>
+          <p class="events-note">For the complete events listing, visit <a
+              href="https://www.visitscarborough.com/whats-on" target="_blank" rel="noopener">Visit Scarborough</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="fade-in">Ready for Your Coastal Escape?</h2>
+        <p class="fade-in">Book directly on Booking.com for the best rates and instant confirmation</p>
+        <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+          rel="noopener" class="btn btn-primary fade-in" style="font-size:1.1rem;padding:16px 32px;">Check
+          Availability</a>
+        <div class="cta-details fade-in">
+          <div class="cta-detail">
+            <strong>Check-in</strong>
+            <span>From 4:00 PM</span>
+          </div>
+          <div class="cta-detail">
+            <strong>Check-out</strong>
+            <span>By 10:00 AM</span>
+          </div>
+          <div class="cta-detail">
+            <strong>Contact</strong>
+            <span>info@captainscottage.org</span>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- ===== Footer ===== -->
-  <div class="footer-cta">
-    <h2 style="font-family:'Cormorant SC',serif; letter-spacing:.04em">Embark on Your Next Exquisite Getaway</h2>
-    <a href="#booking" class="btn primary">Reserve Your Stay</a>
-  </div>
-  <footer class="footer"><p>&copy; 2025 Captain’s Cottage | All Rights Reserved</p></footer>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Captain's Cottage</h4>
+          <p style="font-size:0.9rem;color:var(--gray-600);">35 Longwestgate<br>Scarborough, North Yorkshire<br>YO11 1QB
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#features">At a Glance</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#cottage">The Cottage</a>
+          <a href="#location">Location</a>
+        </div>
+        <div class="footer-col">
+          <h4>Book</h4>
+          <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+            rel="noopener">View on Booking.com</a>
+          <a href="mailto:info@captainscottage.org">Email Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Captain's Cottage. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media preview">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close">Close</button>
-    <div class="lightbox-inner" id="lightbox-media"></div>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Close">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+  </div>
+
+  <!-- Mobile CTA -->
+  <div class="mobile-cta">
+    <a href="https://www.booking.com/hotel/gb/captains-cottage-north-yorkshire.en-gb.html" target="_blank"
+      rel="noopener" class="btn btn-primary">
+      Check Availability
+    </a>
   </div>
 
   <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const progress = document.getElementById('scroll-progress');
-      const header = document.getElementById('siteHeader');
-      const menuBtn = document.getElementById('menuBtn');
-      const drawer = document.getElementById('drawer');
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
 
-      // Drawer under header
-      const setHeaderHeight = () => {
-        const h = header.getBoundingClientRect().height;
-        document.documentElement.style.setProperty('--header-h', h + 'px');
-      };
-      window.addEventListener('resize', setHeaderHeight, { passive:true });
-      setHeaderHeight();
-
-      // Scroll progress + header shadow
-      const onScroll = () => {
-        const y = window.scrollY;
-        const doc = document.documentElement.scrollHeight - window.innerHeight || 1;
-        progress.style.width = Math.min(100, (y / doc) * 100) + '%';
-        header.style.boxShadow = y > 8 ? '0 10px 24px rgba(0,0,0,.18)' : 'none';
-      };
-      window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
-
-      // Mobile drawer
-      const closeDrawer = () => { drawer.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); };
-      menuBtn.addEventListener('click', () => {
-        const open = drawer.classList.toggle('open');
-        menuBtn.setAttribute('aria-expanded', String(open));
-      });
-      drawer.addEventListener('click', e => { if (e.target.tagName === 'A') closeDrawer(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
-
-      // Reveal on scroll (+ rule draw)
-      const reveals = document.querySelectorAll('.reveal, .section-header .under');
-      const ro = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            entry.target.classList.add('in');
-            ro.unobserve(entry.target);
-          }
-        });
-      }, { threshold:0.18 });
-      reveals.forEach(el => ro.observe(el));
-
-      // Active nav link highlight
-      const navLinks = [...document.querySelectorAll('.links .link[href^="#"]')];
-      const sections = [...document.querySelectorAll('main section[id]')];
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            const id = entry.target.id;
-            navLinks.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + id ? 'true' : 'false'));
-          }
-        });
-      }, { threshold:0.55 });
-      sections.forEach(s => io.observe(s));
-
-      // Lightbox
+    // Lightbox
+    function openLightbox(src, type = 'image') {
       const lightbox = document.getElementById('lightbox');
-      const lightboxMedia = document.getElementById('lightbox-media');
-      const lightboxClose = document.getElementById('lightbox-close');
-      const openLightbox = (node) => {
-        lightbox.classList.add('open'); lightboxMedia.innerHTML = '';
-        if(node.tagName === 'IMG'){
-          const img = new Image(); img.src = node.src; img.alt = node.alt || ''; lightboxMedia.appendChild(img);
-        }else if(node.tagName === 'VIDEO'){
-          const v = document.createElement('video'); v.controls = true; v.autoplay = true;
-          const s = node.querySelector('source'); v.src = s ? s.src : (node.currentSrc || node.src);
-          lightboxMedia.appendChild(v);
-        }
-      };
-      document.querySelectorAll('.clickable-media, .gallery > img, .gallery > video, .media-inline img')
-        .forEach(el => el.addEventListener('click', ()=> openLightbox(el)));
-      const closeLightbox = () => { lightbox.classList.remove('open'); lightboxMedia.innerHTML=''; };
-      lightboxClose.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
-      document.addEventListener('keydown', e => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
+      const content = document.getElementById('lightboxContent');
 
-      // Weather widget
-      (function(d,s,id){ var js,fjs=d.getElementsByTagName(s)[0]; if(!d.getElementById(id)){ js=d.createElement(s); js.id=id; js.src='https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js,fjs);} })(document,'script','weatherwidget-io-js');
-
-      // Parallax with inertial smoothing
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReduced) {
-        const nodes = [...document.querySelectorAll('[data-parallax]')].map(el => ({ el, speed: parseFloat(el.dataset.speed) || 0.1, value: 0 }));
-        const layers = [...document.querySelectorAll('[data-tilt]')].map(el => ({ el, mult: parseFloat(el.dataset.tilt) || 6, tx:0, ty:0, targetX:0, targetY:0 }));
-        const hero = document.querySelector('.hero');
-        if (hero){
-          hero.addEventListener('pointermove', (e)=>{
-            const r = hero.getBoundingClientRect();
-            const cx = (e.clientX - r.left)/r.width - .5;
-            const cy = (e.clientY - r.top)/r.height - .5;
-            layers.forEach(l => { l.targetX = -cx * l.mult; l.targetY = -cy * l.mult; });
-          });
-          hero.addEventListener('pointerleave', ()=> layers.forEach(l => { l.targetX = 0; l.targetY = 0; }));
-        }
-
-        let last = performance.now();
-        const loop = () => {
-          const now = performance.now(), dt = Math.min(100, now - last); last = now;
-          const aP = 1 - Math.pow(1 - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--parallax-smooth') || .08), dt/16.67);
-          const aT = 1 - Math.pow(1 - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tilt-smooth') || .12), dt/16.67);
-          const vh = innerHeight;
-
-          nodes.forEach(n => {
-            const rect = n.el.getBoundingClientRect();
-            const offset = (rect.top + rect.height/2) - (vh/2);
-            const target = (-offset) * n.speed;
-            n.value += (target - n.value) * aP;
-            n.el.style.setProperty('--py', n.value.toFixed(2) + 'px');
-          });
-
-          layers.forEach(l => {
-            l.tx += (l.targetX - l.tx) * aT;
-            l.ty += (l.targetY - l.ty) * aT;
-            l.el.style.setProperty('--tx', l.tx.toFixed(1) + 'px');
-            l.el.style.setProperty('--ty', l.ty.toFixed(1) + 'px');
-          });
-
-          requestAnimationFrame(loop);
-        };
-        requestAnimationFrame(loop);
+      if (type === 'video') {
+        content.innerHTML = `<video src="${src}" controls autoplay style="max-width:90vw;max-height:85vh;border-radius:16px;"></video>`;
+      } else {
+        content.innerHTML = `<img src="${src}" alt="Gallery image" style="max-width:90vw;max-height:85vh;border-radius:16px;">`;
       }
-    });
-  </script>
 
-  <!-- Ticketmaster Widget -->
-  <script defer src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightboxContent').innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Intersection Observer for Animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Leaflet Map
+    document.addEventListener('DOMContentLoaded', function () {
+      const map = L.map('map').setView([54.2783, -0.4040], 15);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Custom marker for the cottage
+      const cottageIcon = L.divIcon({
+        className: 'custom-marker',
+        html: '<div style="background:#f97316;width:32px;height:32px;border-radius:50%;border:4px solid white;box-shadow:0 4px 12px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12 2L2 12h3v9h6v-6h2v6h6v-9h3L12 2z"/></svg></div>',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+      });
+
+      L.marker([54.2783, -0.4040], { icon: cottageIcon })
+        .addTo(map)
+        .bindPopup('<strong style="font-size:14px;">Captain\'s Cottage</strong><br><span style="color:#666;">35 Longwestgate, YO11 1QB</span>')
+        .openPopup();
+    });
+
+    // Weather Widget
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+  </script>
 </body>
+
 </html>
